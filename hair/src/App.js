@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route } from "react-router-dom";
+
+import PrivateRoute from "./components/PrivateRoute";
+import Login from "./components/Login";
+import Stylists from "./components/Stylists";
+import AddStylist from "./components/AddStylist";
+import UserSignUp from "./components/UserSignUp";
+import StylistSignUp from "./components/StylistSignUp";
+
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route exact path="/" component={Login} />
+      <PrivateRoute exact path="/stylists" component={Stylists} />
+      <PrivateRoute exact path="/addstylist" component={AddStylist} />
+      <PrivateRoute exact path="/newuser" component={UserSignUp} />
+      <PrivateRoute exact path="/newstylist" component={StylistSignUp} />
     </div>
   );
 }
