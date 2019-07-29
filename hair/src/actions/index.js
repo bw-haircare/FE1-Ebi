@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosWithAuth } from "../../utilities/axiosWithAuth";
+import { axiosWithAuth } from "../utilities/axiosWithAuth";
 
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -9,11 +9,11 @@ export const FETCH_STYLISTS_START = "FETCH_STYLISTS_START";
 export const FETCH_STYLISTS_SUCCESS = "FETCH_STYLISTS_SUCCESS";
 export const FETCH_STYLISTS_FAILURE = "FETCH_STYLISTS_FAILURE";
 
-export const ADD_STYLISTS_START = "ADD_STYLISTS_START";
-export const ADD_STYLISTS_SUCCESS = "ADD_STYLISTS_SUCCESS";
-export const ADD_STYLISTS_FAILURE = "ADD_STYLISTS_FAILURE";
+export const ADD_STYLIST_START = "ADD_STYLIST_START";
+export const ADD_STYLIST_SUCCESS = "ADD_STYLIST_SUCCESS";
+export const ADD_STYLIST_FAILURE = "ADD_STYLIST_FAILURE";
 
-export const DELETE_STYLISTS = "DELETE_STYLISTS";
+export const DELETE_STYLIST = "DELETE_STYLIST";
 
 export const STYLIST_UPDATE_START = "STYLIST_UPDATE_START";
 export const STYLIST_UPDATE_SUCCESS = "STYLIST_UPDATE_SUCCESS";
@@ -45,7 +45,7 @@ export const login = creds => dispatch => {
 export const fetchStylists = () => dispatch => {
   dispatch({ type: FETCH_STYLISTS_START });
   axios
-    .get("https://_.herokuapp.com/api/stylists/", {
+    .get("https://haircare-bw.herokuapp.com/api/stylists/", {
       headers: { Authorization: localStorage.getItem("token") }
     })
     .then(res => {
@@ -61,7 +61,7 @@ export const fetchStylists = () => dispatch => {
 export const addStylist = newStylist => dispatch => {
   dispatch({ type: ADD_STYLIST_START });
   axios
-    .post("https://_.herokuapp.com/api/stylists/", newStylist, {
+    .post("https://haircare-bw.herokuapp.com/api/stylists/", newStylist, {
       headers: { Authorization: localStorage.getItem("token") }
     })
     .then(res => {
@@ -78,7 +78,7 @@ export const addStylist = newStylist => dispatch => {
 
 export const deleteStylist = id => dispatch => {
   return axiosWithAuth()
-    .delete(`https://_.herokuapp.com/api/stylists/${id}`)
+    .delete(`https://haircare-bw.herokuapp.com/api/stylists/${id}`)
     .then(res => {
       dispatch({ type: DELETE_STYLIST, payload: res.data.id });
     })
@@ -93,7 +93,7 @@ export const updateTodo = (id, changes) => dispatch => {
   console.log(changes);
   dispatch({ type: STYLIST_UPDATE_START });
   return axiosWithAuth()
-    .put(`https://_.herokuapp.com/api/stylists/${id}`, changes)
+    .put(`https://haircare-bw.herokuapp.com/api/stylists/${id}`, changes)
     .then(res => {
       dispatch({ type: STYLIST_UPDATE_SUCCESS, payload: res.data });
     })
@@ -108,7 +108,7 @@ export const updateTodo = (id, changes) => dispatch => {
 
 // Delete profile
 
-export function toggleTodo(index) {
+export function toggleStylist(index) {
   return {
     type: TOGGLE_STYLIST,
     payload: index

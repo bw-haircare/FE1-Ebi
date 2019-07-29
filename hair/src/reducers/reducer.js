@@ -11,7 +11,7 @@ import {
   DELETE_STYLIST,
   STYLIST_UPDATE_SUCCESS,
   TOGGLE_STYLIST
-} from "../actions/actions";
+} from "../actions/index";
 
 const initialState = {
   stylists: [],
@@ -85,8 +85,8 @@ export const reducer = (state = initialState, action) => {
     case STYLIST_UPDATE_SUCCESS:
       return {
         ...state,
-        todos: state.stylists.map(stylist =>
-          stylist.id === action.payload.id ? action.payload : todo
+        stylists: state.stylists.map(stylist =>
+          stylist.id === action.payload.id ? action.payload : stylist
         )
       };
     case TOGGLE_STYLIST:
