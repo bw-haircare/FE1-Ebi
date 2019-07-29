@@ -27,7 +27,7 @@ export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
 
   return axiosWithAuth()
-    .post("https://_.herokuapp.com/api/auth/login", creds)
+    .post("https://haircare-bw.herokuapp.com/api/auth/login", creds)
     .then(res => {
       localStorage.setItem("token", res.data.token);
       console.log(res);
