@@ -11,13 +11,16 @@ import StylistSignUp from "./components/StylistSignUp";
 import "./App.css";
 
 function App() {
+  
+  //hook used for StylistSignUp.js
+  const [stylist, setStylist] = useState({});
+
   return (
     <div className="App">
       <Route exact path="/" component={Login} />
       <PrivateRoute exact path="/stylists" component={Stylists} />
-      <PrivateRoute exact path="/addstylist" component={AddStylist} />
-      <PrivateRoute exact path="/newuser" component={UserSignUp} />
       <PrivateRoute exact path="/newstylist" component={StylistSignUp} />
+      <PrivateRoute exact path="/newuser" component={UserSignUp} />
     </div>
   );
 }

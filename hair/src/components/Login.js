@@ -14,6 +14,8 @@ class Login extends React.Component {
     return (
       <div className="login-wrapper">
         <h1>Hair Care App</h1>
+        <button>User Sign Up</button>
+        <button>Stylist Sign Up</button>
       </div>
     );
   }
