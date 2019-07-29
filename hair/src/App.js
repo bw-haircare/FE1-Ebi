@@ -11,12 +11,34 @@ import StylistSignUp from "./components/StylistSignUp";
 import "./App.css";
 
 function App() {
-  
-  //hook used for StylistSignUp.js
-  const [stylist, setStylist] = useState({});
+  //JADE
+  //sets state
+  const [stylist, setStylist] = useState( {}
+    [{
+      id:1, 
+      name:'Jade',
+      number: '456-123-3698',
+      email:'jade@gmail.com'
+   },
+   {
+      id:2, 
+      name:'Alexis',
+      number: '888-369-8465',
+      email:'Alexis@gmail.com'
+   }]
+  );
+   //JADE
+  //Adds stylist to form on submission
+  const addStylist = person => {
+    setStylist([...stylist, person])
+  }
+
 
   return (
     <div className="App">
+         <StylistSignUp
+        submitStylist={addStylist}
+      />
       <Route exact path="/" component={Login} />
       <PrivateRoute exact path="/stylists" component={Stylists} />
       <PrivateRoute exact path="/newstylist" component={StylistSignUp} />
