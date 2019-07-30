@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export const LOGIN_START = "LOGIN_START";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAILURE = "LOGIN_FAILURE";
+
+export const LOGIN_STYLIST_START = "LOGIN_STYLIST_START";
+export const LOGIN_STYLIST_SUCCESS = "LOGIN_STYLIST_SUCCESS";
+export const LOGIN_STYLIST_FAILURE = "LOGIN_STYLIST_FAILURE";
 
 export const FETCH_STYLISTS_START = "FETCH_STYLISTS_START";
 export const FETCH_STYLISTS_SUCCESS = "FETCH_STYLISTS_SUCCESS";
@@ -20,10 +21,10 @@ export const STYLIST_UPDATE_FAILURE = "STYLIST_UPDATE_FAILURE";
 
 export const TOGGLE_STYLIST = "TOGGLE_STYLIST";
 
-// Login
+// Login 
 
 export const login = creds => dispatch => {
-  dispatch({ type: LOGIN_START });
+  dispatch({ type: LOGIN_STYLIST_START });
   return axios
     .post("https://hairecare-bw.herokuapp.com/oauth/token", creds, {
       headers: {
@@ -33,13 +34,13 @@ export const login = creds => dispatch => {
     })
     .then(res => {
       localStorage.setItem("token", res.data.access_token);
-      dispatch({ type: LOGIN_SUCCESS });
+      dispatch({ type: LOGIN_STYLIST_SUCCESS });
       return true;
     })
     .catch(err => console.log("ERROR", err));
 };
 
-// Register new user
+// Register - New Stylist
 
 // Fetch Stylists
 
@@ -75,25 +76,12 @@ export const addStylist = newStylist => dispatch => {
     });
 };
 
-// Delete Stylist
-
-export const deleteStylist = id => dispatch => {
-  return axiosWithAuth()
-    .delete(`https://haircare-bw.herokuapp.com/api/stylists/${id}`)
-    .then(res => {
-      dispatch({ type: DELETE_STYLIST, payload: res.data.id });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
-// Update Stylist
+// Edit - Stylist Profile
 
 export const updateTodo = (id, changes) => dispatch => {
   console.log(changes);
   dispatch({ type: STYLIST_UPDATE_START });
-  return axiosWithAuth()
+  return axios
     .put(`https://haircare-bw.herokuapp.com/api/stylists/${id}`, changes)
     .then(res => {
       dispatch({ type: STYLIST_UPDATE_SUCCESS, payload: res.data });
@@ -103,11 +91,19 @@ export const updateTodo = (id, changes) => dispatch => {
     });
 };
 
-// View profile by ID
+// Delete - Stylist Profile
 
-// Edit profile
+export const deleteStylist = id => dispatch => {
+  return axios
+    .delete(`https://haircare-bw.herokuapp.com/api/stylists/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_STYLIST, payload: res.data.id });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
-// Delete profile
 
 export function toggleStylist(index) {
   return {

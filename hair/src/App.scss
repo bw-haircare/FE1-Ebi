@@ -130,49 +130,87 @@ table {
   border-spacing: 0;
 }
 
+/* ------------------------------------------------*/
+
+body {
+  font-family: "Darker Grotesque", sans-serif;
+  font-size: 20px;
+}
+
 h1 {
   font-size: 25px;
-  font-family: "Darker Grotesque", sans-serif;
   font-weight: bold;
 }
 
 h2 {
   font-size: 23px;
-  font-family: "Darker Grotesque", sans-serif;
   font-weight: bold;
 }
 
 h3 {
   font-size: 20px;
   font-weight: bold;
-  font-family: "Darker Grotesque", sans-serif;
 }
 
 h4 {
   font-size: 18px;
   font-weight: bold;
-  font-family: "Darker Grotesque", sans-serif;
-}
-
-.login-wrapper {
-  display: flex;
 }
 
 .App {
   text-align: center;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  .login-wrapper {
+    display: flex;
+  }
 
-.App-link {
-  color: #61dafb;
+  // Stylist Sign Up
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+
+    input {
+      margin-top: 10px;
+      width: 258px;
+      height: 36px;
+      padding: 9px 0 7px 8px;
+      border: 1px solid #dddddd;
+      border-radius: 3px;
+      &:focus {
+        outline: none;
+        border: 1px solid #93a6d1;
+      }
+    }
+
+    select {
+      margin-top: 10px;
+      width: 258px;
+      height: 36px;
+      padding: 9px 0 7px 8px;
+      border: 1px solid #dddddd;
+      border-radius: 5px;
+    }
+
+    .submit-button {
+      cursor: default;
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+      font-weight: bold;
+      width: 258px;
+      height: 30px;
+      margin-top: 10px;
+      border-radius: 5px;
+
+      &.clickable {
+        cursor: pointer;
+        background: silver;
+      }
+    }
+  }
 }

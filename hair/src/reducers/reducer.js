@@ -1,7 +1,7 @@
 import {
-  LOGIN_START,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
+  LOGIN_STYLIST_START,
+  LOGIN_STYLIST_SUCCESS,
+  LOGIN_STYLIST_FAILURE,
   FETCH_STYLISTS_START,
   FETCH_STYLISTS_SUCCESS,
   FETCH_STYLISTS_FAILURE,
@@ -23,20 +23,20 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_START:
+    case LOGIN_STYLIST_START:
       return {
         ...state,
         loggingIn: true,
         error: false
       };
-    case LOGIN_SUCCESS:
+    case LOGIN_STYLIST_SUCCESS:
       return {
         ...state,
         loggingIn: false,
         error: false,
         token: localStorage.getItem("token")
       };
-    case LOGIN_FAILURE:
+    case LOGIN_STYLIST_FAILURE:
       return {
         ...state,
         loggingIn: false,

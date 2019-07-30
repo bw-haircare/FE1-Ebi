@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 //temporary
 
-//This is Eunice's part. Putting in temporary data to make sure my components work.
+//This is Eunice's part. NOTE: This will be the list of stylists the users will scroll through.
+//NOTE to Eunice: You can erase the items below. I (Jade) just put code in here to get things working from my component.
 export default function StylistsMember(props) {
   const { person, buttonText } = props;
 
