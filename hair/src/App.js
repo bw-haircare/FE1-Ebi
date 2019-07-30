@@ -2,9 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
-import Login from "./components/Login";
 import Stylists from "./components/Stylists";
-import AddStylist from "./components/AddStylist";
 import UserSignUp from "./components/UserSignUp";
 import StylistSignUp from "./components/StylistSignUp";
 
@@ -13,35 +11,31 @@ import "./App.css";
 function App() {
   //JADE
   //sets state
-  const [stylist, setStylist] = useState(
-    {}[
-      ({
-        id: 1,
-        name: "Jade",
-        number: "456-123-3698",
-        email: "jade@gmail.com"
-      },
-      {
-        id: 2,
-        name: "Alexis",
-        number: "888-369-8465",
-        email: "Alexis@gmail.com"
-      })
-    ]
-  );
+  const [stylist, setStylist] = useState([]);
   //JADE
   //Adds stylist to form on submission
   const addStylist = person => {
-    setStylist([...stylist, person]);
+    setStylist([...stylist, { ...person, id: Date.now() }]);
+  };
+
+  //JADE
+  //Edits stylists
+  const editStylist = editedStylist => {
+    //create a copy of original array to mutate it first before values are committed
+    const stylistCopy = [...stylist];
+    const oldStylist = stylistCopy.find(
+      stylist => stylist.id === editedStylist.id
+    );
+
+    Object.assign(oldStylist, editedStylist);
+    setStylist(stylistCopy);
   };
 
   return (
     <div className="App">
-      <StylistSignUp submitStylist={addStylist} />
-      <Route exact path="/" component={Login} />
-      <PrivateRoute exact path="/stylists" component={Stylists} />
-      <PrivateRoute exact path="/newstylist" component={StylistSignUp} />
-      <PrivateRoute exact path="/newuser" component={UserSignUp} />
+      <Route exact path="/" component={Stylists} />
+      <Route exact path="/newstylist" component={StylistSignUp} />
+      <Route exact path="/newuser" component={UserSignUp} />
     </div>
   );
 }

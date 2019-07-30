@@ -20,14 +20,16 @@ class Login extends React.Component {
     );
   }
 
-  login = e => {
-    e.preventDefault();
-    console.log("clicked");
-    this.props
-      .login(this.state.creds)
-      .then(() => this.props.history.push("/stylists"));
-  };
-}
+    login = (e) => {
+      e.preventDefault();
+      let credentials = `grant_type=password&username=${this.state.credentials.username}&password=${this.state.credentials.password}`;      
+      this.props.login(credentials).then(res => {
+        if (res) {
+          this.props.history.push('/');
+        }
+      });
+    }
+  }
 
   const mapStateToProps = ({ token, loggingIn, error }) => ({
   token,

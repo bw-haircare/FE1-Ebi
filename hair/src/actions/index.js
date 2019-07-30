@@ -1,5 +1,4 @@
 import axios from "axios";
-import { axiosWithAuth } from "../utilities/axiosWithAuth";
 
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -25,17 +24,19 @@ export const TOGGLE_STYLIST = "TOGGLE_STYLIST";
 
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
-
-  return axiosWithAuth()
-    .post("https://haircare-bw.herokuapp.com/api/auth/login", creds)
-    .then(res => {
-      localStorage.setItem("token", res.data.token);
-      console.log(res);
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data.token });
+  return axios
+    .post("https://hairecare-bw.herokuapp.com/oauth/token", creds, {
+      headers: {
+        Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
     })
-    .catch(err => {
-      dispatch({ type: LOGIN_FAILURE, payload: true });
-    });
+    .then(res => {
+      localStorage.setItem("token", res.data.access_token);
+      dispatch({ type: LOGIN_SUCCESS });
+      return true;
+    })
+    .catch(err => console.log("ERROR", err));
 };
 
 // Register new user
@@ -45,7 +46,7 @@ export const login = creds => dispatch => {
 export const fetchStylists = () => dispatch => {
   dispatch({ type: FETCH_STYLISTS_START });
   axios
-    .get("https://haircare-bw.herokuapp.com/api/stylists/", {
+    .get("https://hairecare-bw.herokuapp.com/oauth/token", {
       headers: { Authorization: localStorage.getItem("token") }
     })
     .then(res => {
