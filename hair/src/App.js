@@ -1,9 +1,10 @@
 import React, {useState} from "react";
+//import logo from './logo.svg';
 import Stylists from './components/Stylists'
 import './App.css';
 import {profiles} from './components/data'
 import { Route } from 'react-router-dom';
-//import InsideStylistDetails from './components/InsideStylistDetails'
+import InsideStylistDetails from './components/InsideStylistDetails'
 
 
 
@@ -13,8 +14,13 @@ function App() {
 
   return (
     <div className="App">
-     <h1>Stylists</h1>
-     <Stylists profiles={profiles} />
+      <Route path="/stylists/:id" component={InsideStylistDetails} />
+      <Route exact path="/" render ={props =>{
+        return (     
+           <Stylists bringData={bringData} setBringData={setBringData}/>
+          )
+      }} />
+
       </div>
   );
 }
