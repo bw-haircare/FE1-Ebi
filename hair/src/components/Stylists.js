@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import InsideStylistDetails from './InsideStylistDetails'
+//import InsideStylistDetails from './InsideStylistDetails'
 
 
 function Stylists(props) {
@@ -24,7 +24,7 @@ console.log('props stylist', props)
 }
 
 function StylistDetails({user}) {
-    const {image, name, last, city, role,stars} = user;
+    const {image, name, last, city, role,stars, location} = user;
     return (
         <div>
         <Link to={{
@@ -34,6 +34,7 @@ function StylistDetails({user}) {
                 <img src={image}  height="200px"/>
                 <h2> {name} {last} </h2>
                 <h3>{role}</h3>
+              <p>{location.city}</p>
               <p>Rating: {stars}</p>
                     </div>
                     </Link>

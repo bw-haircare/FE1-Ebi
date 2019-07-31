@@ -21,8 +21,10 @@ console.log('price', props.location.state.price)
 console.log('portfolio', props.location.state.portfolio)
 
 
- const {image, name, last, stars, role, description} = props.location.state;
-
+ const {image, name, last, stars, role, description, portfolio, price, location} = props.location.state;
+ const place = props.location.state.location;
+const pricing = props.location.state.price;
+const work = props.location.state.portfolio;
   return (
     <div>
         <button onClick={()=> props.history.goBack()}>Go Back</button>
@@ -31,7 +33,26 @@ console.log('portfolio', props.location.state.portfolio)
         <h2>{name} {last}</h2>
         <h3>{role}</h3>
         <p>{description}</p>
-
+        {/* <p>{price}</p> */}
+        {Object.values(place).map(value => {
+            return <p>{value}</p>
+        })}
+        {/* <h3>Pricing</h3>
+        {Object.entries(pricing).map(val => {
+            return <p>{ val } usd</p>
+        })} */}
+        <h3>My Services</h3>
+        {Object.entries(pricing).map(([key, val]) => {
+            return (<p><strong>{key}</strong> <br/>${val} 
+            <button>Book</button></p>)
+        })}
+        
+        <h3>My Portfolio</h3>
+        {work.map(val => {
+            return (<img src={val} width="100px" />)
+        })}
+        {/* <img src={work} /> */}
+        {/* <p>{place.zip}</p> */}
         </div>
   )
 }
