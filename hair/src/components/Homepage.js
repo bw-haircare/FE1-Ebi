@@ -1,26 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
+//import InsideStylistDetails from './InsideStylistDetails'
 
-//temporary
-
-//This is Eunice's part. NOTE: This will be the list of stylists the users will scroll through.
-//NOTE to Eunice: You can erase the items below. I (Jade) just put code in here to get things working from my component.
-export default function StylistsMember(props) {
-  const { person, buttonText } = props;
+function Homepage(props) {
+  console.log("props stylist", props);
 
   return (
     <div className="stylist-container">
+      {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
+
       <h1>Stylists</h1>
-      {props.stylist.map((person, index) => {
-        return (
-          <div className="card" key={index}>
-            <p> Name:{person.name}</p>
-            <p> Number:{person.number}</p>
-            <p> Email:{person.email}</p>
-            <Link to={`/edit/${person.id}`}>Edit</Link>
-          </div>
-        );
+      {props.bringData.map((user, i) => {
+        return <StylistDetails key={i} user={user} />;
       })}
     </div>
   );
 }
+
+function StylistDetails({ user }) {
+  const { image, name, last, role, stars, location } = user;
+  return (
+    <div>
+      <Link
+        to={{
+          pathname: `/stylists/${user.id}`,
+          state: { ...user }
+        }}
+      >
+        <div>
+          <img src={image} height="200px" />
+          <h2>
+            {" "}
+            {name} {last}{" "}
+          </h2>
+          <h3>{role}</h3>
+          <p>{location.city}</p>
+          <p>Rating: {stars}</p>
+        </div>
+      </Link>
+    </div>
+  );
+}
+
+export default Homepage;
