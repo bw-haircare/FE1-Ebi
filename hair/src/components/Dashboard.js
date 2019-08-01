@@ -8,30 +8,42 @@ import StylistPosts from "./StylistsPosts";
 
 export default function Dashboard() {
   const [stylistPost, setStylistPost] = useState([
-    //Dummy data that needs to be changed for images
     {
       id: 1,
-      image: "picture 1",
-      name: "Jack",
-      description: "Picture description "
+      image: "../img/Trina.png",
+      name: "Trina",
+      description: "Cut & Color"
     },
     {
       id: 2,
-      image: "picture 2",
-      name: "Jill",
-      description: "Picture description "
+      image: "../img/Mallory.png",
+      name: "Mallory",
+      description: "Color"
     },
     {
       id: 3,
-      image: "picture 3",
-      name: "Holly",
-      description: "Picture description"
+      image: "../img/Jason.png",
+      name: "Jason",
+      description: "Cut & Style"
     },
+
     {
       id: 4,
-      image: "picture 4",
-      name: "Lisa",
-      description: "Picture description "
+      image: "../img/Trent.png",
+      name: "Trent",
+      description: "Cut & Style"
+    },
+    {
+      id: 5,
+      image: "../img/Leila.png",
+      name: "Liela",
+      description: "Color, Cut, & Style"
+    },
+    {
+      id: 6,
+      image: "../img/Jazmine.png",
+      name: "Jazmine",
+      description: "Cut, Press, & Style"
     }
   ]);
 
@@ -58,14 +70,17 @@ export default function Dashboard() {
       {/* <Link to="/StylisPost">Dashboard</Link> */}
 
       <div className="dashNav-container">
-        <Link to="/components/AddEditPost">Add Post</Link>
-        <Link to="/components/StylistsPosts">Dashboard</Link>
-        This is the Dashboard
+        <Link className="link-color" to="/DashBoard/StylistsPosts">
+          Posts
+        </Link>
+        <Link className="link-color" to="/DashBoard/AddEditPost ">
+          Add Post
+        </Link>
       </div>
 
       <Route
         exact
-        path="/components/AddEditPost"
+        path="/DashBoard/AddEditPost"
         render={props => (
           <AddEditForm {...props} submitPost={addPost} buttonText="Add Post" />
         )}
@@ -73,7 +88,7 @@ export default function Dashboard() {
 
       <Route
         exact
-        path="/components/StylistsPosts"
+        path="/DashBoard/StylistsPosts"
         render={props => (
           <StylistPosts
             {...props}
@@ -85,7 +100,8 @@ export default function Dashboard() {
       />
 
       <Route
-        path="/components/StylistsPosts/postEdit/:id"
+        exact
+        path="/DashBoard/StylistsPosts/postEdit/:id"
         render={props => {
           const card = stylistPost.find(
             post => post.id.toString() === props.match.params.id

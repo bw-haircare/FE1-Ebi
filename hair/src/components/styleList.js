@@ -1,7 +1,7 @@
 const profiles = [
   {
     id: 0,
-    image: "../image/img9.jpg",
+    image: "../img/img9.jpg",
     name: "johnny",
     last: "bravo",
     city: "Indy",
@@ -22,17 +22,17 @@ const profiles = [
       "The Works": 100
     },
     portfolio: [
-      "../image/img1.jpg",
-      "../image/img2.jpg",
-      "../image/img3.jpg",
-      "../image/img4.jpg",
-      "../image/img5.jpg"
+      "../img/img1.jpg",
+      "../img/img2.jpg",
+      "../img/img3.jpg",
+      "../img/img4.jpg",
+      "../img/img5.jpg"
     ],
     stars: 1
   },
   {
     id: 1,
-    image: "../image/img10.jpg",
+    image: "../img/img10.jpg",
     name: "Princess Consuela",
     last: "Banana-Hammock",
     city: "Jacksonville",
@@ -51,7 +51,7 @@ const profiles = [
     },
     description:
       "Hello, my name is Princess Consuela Banana Hammock. If you are interested in any of my services please consult with me if you are a new customer. ",
-    portfolio: ["../image/img6.jpg", "../image/img7.jpg", "../image/img8.jpg"],
+    portfolio: ["../img/img6.jpg", "../img/img7.jpg", "../img/img8.jpg"],
     stars: 5
   }
 ];

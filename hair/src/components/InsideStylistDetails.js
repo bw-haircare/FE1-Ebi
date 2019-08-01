@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Button } from "./styledComponents";
 
 function InsideStylistDetails(props) {
   // const [bringData, setBringData] = useState();
@@ -34,7 +36,7 @@ function InsideStylistDetails(props) {
   const work = props.location.state.portfolio;
   return (
     <div>
-      <button onClick={() => props.history.goBack()}>Go Back</button>
+      <Button onClick={() => props.history.goBack()}>Go Back</Button>
       <p>Inside the Stylist Profile Card. Hello World</p>
       <img src={image} width="200px" />
       <h2>
@@ -42,20 +44,17 @@ function InsideStylistDetails(props) {
       </h2>
       <h3>{role}</h3>
       <p>{description}</p>
-      {/* <p>{price}</p> */}
+
       {Object.values(place).map(value => {
         return <p>{value}</p>;
       })}
-      {/* <h3>Pricing</h3>
-        {Object.entries(pricing).map(val => {
-            return <p>{ val } usd</p>
-        })} */}
+
       <h3>My Services</h3>
       {Object.entries(pricing).map(([key, val]) => {
         return (
           <p>
             <strong>{key}</strong> <br />${val}
-            <button>Book</button>
+            <Button>Book</Button>
           </p>
         );
       })}
@@ -64,8 +63,6 @@ function InsideStylistDetails(props) {
       {work.map(val => {
         return <img src={val} width="100px" />;
       })}
-      {/* <img src={work} /> */}
-      {/* <p>{place.zip}</p> */}
     </div>
   );
 }

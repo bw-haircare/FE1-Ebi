@@ -4,23 +4,25 @@ import PrivateRoute from "./utilities/PrivateRoute";
 import NavBar from "./components/NavBar";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
-// import Homepage from "./components/Homepage";
-import Test from "./components/Test";
-import { profiles } from "./components/styleList";
-// import InsideStylistDetails from "./components/InsideStylistDetails";
+import Homepage from "./components/Homepage";
+import { profiles } from "./components/data";
+import Register from "./components/Register";
+import InsideStylistDetails from "./components/InsideStylistDetails";
 import "./App.scss";
 
 function App() {
-  // const [bringData, setBringData] = useState(profiles);
+  const [bringData, setBringData] = useState(profiles);
+
   return (
     <Router>
       <div className="App">
-        <h1>Hair Care App Homepage</h1>
+        <h1>Hair Care</h1>
         <NavBar />
-        <Route exact path="/" component={Test} />
+        {/* <Route exact path="/Homepage" component={Homepage} /> */}
         <PrivateRoute exact path="/Dashboard" component={Dashboard} />
         <Route exact path="/login" component={Login} />
-        {/* <Route path="/stylists/:id" component={InsideStylistDetails} />
+        <Route exact path="/reg" component={Register} />
+        <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
           exact
           path="/"
@@ -29,7 +31,7 @@ function App() {
               <Homepage bringData={bringData} setBringData={setBringData} />
             );
           }}
-        /> */}
+        />
       </div>
     </Router>
   );

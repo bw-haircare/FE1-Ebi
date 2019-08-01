@@ -94,11 +94,12 @@ class Login extends React.Component {
     );
   }
 
-  componentDidMount() {
-    if (this.props.token) {
-      this.props.history.push("/");
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.token) {
+  //     console.log(this.props.token);
+  //     this.props.history.push("/");
+  //   }
+  // }
 
   handleChanges = e => {
     e.preventDefault();
@@ -113,10 +114,10 @@ class Login extends React.Component {
 
   login = e => {
     e.preventDefault();
-    let credentials = `grant_type=password&username=${
-      this.state.credentials.username
-    }&password=${this.state.credentials.password}`;
-    this.props.login(credentials).then(res => {
+    let creds = `grant_type=password&username=${
+      this.state.creds.username
+    }&password=${this.state.creds.password}`;
+    this.props.login(creds).then(res => {
       if (res) {
         this.props.history.push("/dashboard");
       }

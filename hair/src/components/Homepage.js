@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+// import Images from "../img";
 import { Link } from "react-router-dom";
-//import InsideStylistDetails from './InsideStylistDetails'
+import InsideStylistDetails from "../components/InsideStylistDetails";
+import { profiles } from "../components/data";
+
+//CSS
+import styled, { css } from "styled-components";
+import { Button, H1 } from "./styledComponents";
 
 function Homepage(props) {
   console.log("props stylist", props);
+  const [bringData, setBringData] = useState([]);
 
   return (
     <div className="stylist-container">
       {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
 
-      <h1>Stylists</h1>
-      {props.bringData.map((user, i) => {
-        return <StylistDetails key={i} user={user} />;
-      })}
+      <H1>Stylists</H1>
+      <div>
+        {props.bringData.map((user, i) => {
+          return <StylistDetails key={i} user={user} />;
+        })}
+      </div>
     </div>
   );
 }
@@ -28,7 +37,7 @@ function StylistDetails({ user }) {
         }}
       >
         <div>
-          <img src={image} height="200px" />
+          <img src="./elmoburns.gif" height="200px" />
           <h2>
             {" "}
             {name} {last}{" "}

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const LOGIN_STYLIST_START = "LOGIN_STYLIST_START";
 export const LOGIN_STYLIST_SUCCESS = "LOGIN_STYLIST_SUCCESS";
 export const LOGIN_STYLIST_FAILURE = "LOGIN_STYLIST_FAILURE";
@@ -21,12 +20,12 @@ export const STYLIST_UPDATE_FAILURE = "STYLIST_UPDATE_FAILURE";
 
 export const TOGGLE_STYLIST = "TOGGLE_STYLIST";
 
-// Login 
+// Login
 
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_STYLIST_START });
   return axios
-    .post("https://hairecare-bw.herokuapp.com/oauth/token", creds, {
+    .post("https://haircare-bw.herokuapp.com/login", creds, {
       headers: {
         Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
         "Content-Type": "application/x-www-form-urlencoded"
@@ -40,7 +39,28 @@ export const login = creds => dispatch => {
     .catch(err => console.log("ERROR", err));
 };
 
-// Register - New Stylist
+//================================REGISTER================================//
+
+export const REGISTER_START = "REGISTER_START";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAILURE = "REGISTER_FAILURE";
+
+export const register = creds => dispatch => {
+  dispatch({ type: REGISTER_START });
+  return axios
+    .post("https://haircare-bw.herokuapp.com/createnewuser", creds, {
+      headers: {
+        Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+    .then(res => {
+      localStorage.setItem("token", res.data.access_token);
+      dispatch({ type: REGISTER_SUCCESS });
+      return true;
+    })
+    .catch(err => console.log("ERROR", err));
+};
 
 // Fetch Stylists
 
@@ -104,6 +124,13 @@ export const deleteStylist = id => dispatch => {
     });
 };
 
+//================================NOERRORS================================//
+export const NO_ERROR = "NO_ERROR";
+export const noError = () => {
+  return {
+    type: NO_ERROR
+  };
+};
 
 export function toggleStylist(index) {
   return {
