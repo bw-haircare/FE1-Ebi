@@ -4,7 +4,21 @@ import { connect } from "react-redux";
 import { login } from "../actions/index";
 import styled from "styled-components";
 
+export const H1 = styled.h1`
+  font-size: 22px;
+  font-weight: bold;
+  padding: 30px;
+  text-align: center;
+`;
+
 export const FormGroup = styled.div`
+  color: palevioletred;
+  display: block;
+  width: 300px;
+  margin: 50px auto;
+`;
+
+export const Form = styled.div`
   color: palevioletred;
   display: block;
   width: 300px;
@@ -33,6 +47,15 @@ export const Message = styled.label`
   display: block;
 `;
 
+export const Button = styled.button`
+  background: #ac8daf;
+  border-radius: 3px;
+  border: none;
+  color: #f1d4d4;
+  padding: 0.5em 2em;
+  margin: 1em;
+`;
+
 class Login extends React.Component {
   state = {
     creds: {
@@ -45,7 +68,7 @@ class Login extends React.Component {
     return (
       <div className="login-wrapper">
         <FormGroup>
-          <h2 className="login-here">Ready to get started?</h2>
+          <H1>Login</H1>
           <div>
             <Input
               placeholder="username"
@@ -83,7 +106,7 @@ class Login extends React.Component {
                   width={80}
                 />
               ) : (
-                <h3>Sign In</h3>
+                <Button>Sign In</Button>
               )}
             </div>
             <i className="fas fa-sign-in-alt" />
@@ -93,13 +116,6 @@ class Login extends React.Component {
       </div>
     );
   }
-
-  // componentDidMount() {
-  //   if (this.props.token) {
-  //     console.log(this.props.token);
-  //     this.props.history.push("/");
-  //   }
-  // }
 
   handleChanges = e => {
     e.preventDefault();

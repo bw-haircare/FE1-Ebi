@@ -6,18 +6,25 @@ import { profiles } from "../components/data";
 
 //CSS
 import styled, { css } from "styled-components";
-import { Button, H1 } from "./styledComponents";
+import {
+  Button,
+  H1,
+  WrapDiv,
+  CropImg,
+  AlignLeft,
+  AlignRight
+} from "./styledComponents";
 
 function Homepage(props) {
   console.log("props stylist", props);
   const [bringData, setBringData] = useState([]);
 
   return (
-    <div className="stylist-container">
+    <div>
       {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
 
       <H1>Stylists</H1>
-      <div>
+      <div className="StyleContainer ">
         {props.bringData.map((user, i) => {
           return <StylistDetails key={i} user={user} />;
         })}
@@ -29,25 +36,29 @@ function Homepage(props) {
 function StylistDetails({ user }) {
   const { image, name, last, role, stars, location } = user;
   return (
-    <div>
+    <WrapDiv>
       <Link
         to={{
           pathname: `/stylists/${user.id}`,
           state: { ...user }
         }}
       >
-        <div>
-          <img src="./elmoburns.gif" height="200px" />
+        <AlignLeft>
+          <CropImg>
+            <img src={image} height="200px" />
+          </CropImg>{" "}
+        </AlignLeft>
+        <AlignRight>
           <h2>
             {" "}
             {name} {last}{" "}
           </h2>
           <h3>{role}</h3>
-          <p>{location.city}</p>
-          <p>Rating: {stars}</p>
-        </div>
+          <p className="city">{location.city}</p>
+          <p className="stars">Rating: {stars}</p>
+        </AlignRight>
       </Link>
-    </div>
+    </WrapDiv>
   );
 }
 

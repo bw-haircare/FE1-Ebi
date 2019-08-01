@@ -39,32 +39,36 @@ export const login = creds => dispatch => {
     .catch(err => console.log("ERROR", err));
 };
 
-//================================REGISTER================================//
-
-export const REGISTER_START = "REGISTER_START";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAILURE = "REGISTER_FAILURE";
-
-export const register = creds => dispatch => {
-  dispatch({ type: REGISTER_START });
+// Sign Up
+export const SIGNUP_START = "SIGNUP_START";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
+export const signUp = creds => dispatch => {
+  dispatch({
+    type: SIGNUP_START
+  });
   return axios
-    .post("https://haircare-bw.herokuapp.com/createnewuser", creds, {
-      headers: {
-        Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    })
+    .post(`https://haircare-bw.herokuapp.com/createnewuser`, creds)
     .then(res => {
-      localStorage.setItem("token", res.data.access_token);
-      dispatch({ type: REGISTER_SUCCESS });
-      return true;
+      console.log(res);
+      // localStorage.setItem("token", res.data.payload);
+      dispatch({
+        type: SIGNUP_SUCCESS,
+        payload: res.data.payload
+      });
+      setUser();
     })
-    .catch(err => console.log("ERROR", err));
+    .catch(err => {
+      dispatch({
+        type: SIGNUP_FAILURE,
+        payload: err
+      });
+    });
 };
 
 // Fetch Stylists
 
-export const fetchStylists = () => dispatch => {
+export const setUser = () => dispatch => {
   dispatch({ type: FETCH_STYLISTS_START });
   axios
     .get("https://hairecare-bw.herokuapp.com/oauth/token", {

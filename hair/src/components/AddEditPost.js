@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+//CSS
+import styled, { css } from "styled-components";
+import { DashNav, DashLink } from "./styledComponents";
+
 export default function AddEditForm(props) {
   const sizes = ["mini", "tiny", "small", "large", "big", "huge", "massive"];
 
@@ -27,7 +31,7 @@ export default function AddEditForm(props) {
     event.preventDefault();
     submitPost(newPost);
     setNewPost({ image: "", name: "", description: "" });
-    history.push("/components/StylistsPosts");
+    history.push("/Dashboard/StylistsPosts");
   }
 
   console.log("form", submitPost); //Come up with not a function on submitPost
@@ -43,7 +47,8 @@ export default function AddEditForm(props) {
             type="text"
             className="input"
             name="image"
-            placeholder="Please enter name"
+            // need to remove this
+            placeholder="https://i.imgur.com/52MIbbN.png"
             value={newPost.image}
             onChange={handleChange}
           />

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { Button } from "./styledComponents";
+import {
+  Button,
+  ProfileArticle,
+  CropImg,
+  CropThumb,
+  Container
+} from "./styledComponents";
 
 function InsideStylistDetails(props) {
   // const [bringData, setBringData] = useState();
@@ -35,35 +41,55 @@ function InsideStylistDetails(props) {
   const pricing = props.location.state.price;
   const work = props.location.state.portfolio;
   return (
-    <div>
-      <Button onClick={() => props.history.goBack()}>Go Back</Button>
-      <p>Inside the Stylist Profile Card. Hello World</p>
-      <img src={image} width="200px" />
-      <h2>
-        {name} {last}
-      </h2>
-      <h3>{role}</h3>
-      <p>{description}</p>
+    <Container>
+      <ProfileArticle>
+        <Button onClick={() => props.history.goBack()}>Go Back</Button>
+        <section className="top-section">
+          <CropImg>
+            <div className="left">
+              <img src={image} width="200px" />
+            </div>
+          </CropImg>
 
-      {Object.values(place).map(value => {
-        return <p>{value}</p>;
-      })}
+          <div className="right">
+            <h2>
+              {name} {last}
+            </h2>
+            <h3>{role}</h3>
+            <p className="description">{description}</p>
+          </div>
+        </section>
 
-      <h3>My Services</h3>
-      {Object.entries(pricing).map(([key, val]) => {
-        return (
-          <p>
-            <strong>{key}</strong> <br />${val}
-            <Button>Book</Button>
-          </p>
-        );
-      })}
+        <section className="bottom-row">
+          <section className="services">
+            {/* {Object.values(place).map(value => {
+              return <p>{value}</p>;
+            })} */}
 
-      <h3>My Portfolio</h3>
-      {work.map(val => {
-        return <img src={val} width="100px" />;
-      })}
-    </div>
+            <h3>My Services</h3>
+            {Object.entries(pricing).map(([key, val]) => {
+              return (
+                <p>
+                  <strong>{key}</strong> <br />${val}
+                  <Button>Book</Button>
+                </p>
+              );
+            })}
+          </section>
+
+          <section className="portfolio">
+            <h3>My Portfolio</h3>
+            {work.map(val => {
+              return (
+                <CropThumb>
+                  <img src={val} />
+                </CropThumb>
+              );
+            })}
+          </section>
+        </section>
+      </ProfileArticle>
+    </Container>
   );
 }
 

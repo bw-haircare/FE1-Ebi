@@ -6,8 +6,11 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Homepage from "./components/Homepage";
 import { profiles } from "./components/data";
-import Register from "./components/Register";
+import SignUp from "./components/SignUp";
 import InsideStylistDetails from "./components/InsideStylistDetails";
+
+//CSS
+import { AppTitle } from "./components/styledComponents";
 import "./App.scss";
 
 function App() {
@@ -16,12 +19,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>Hair Care</h1>
+        <AppTitle>Hair Care</AppTitle>
         <NavBar />
-        {/* <Route exact path="/Homepage" component={Homepage} /> */}
-        <PrivateRoute exact path="/Dashboard" component={Dashboard} />
+        <PrivateRoute path="/Dashboard" component={Dashboard} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/reg" component={Register} />
+        <Route exact path="/signup" component={SignUp} />
         <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
           exact

@@ -135,3 +135,39 @@ body {
   font-family: "Darker Grotesque", sans-serif;
   font-size: 20px;
 }
+
+.App {
+  .link-color {
+    color: #484c7f;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: ease-in-out 0.3s;
+  }
+
+  .link-color:hover {
+    color: #fdc8b7;
+  }
+
+  .StyleContainer {
+    margin: 0px auto;
+    max-width: 1000px;
+    width: 100%;
+  }
+  .postButton {
+    background: #ac8daf;
+
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    box-shadow: -1px 1px 2px 1px rgba(138, 138, 138, 1);
+    text-align: center;
+    transition: ease-in-out 0.3s;
+  }
+
+  .postButton:hover {
+    background: #ac8daf;
+    color: #fdc8b7;
+  }
+}

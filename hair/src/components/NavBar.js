@@ -8,16 +8,16 @@ export default function NavBar() {
   return (
     <Flex>
       <Spacing>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/">Home</NavLink>
       </Spacing>
       <Spacing>
         <NavLink to="/About">About</NavLink>
       </Spacing>
       <Spacing>
-        <NavLink to="/reg">Register</NavLink>
+        <NavLink to="/login">Login</NavLink>
       </Spacing>
       <Spacing>
-        <NavLink to="/Logout">Logout</NavLink>
+        <NavLink to="/Dashboard">Dashboard</NavLink>
       </Spacing>
     </Flex>
   );
