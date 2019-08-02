@@ -21,13 +21,12 @@ const profiles = [
       "The Works": 100
     },
     portfolio: [
-      "https://i.imgur.com/ILgo4FN.jpg",
       "https://i.imgur.com/0egAGWj.jpg",
       "https://i.imgur.com/RPDgUMm.jpg",
       "https://i.imgur.com/CQaZyta.jpg",
       "https://i.imgur.com/PmVHgFS.jpg"
     ],
-    stars: 1.0
+    stars: 1.9
   },
   {
     id: 1,
@@ -51,11 +50,8 @@ const profiles = [
       "The Works": 100
     },
     portfolio: [
-      "https://i.imgur.com/ILgo4FN.jpg",
-      "https://i.imgur.com/0egAGWj.jpg",
-      "https://i.imgur.com/RPDgUMm.jpg",
-      "https://i.imgur.com/CQaZyta.jpg",
-      "https://i.imgur.com/PmVHgFS.jpg"
+      "https://i.imgur.com/cX7ccxK.jpg",
+      "https://i.imgur.com/Nqq8Te4.jpg"
     ],
     stars: 5.0
   },
@@ -183,7 +179,7 @@ const profiles = [
     image: "https://i.imgur.com/gCFZiyD.jpg",
     name: "Bucky",
     last: "Barnes",
-    role: "Stylist",
+    role: "Loctician",
     location: {
       address: "245 East 73rd Street",
       city: "Metropolis",
@@ -193,9 +189,9 @@ const profiles = [
     },
     description: "Quality service for an affordable price ",
     price: {
-      "DC Comic Baliage": 90,
-      "Curl and Cut": 85,
-      "The Pixie Do": 70,
+      "Faux Locs Installs": 500,
+      "Loc Maintenance": 185,
+      "Loc Installs": 350,
       "Hair exam Consultation": 20
     },
     portfolio: [
@@ -205,7 +201,7 @@ const profiles = [
       "https://i.imgur.com/CQaZyta.jpg",
       "https://i.imgur.com/PmVHgFS.jpg"
     ],
-    stars: 2.0
+    stars: 4.8
   },
   {
     id: 7,
