@@ -45,6 +45,22 @@ const work = props.location.state.portfolio;
         <h2>{name} {last}</h2>
         <h3>{role}</h3>
         <p>{description}</p>
+
+        {/* <Button variant="primary" onClick={handleShow}>
+        Book
+      </Button> */}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Congratulations!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You're all set! {name} will contact you shortly to work out the details </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
         
         <StarRatingComponent 
           name="rate1" 
@@ -69,7 +85,7 @@ const work = props.location.state.portfolio;
         Book
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Congratulations!</Modal.Title>
         </Modal.Header>
@@ -79,7 +95,7 @@ const work = props.location.state.portfolio;
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
             
             
             </p>)
