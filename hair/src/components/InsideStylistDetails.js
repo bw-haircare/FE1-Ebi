@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import styled, { css } from "styled-components";
+import Modal from "react-bootstrap/Modal";
+import ReactDOM from "react-dom";
 import {
   Button,
   ProfileArticle,
@@ -20,6 +22,11 @@ function InsideStylistDetails(props) {
   //     //     setBringData(response.data)
   //     // })
   // }, [props.match.params.id])
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   console.log("props Inside", props);
   console.log("match", props.match.params.id);
@@ -71,6 +78,21 @@ function InsideStylistDetails(props) {
               {stars}
             </p>
           </div>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Congratulations!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              You're all set! {name} will contact you shortly to work out the
+              details{" "}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </section>
 
         <section className="bottom-row">
@@ -84,21 +106,30 @@ function InsideStylistDetails(props) {
               return (
                 <p>
                   <strong>{key}</strong> <br />${val}
-                  <Button>Book</Button>
+                  <Button variant="primary" onClick={handleShow}>
+                    Book
+                  </Button>
                 </p>
               );
             })}
           </section>
 
-          <section className="portfolio">
+          <section className="side">
             <h3>My Portfolio</h3>
-            {work.map(val => {
-              return (
-                <CropThumb>
-                  <img src={val} />
-                </CropThumb>
-              );
-            })}
+            <section className="portfolio">
+              {work.map(val => {
+                return (
+                  <CropThumb>
+                    <img src={val} />
+                  </CropThumb>
+                );
+              })}
+            </section>
+            <section className="address">
+              {Object.values(place).map(value => {
+                return <p>{value}</p>;
+              })}
+            </section>
           </section>
         </section>
       </ProfileArticle>

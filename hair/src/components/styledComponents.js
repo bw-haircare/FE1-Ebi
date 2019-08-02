@@ -124,12 +124,11 @@ export const Wrap = styled.div`
 `;
 
 export const CropImg = styled.div`
-  width: 130px;
-  height: 130px;
+  width: 125px;
+  height: 125px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
-  margin-top: 10px;
   margin-left: 10px;
 `;
 
@@ -205,15 +204,36 @@ export const ProfileArticle = styled.div`
     text-align: left;
     margin-right: 100px;
     width: 300px;
+
+    button{
+      padding: auto;
+    }
   }
 
-  .portfolio {
+  .side{
+    display: block;
+
+    .portfolio {
     display: grid;
     grid-template-columns: 0fr 0fr;
+
+    .sc-htoDjs.khYaDL{
+      margin-left: 20px;
+    }
   }
+
+  .address{
+    text-align: center;
+    margin-top: 20px;
+  }
+  }
+
+  
 `;
 
-//Container - Jade
+//Styling by Jade
+
+//Container
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -223,7 +243,9 @@ export const Container = styled.div`
   padding-top: 20px;
 `;
 
-//Dashboard Styles- Jade
+// Logo
+
+//Dashboard Styles
 export const DashNav = styled.nav`
   display: flex;
   justify-content: space-evenly;
@@ -320,22 +342,7 @@ export const PostLabel = styled.label`
 `;
 
 export const PostInput = styled.input`
-  background: #fdc8b7;
-  background-image: linear-gradient(
-    to bottom,
-    #fdc8b7,
-    #fecebe,
-    #fed3c6,
-    #ffd9cd,
-    #ffdfd5,
-    #ffdfd5,
-    #ffdfd5,
-    #ffdfd5,
-    #ffd9cd,
-    #fed3c6,
-    #fecebe,
-    #fdc8b7
-  );
+  background: #ffdfd5;
   border: none;
   border-radius: 3px;
   width: 100%;

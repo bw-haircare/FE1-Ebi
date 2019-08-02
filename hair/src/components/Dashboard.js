@@ -1,3 +1,5 @@
+//Code and styling done by Jade Lopez
+
 import React, { useState } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 
@@ -6,8 +8,6 @@ import StylistPosts from "./StylistsPosts";
 
 //CSS
 import { DashNav, DashLink } from "./styledComponents";
-
-//Dashboard for Stylists: Edit where needed.
 
 export default function Dashboard() {
   const [stylistPost, setStylistPost] = useState([
@@ -72,8 +72,6 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* <Link to="/StylisPost">Dashboard</Link> */}
-
       <DashNav>
         <DashLink>
           <Link className="link-color" to="/Dashboard/StylistsPosts">
@@ -81,8 +79,16 @@ export default function Dashboard() {
           </Link>
         </DashLink>
         <DashLink>
-          <Link className="link-color" to="/Dashboard/AddEditPost">
+          <Link
+            className="link-color"
+            to="/Dashboard/StylistsPosts/AddEditPost"
+          >
             Add Post
+          </Link>
+        </DashLink>
+        <DashLink>
+          <Link className="link-color" to="/logout">
+            Log Out
           </Link>
         </DashLink>
       </DashNav>
@@ -90,7 +96,7 @@ export default function Dashboard() {
       <Switch>
         <Route
           exact
-          path="/Dashboard/AddEditPost"
+          path="/Dashboard/StylistsPosts/AddEditPost"
           render={props => (
             <AddEditForm {...props} submitPost={addPost} buttonText="Add" />
           )}

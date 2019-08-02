@@ -1,3 +1,5 @@
+//Code and styling done by Jade Lopez
+
 import React, { useState } from "react";
 
 //CSS
@@ -11,14 +13,11 @@ import {
 } from "./styledComponents";
 
 export default function AddEditForm(props) {
-  const sizes = ["mini", "tiny", "small", "large", "big", "huge", "massive"];
-
   const { submitPost, initialPost, buttonText, history } = props;
   const [newPost, setNewPost] = useState(
     initialPost || { image: "", name: "", description: "" }
   );
 
-  // console.log("form", submitPost)
   //Change Event
   function handleChange(event) {
     const updatedPost = { ...newPost, [event.target.name]: event.target.value };
@@ -32,7 +31,6 @@ export default function AddEditForm(props) {
   }
 
   //Submit Event
-
   function handleSubmit(event) {
     event.preventDefault();
     submitPost(newPost);
@@ -40,14 +38,12 @@ export default function AddEditForm(props) {
     history.push("/Dashboard/StylistsPosts");
   }
 
-  console.log("form", submitPost); //Come up with not a function on submitPost
-
   return (
     <div>
       <h2 className="postFormTitle">{buttonText}</h2>
       <FormContainer>
         <PostForm onSubmit={handleSubmit}>
-          {/* Placeholder for image */}
+          {/* Placeholder for image url */}
           <PostForm className="form-group">
             <PostLabel>Image:</PostLabel>
             <PostInput

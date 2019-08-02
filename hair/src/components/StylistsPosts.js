@@ -1,3 +1,5 @@
+//Code and styling done by Jade Lopez
+
 import React from "react";
 import { Link } from "react-router-dom";
 

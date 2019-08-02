@@ -17,7 +17,7 @@ export default function NavBar() {
         <NavLink to="/login">Login</NavLink>
       </Spacing>
       <Spacing>
-        <NavLink to="/Dashboard">Dashboard</NavLink>
+        <NavLink to="/Dashboard/StylistsPosts">Dashboard</NavLink>
       </Spacing>
     </Flex>
   );
