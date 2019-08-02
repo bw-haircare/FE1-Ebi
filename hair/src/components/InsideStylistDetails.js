@@ -3,6 +3,9 @@ import { Link, Route } from 'react-router-dom';
 import styled , { css } from 'styled-components'
 import {Button, WrapDiv, CropImg, CropThumb, AlignLeft, ProfileArticle} from "./StyledCss";
 import StarRatingComponent from 'react-star-rating-component';
+import Modal from 'react-bootstrap/Modal'
+import ReactDOM from 'react-dom';
+
 
 
 function InsideStylistDetails(props) {
@@ -16,6 +19,10 @@ function InsideStylistDetails(props) {
     //     //     setBringData(response.data)
     //     // })
     // }, [props.match.params.id])
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
 console.log('props Inside', props)
 console.log('match', props.match.params.id)
@@ -57,7 +64,25 @@ const work = props.location.state.portfolio;
         <h3>My Services</h3>
         {Object.entries(pricing).map(([key, val]) => {
             return (<p><strong>{key}</strong> <br/>${val} 
-            <Button>Book</Button></p>)
+            
+            <Button variant="primary" onClick={handleShow}>
+        Book
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Congratulations!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You're all set! {name} will contact you shortly to work out the details </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+            
+            
+            </p>)
         })}
         </section>
         
