@@ -11,7 +11,7 @@ import InsideStylistDetails from "./components/InsideStylistDetails";
 import Logout from "./components/Logout";
 
 //CSS
-import { AppTitle } from "./components/styledComponents";
+import { LogoContainer, Logo } from "./components/styledComponents";
 import "./App.scss";
 
 function App() {
@@ -20,7 +20,10 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <AppTitle>Hair Care</AppTitle>
+        <LogoContainer>
+          <Logo src="https://i.imgur.com/jaZMHk5.png" alt="Hair Care Logo" />
+        </LogoContainer>
+
         <NavBar />
         <PrivateRoute path="/Dashboard/StylistsPosts" component={Dashboard} />
         <Route exact path="/login" component={Login} />

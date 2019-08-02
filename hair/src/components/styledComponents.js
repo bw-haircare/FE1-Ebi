@@ -40,7 +40,7 @@ export const Button = styled.button`
   border-radius: 3px;
   border: none;
   color: #f1d4d4;
-  padding: 0.5em 2em;
+  padding: 0.3em 1em;
   margin: 1em;
 `;
 
@@ -244,6 +244,18 @@ export const Container = styled.div`
 `;
 
 // Logo
+
+export const LogoContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+export const Logo = styled.img`
+  width: 200px;
+`;
 
 //Dashboard Styles
 export const DashNav = styled.nav`
