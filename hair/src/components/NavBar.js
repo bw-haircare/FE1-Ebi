@@ -11,7 +11,7 @@ export default function NavBar() {
         <NavLink to="/">Home</NavLink>
       </Spacing>
       <Spacing>
-        <NavLink to="/About">About</NavLink>
+        <a href="https://bwhaircare.netlify.com/">About</a>
       </Spacing>
       <Spacing>
         <NavLink to="/login">Login</NavLink>

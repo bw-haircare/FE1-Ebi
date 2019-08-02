@@ -320,8 +320,26 @@ export const PostLabel = styled.label`
 `;
 
 export const PostInput = styled.input`
+  background: #fdc8b7;
+  background-image: linear-gradient(
+    to bottom,
+    #fdc8b7,
+    #fecebe,
+    #fed3c6,
+    #ffd9cd,
+    #ffdfd5,
+    #ffdfd5,
+    #ffdfd5,
+    #ffdfd5,
+    #ffd9cd,
+    #fed3c6,
+    #fecebe,
+    #fdc8b7
+  );
+  border: none;
+  border-radius: 3px;
   width: 100%;
-  padding: 12px 20px;
+  padding: 15px 20px;
   margin: 10px 0;
 `;
 
