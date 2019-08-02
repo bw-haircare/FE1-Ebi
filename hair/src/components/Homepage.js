@@ -25,7 +25,7 @@ function Homepage(props) {
     <div>
       {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
 
-      <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS</H1>
+      <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS NEARBY</H1>
       <div className="StyleContainer ">
         {props.bringData.map((user, i) => {
           return <StylistDetails key={i} user={user} />;
