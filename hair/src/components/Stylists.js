@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import {WrapDiv, CropImg, AlignLeft} from "./StyledCss";
 //import InsideStylistDetails from './InsideStylistDetails'
+
 
 
 function Stylists(props) {
 
 console.log('props stylist', props)
 
+console.log('123, check')
 
   return (
-    <div className="stylist-container">
+    <div>
         {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
 
       <h1>Stylists</h1>
@@ -26,25 +30,25 @@ console.log('props stylist', props)
 function StylistDetails({user}) {
     const {image, name, last, city, role,stars, location} = user;
     return (
-        <div>
-        <Link to={{
+        <WrapDiv>
+            <Link to={{
             pathname: `/stylists/${user.id}`, state:{...user}
             }}>
+                <AlignLeft><CropImg><img src={image}  height="200px"/></CropImg> </AlignLeft>
                 <div>
-                <img src={image}  height="200px"/>
-                <h2> {name} {last} </h2>
-                <h3>{role}</h3>
-              <p>{location.city}</p>
-              <p>Rating: {stars}</p>
-                    </div>
-                    </Link>
+                    <h2> {name} {last} </h2>
+                    <h3>{role}</h3>
+                    <p className="city">{location.city}</p>
+                    <p className="stars">Rating: {stars}</p>
+                </div>
+            </Link>
 
-</div>            
+        </WrapDiv>            
         
             
         
-    )
-}
+            )
+                                }
 
 
 export default Stylists;

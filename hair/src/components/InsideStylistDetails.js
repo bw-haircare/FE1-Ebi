@@ -1,5 +1,8 @@
 import React, { useState, useEffect }  from "react";
 import { Link, Route } from 'react-router-dom';
+import styled , { css } from 'styled-components'
+import {Button, WrapDiv, CropImg, CropThumb, AlignLeft, ProfileArticle} from "./StyledCss";
+import StarRatingComponent from 'react-star-rating-component';
 
 
 function InsideStylistDetails(props) {
@@ -26,34 +29,50 @@ console.log('portfolio', props.location.state.portfolio)
 const pricing = props.location.state.price;
 const work = props.location.state.portfolio;
   return (
-    <div>
-        <button onClick={()=> props.history.goBack()}>Go Back</button>
-        <p>Inside the Stylist Profile Card. Hello World</p>
-        <img src={image} width="200px"/>
+    <ProfileArticle>
+        <Button onClick={()=> props.history.goBack()}>Go Back</Button>
+        <section className="top-section">
+            <CropImg className="left"><img src={image} width="200px"/></CropImg>
+       <div className="right">
+        
         <h2>{name} {last}</h2>
         <h3>{role}</h3>
         <p>{description}</p>
-        {/* <p>{price}</p> */}
-        {Object.values(place).map(value => {
+        
+        <StarRatingComponent 
+          name="rate1" 
+          starCount={5}
+          renderStarIcon={() => <span>♥</span>}
+          starColor="red"
+          value={stars}
+        />
+        </div>
+        </section>
+
+        <section className="bottom-row">
+            <section className="services">
+        {/* {Object.values(place).map(value => {
             return <p>{value}</p>
-        })}
-        {/* <h3>Pricing</h3>
-        {Object.entries(pricing).map(val => {
-            return <p>{ val } usd</p>
         })} */}
         <h3>My Services</h3>
         {Object.entries(pricing).map(([key, val]) => {
             return (<p><strong>{key}</strong> <br/>${val} 
-            <button>Book</button></p>)
+            <Button>Book</Button></p>)
         })}
+        </section>
         
-        <h3>My Portfolio</h3>
+        <section className="portfolio">
+            <h3>My Portfolio</h3>
         {work.map(val => {
-            return (<img src={val} width="100px" />)
+            return (<CropThumb><img src={val} /></CropThumb>)
         })}
-        {/* <img src={work} /> */}
-        {/* <p>{place.zip}</p> */}
-        </div>
+
+
+        </section>
+        </section>
+
+
+        </ProfileArticle>
   )
 }
 
