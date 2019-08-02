@@ -13,16 +13,6 @@ import {
 } from "./styledComponents";
 
 function InsideStylistDetails(props) {
-  // const [bringData, setBringData] = useState();
-
-  // useEffect(()=>{
-  //     const id = props.match.params.id;
-
-  //     // .then(response=>{
-  //     //     setBringData(response.data)
-  //     // })
-  // }, [props.match.params.id])
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

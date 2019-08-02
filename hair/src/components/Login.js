@@ -135,7 +135,7 @@ class Login extends React.Component {
     }&password=${this.state.creds.password}`;
     this.props.login(creds).then(res => {
       if (res) {
-        this.props.history.push("/dashboard");
+        this.props.history.push("/Dashboard/StylistsPosts");
       }
     });
   };
