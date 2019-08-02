@@ -137,7 +137,7 @@ const profiles = [
       "Hair exam Consultation": 20
     },
     portfolio: [
-      "https://i.imgur.com/ILgo4FN.jpg",
+      "https://i.imgur.com/MRDpqHj.jpg",
       "https://i.imgur.com/0egAGWj.jpg",
       "https://i.imgur.com/RPDgUMm.jpg",
       "https://i.imgur.com/CQaZyta.jpg",
@@ -195,11 +195,10 @@ const profiles = [
       "Hair exam Consultation": 20
     },
     portfolio: [
-      "https://i.imgur.com/ILgo4FN.jpg",
-      "https://i.imgur.com/0egAGWj.jpg",
-      "https://i.imgur.com/RPDgUMm.jpg",
-      "https://i.imgur.com/CQaZyta.jpg",
-      "https://i.imgur.com/PmVHgFS.jpg"
+      "https://i.imgur.com/MRDpqHj.jpg",
+      "https://i.imgur.com/hZdkwdC.jpg",
+      "https://i.imgur.com/FRfsebD.jpg",
+      "https://i.imgur.com/nhXcjjD.jpg"
     ],
     stars: 4.8
   },
