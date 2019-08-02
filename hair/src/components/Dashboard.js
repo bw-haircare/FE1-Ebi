@@ -65,6 +65,11 @@ export default function Dashboard() {
     setStylistPost(stylistPostCopy);
   };
 
+  //Delete post
+  const deletePost = id => {
+    setStylistPost(stylistPost.filter(post => post.id !== id));
+  };
+
   return (
     <div>
       {/* <Link to="/StylisPost">Dashboard</Link> */}
@@ -80,7 +85,6 @@ export default function Dashboard() {
             Add Post
           </Link>
         </DashLink>
-        {/* /components/Dashboard/AddEditForm */}
       </DashNav>
 
       <Switch>
@@ -88,11 +92,7 @@ export default function Dashboard() {
           exact
           path="/Dashboard/AddEditPost"
           render={props => (
-            <AddEditForm
-              {...props}
-              submitPost={addPost}
-              buttonText="Add Post"
-            />
+            <AddEditForm {...props} submitPost={addPost} buttonText="Add" />
           )}
         />
 
@@ -104,6 +104,7 @@ export default function Dashboard() {
               {...props}
               stylistPost={stylistPost}
               setStylistPost={setStylistPost}
+              deletePost={deletePost}
               buttonText="Edit"
             />
           )}

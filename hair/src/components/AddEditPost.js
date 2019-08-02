@@ -2,7 +2,13 @@ import React, { useState } from "react";
 
 //CSS
 import styled, { css } from "styled-components";
-import { DashNav, DashLink } from "./styledComponents";
+import {
+  FormContainer,
+  PostForm,
+  PostLabel,
+  PostInput,
+  FormButton
+} from "./styledComponents";
 
 export default function AddEditForm(props) {
   const sizes = ["mini", "tiny", "small", "large", "big", "huge", "massive"];
@@ -38,46 +44,47 @@ export default function AddEditForm(props) {
 
   return (
     <div>
-      <h2>{buttonText}</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Placeholder for image */}
-        <div className="form-group">
-          <label>Image:</label>
-          <input
-            type="text"
-            className="input"
-            name="image"
-            // need to remove this
-            placeholder="https://i.imgur.com/52MIbbN.png"
-            value={newPost.image}
-            onChange={handleChange}
-          />
-        </div>
+      <h2 className="postFormTitle">{buttonText}</h2>
+      <FormContainer>
+        <PostForm onSubmit={handleSubmit}>
+          {/* Placeholder for image */}
+          <PostForm className="form-group">
+            <PostLabel>Image:</PostLabel>
+            <PostInput
+              type="text"
+              className="input"
+              name="image"
+              placeholder=" "
+              value={newPost.image}
+              onChange={handleChange}
+            />
+          </PostForm>
 
-        <div className="form-group">
-          <label>Name:</label>
-          <input
-            type="text"
-            className="input"
-            name="name"
-            placeholder="Please enter name"
-            value={newPost.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Description:</label>
-          <input
-            type="text"
-            className="input"
-            name="description"
-            placeholder="Please enter name"
-            value={newPost.description}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">{buttonText}</button>
-      </form>
+          <PostForm className="form-group">
+            <PostLabel>Name:</PostLabel>
+            <PostInput
+              type="text"
+              className="input"
+              name="name"
+              placeholder="Please enter name"
+              value={newPost.name}
+              onChange={handleChange}
+            />
+          </PostForm>
+          <PostForm className="form-group">
+            <PostLabel>Description:</PostLabel>
+            <PostInput
+              type="text"
+              className="input"
+              name="description"
+              placeholder="Please enter a description"
+              value={newPost.description}
+              onChange={handleChange}
+            />
+          </PostForm>
+          <FormButton type="submit">{buttonText}</FormButton>
+        </PostForm>
+      </FormContainer>
     </div>
   );
 }

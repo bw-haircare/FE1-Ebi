@@ -13,6 +13,7 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-star-rating-component": "^1.4.1",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
@@ -45,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.0",
     "gulp-header": "^2.0.9"
   }
 }

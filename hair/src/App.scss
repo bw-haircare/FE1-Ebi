@@ -140,34 +140,56 @@ body {
   .link-color {
     color: #484c7f;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     text-decoration: none;
     transition: ease-in-out 0.3s;
   }
-
   .link-color:hover {
     color: #fdc8b7;
   }
-
   .StyleContainer {
     margin: 0px auto;
     max-width: 1000px;
     width: 100%;
   }
+  .editPostButton {
+    background: #ac8daf;
+    color: #fdc8b7;
+    font-size: 26px;
+    font-weight: 500;
+    padding: 0px 20px;
+    margin: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: -1px 1px 2px 1px rgba(138, 138, 138, 1);
+    text-decoration: none;
+    text-align: center;
+    transition: ease-in-out 0.3s;
+  }
   .postButton {
     background: #ac8daf;
-
-    color: white;
+    color: #fdc8b7;
     font-size: 20px;
-    padding: 10px 20px;
+    padding: 5px 10px;
+    margin: 5px 15px;
+    border: none;
+    border-radius: 3px;
     box-shadow: -1px 1px 2px 1px rgba(138, 138, 138, 1);
     text-align: center;
     transition: ease-in-out 0.3s;
   }
-
-  .postButton:hover {
+  .postButton:hover,
+  .editPostButton:hover {
     background: #ac8daf;
-    color: #fdc8b7;
+    color: white;
+  }
+  .postFormTitle {
+    /* Fix color */
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 30px;
+    color: #464159;
+    text-align: center;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
+import StarRatingComponent from "react-star-rating-component";
 import styled, { css } from "styled-components";
 import {
   Button,
@@ -57,6 +58,18 @@ function InsideStylistDetails(props) {
             </h2>
             <h3>{role}</h3>
             <p className="description">{description}</p>
+            <p className="stars">
+              {" "}
+              My Rating:{" "}
+              <StarRatingComponent
+                name="rate1"
+                starCount={5}
+                starColor="pink"
+                renderStarIcon={() => <span>♥</span>}
+                value={stars}
+              />{" "}
+              {stars}
+            </p>
           </div>
         </section>
 

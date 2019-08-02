@@ -18,12 +18,10 @@ export const Spacing = styled.div`
     font-weight: 500;
   }
 `;
-//#336
 export const Flex = styled.div`
   background: #464159;
   width: 100%;
   display: flex;
-  flex-flox: row;
   justify-content: center;
   padding: 15px 0;
 `;
@@ -34,16 +32,6 @@ export const H1 = styled.h1`
   font-weight: bold;
   color: #484c7f;
   text-align: center;
-`;
-
-//Container
-export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 40px;
-  padding-top: 20px;
 `;
 
 //Eunice's Stylists- Homep//
@@ -81,24 +69,58 @@ export const WrapDiv = styled.div`
     color: #707070;
   }
 
-  .stars {
-    color: #e22424;
-  }
-
   .city {
     font-size: 0.9em;
   }
 `;
 
-export const AlignLeft = styled.div`
-  position: absolute;
-`;
+export const Wrap = styled.div`
+  border-radius: 10px;
+  border: 1px solid #707070;
+  margin: 40px;
+  padding: 10px;
+  height: 150px;
+  box-shadow: 7px 10px #daccdb;
+  column-count: 2;
 
-export const AlignRight = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid red;
-  margin-left: 300px;
+  a {
+    text-decoration: none;
+    color: #707070;
+  }
+
+  .left {
+    width: 30%;
+  }
+
+  .right {
+    width: 50%;
+    text-align: left;
+    margin-left: -280px;
+
+    .stars {
+      margin-top: 10px;
+
+      span {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+      }
+    }
+
+    h2 {
+      color: #707070;
+      font-weight: bolder;
+      font-size: 1.5 em;
+    }
+
+    h3 {
+      color: #9f9f9f;
+    }
+
+    city {
+      font-size: 0.9em;
+    }
+  }
 `;
 
 export const CropImg = styled.div`
@@ -140,7 +162,7 @@ export const ProfileArticle = styled.div`
     }
 
     .description {
-      margin-top: 10px;
+      margin-bottom: 10px;
     }
   }
 
@@ -150,8 +172,22 @@ export const ProfileArticle = styled.div`
 
   .right {
     width: 50%;
-    text-align: left;
-    margin-left: 20px;
+    margin-left: 30px;
+
+    .stars {
+        margin-top: 15px;
+
+        .dv-star-rating{
+            vertical-align: sub;
+        }
+      }
+
+      span {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    }
+
+  }
+
   }
 
   .bottom-row {
@@ -177,8 +213,17 @@ export const ProfileArticle = styled.div`
   }
 `;
 
-//Dashboard Styles- Jade
+//Container - Jade
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  padding-top: 20px;
+`;
 
+//Dashboard Styles- Jade
 export const DashNav = styled.nav`
   display: flex;
   justify-content: space-evenly;
@@ -187,8 +232,20 @@ export const DashNav = styled.nav`
   width: 100%;
 `;
 export const DashLink = styled.a`
-  font-size: 20px;
-  padding: 20px 0px;
+  padding: 40px 0px;
+`;
+
+//Posts
+
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px auto;
+  padding-top: 20px;
+  max-width: 1000px;
+  width: 100%;
 `;
 
 export const PostCard = styled.div`
@@ -211,17 +268,77 @@ export const PostBody = styled.div`
   align-items: center;
   margin: 20px 0;
   padding-left: 15px;
+
+  h2 {
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
 `;
 
 export const Descript = styled.p`
   color: grey;
-  font-size: 18px;
+  font-size: 22px;
 `;
 
 export const BtnContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   width: 120px;
+  margin: 40px auto 15px;
+`;
+
+//Form Styling
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px auto 0;
+  padding-top: 20px;
+  max-width: 1000px;
+  width: 100%;
+`;
+
+export const PostForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+`;
+
+export const PostFormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PostLabel = styled.label`
+  font-size: 25px;
+  margin-top: 10px;
+  font-weight: 600;
+`;
+
+export const PostInput = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+`;
+
+export const FormButton = styled.button`
   margin: 40px auto;
+  width: 120px;
+  background: #ac8daf;
+  border: none;
+  border-radius: 3px;
+  box-shadow: -1px 1px 2px 1px rgba(138, 138, 138, 1);
+  color: white;
+  font-size: 20px;
+  padding: 8px 10px;
+  transition: ease-in-out 0.3s;
+
+  &:hover {
+    background: #ac8daf;
+    color: #fdc8b7;
+  }
 `;

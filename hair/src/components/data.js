@@ -28,7 +28,7 @@ const profiles = [
       "https://i.imgur.com/CQaZyta.jpg",
       "https://i.imgur.com/PmVHgFS.jpg"
     ],
-    stars: 1
+    stars: 1.0
   },
   {
     id: 1,
@@ -59,7 +59,7 @@ const profiles = [
       "https://i.imgur.com/CQaZyta.jpg",
       "https://i.imgur.com/PmVHgFS.jpg"
     ],
-    stars: 5
+    stars: 5.0
   },
   {
     id: 2,
@@ -90,7 +90,7 @@ const profiles = [
       "https://i.imgur.com/CQaZyta.jpg",
       "https://i.imgur.com/PmVHgFS.jpg"
     ],
-    stars: 1
+    stars: 1.0
   }
 ];
 

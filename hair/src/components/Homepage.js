@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InsideStylistDetails from "../components/InsideStylistDetails";
 import { profiles } from "../components/data";
+import StarRatingComponent from "react-star-rating-component";
 
 //CSS
 import styled, { css } from "styled-components";
@@ -12,7 +13,8 @@ import {
   WrapDiv,
   CropImg,
   AlignLeft,
-  AlignRight
+  AlignRight,
+  Wrap
 } from "./styledComponents";
 
 function Homepage(props) {
@@ -23,7 +25,7 @@ function Homepage(props) {
     <div>
       {/* <Route path="/stylists/:id" component={InsideStylistDetails} /> */}
 
-      <H1>Stylists</H1>
+      <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS</H1>
       <div className="StyleContainer ">
         {props.bringData.map((user, i) => {
           return <StylistDetails key={i} user={user} />;
@@ -36,29 +38,37 @@ function Homepage(props) {
 function StylistDetails({ user }) {
   const { image, name, last, role, stars, location } = user;
   return (
-    <WrapDiv>
+    <Wrap>
       <Link
         to={{
           pathname: `/stylists/${user.id}`,
           state: { ...user }
         }}
       >
-        <AlignLeft>
+        <div className="left">
           <CropImg>
             <img src={image} height="200px" />
           </CropImg>{" "}
-        </AlignLeft>
-        <AlignRight>
+        </div>
+        <div className="right">
           <h2>
             {" "}
             {name} {last}{" "}
           </h2>
           <h3>{role}</h3>
           <p className="city">{location.city}</p>
-          <p className="stars">Rating: {stars}</p>
-        </AlignRight>
+          <p className="stars">
+            <StarRatingComponent
+              name="rate1"
+              starCount={5}
+              starColor="pink"
+              renderStarIcon={() => <span>♥</span>}
+              value={stars}
+            />
+          </p>
+        </div>
       </Link>
-    </WrapDiv>
+    </Wrap>
   );
 }
 

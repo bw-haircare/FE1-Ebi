@@ -9,16 +9,17 @@ import {
   PostBody,
   Descript,
   BtnContainer,
-  H1
+  H1,
+  PostContainer
 } from "./styledComponents";
 
 export default function StylistPosts(props) {
-  const { submitPost, buttonText } = props;
+  const { submitPost, buttonText, deletePost } = props;
 
   return (
     <div>
       <H1>My Clients</H1>
-      <Container>
+      <PostContainer>
         {props.stylistPost.map((post, index) => {
           return (
             <PostCard key={index}>
@@ -30,21 +31,21 @@ export default function StylistPosts(props) {
               <BtnContainer>
                 <Link
                   to={`/Dashboard/StylistsPosts/postEdit/${post.id}`}
-                  className="postButton"
+                  className="editPostButton"
                 >
                   {buttonText}
                 </Link>
-                <Link
-                  to={`/Dashboard/StylistsPosts/postEdit/${post.id}`}
+                <button
                   className="postButton"
+                  onClick={() => props.deletePost(post.id)}
                 >
                   Delete
-                </Link>
+                </button>
               </BtnContainer>
             </PostCard>
           );
         })}
-      </Container>
+      </PostContainer>
     </div>
   );
 }
