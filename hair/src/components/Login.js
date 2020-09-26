@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
-import { login } from "../actions/index2";
+import { LoadUser, loginUser } from "../actions/index";
 import styled from "styled-components";
 
 export const H1 = styled.h1`
@@ -56,29 +56,39 @@ export const Button = styled.button`
   margin: 1em;
 `;
 
-class Login extends React.Component {
-  state = {
-    creds: {
-      username: "",
-      password: ""
-    }
+function SignUp({loggingIn, loginUser,history}) {
+
+  
+  const [data, setData]=useState({
+    username: "",
+    password: "",
+  })
+
+  const handleChanges = e => {
+    setData({...data, [e.target.name]:e.target.value})
+
   };
 
-  render() {
+  const handleSubmit = e => {
+    console.log(data)
+    if(data.username==="" && data.password==="")return alert("empty val")
+    else loginUser(data.username, data.password)
+    history.push("/Dashboard/StylistsPosts");
+
+}
+
+
+
     return (
       <div className="login-wrapper">
         <FormGroup>
-          <H1>Login</H1>
+          <H1>  Login </H1>
           <div>
             <Input
               placeholder="username"
               name="username"
-              value={this.state.creds.username}
-              onChange={this.handleChanges}
-              className={
-                this.props.error === true ? "error login-input" : "login-input"
-              }
-              required
+              defaultValue={data.username}
+              onChange={(e)=>handleChanges(e)}
             />
             <i className="fas fa-user" />
           </div>
@@ -87,27 +97,14 @@ class Login extends React.Component {
               type="password"
               placeholder="password"
               name="password"
-              value={this.state.creds.password}
-              onChange={this.handleChanges}
-              className={
-                this.props.error === true ? "error login-input" : "login-input"
-              }
-              required
+              defaultValue={data.password}
+              onChange={(e)=>handleChanges(e)}
             />
             <i className="fas fa-key" />
           </div>
           <div>
-            <div className="btn-login shd" onClick={this.login}>
-              {this.props.loggingIn === true ? (
-                <Loader
-                  type="ThreeDots"
-                  color="##00bfff"
-                  height={80}
-                  width={80}
-                />
-              ) : (
-                <Button>Sign In</Button>
-              )}
+            <div className="btn-login shd" onClick={()=>handleSubmit()}>
+              <Button>Sign In</Button>
             </div>
             <i className="fas fa-sign-in-alt" />
           </div>
@@ -117,37 +114,9 @@ class Login extends React.Component {
     );
   }
 
-  handleChanges = e => {
-    e.preventDefault();
-    this.setState({
-      ...this.state,
-      creds: {
-        ...this.state.creds,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
 
-  login = e => {
-    e.preventDefault();
-    let creds = `grant_type=password&username=${
-      this.state.creds.username
-    }&password=${this.state.creds.password}`;
-    this.props.login(creds).then(res => {
-      if (res) {
-        this.props.history.push("/Dashboard/StylistsPosts");
-      }
-    });
-  };
-}
-
-const mapStateToProps = ({ token, loggingIn, error }) => ({
-  token,
-  loggingIn,
-  error
+const mapStateToProps = (state) => ({
+  loggingIn: state.loggingIn,
 });
 
-export default connect(
-  mapStateToProps,
-  { login }
-)(Login);
+export default connect(mapStateToProps,{ LoadUser, loginUser } )(SignUp);

@@ -32,14 +32,6 @@ import {
   export const reducer = (state = initialState, action) => {
     switch (action.type) {
       case REGISTER_SUCCESS:
-        //   console.log("ACTION PAYLOAD", action.payload.token)
-        localStorage.setItem("token", action.payload.token)
-        return {
-          ...state,
-          loggingIn: false,
-          error: false,
-          token: action.payload.token
-        };
       case LOGIN_SUCCESS:
           localStorage.setItem("token", action.payload.token)
         return {
@@ -63,6 +55,7 @@ import {
           loggingIn: true,
           error: null
         };
+
     //   case FETCH_STYLISTS_SUCCESS:
     //     return {
     //       ...state,

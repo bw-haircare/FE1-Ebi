@@ -88,6 +88,7 @@ export default function Dashboard() {
         </DashLink>
         <DashLink>
           <Link className="link-color" to="/logout">
+          
             Log Out
           </Link>
         </DashLink>

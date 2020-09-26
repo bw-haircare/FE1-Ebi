@@ -3,7 +3,6 @@ import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
 import { LoadUser, registerUser } from "../actions/index";
 import styled from "styled-components";
-import {Redirect} from "react-router-dom"
 
 export const H1 = styled.h1`
   font-size: 22px;

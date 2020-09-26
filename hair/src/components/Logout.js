@@ -4,7 +4,7 @@ function Logout() {
   localStorage.clear();
   window.location.href = "/";
 
-  return <button onClick={Logout}>Logout</button>;
+  // return <div onClick={Logout}>Logout</div>;
 }
 
 export default Logout;
