@@ -1,7 +1,16 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
-import { signUp } from "../actions";
+import { LoadUser, registerUser } from "../actions/index";
 import styled from "styled-components";
+import {Redirect} from "react-router-dom"
+
+export const H1 = styled.h1`
+  font-size: 22px;
+  font-weight: bold;
+  padding: 30px;
+  text-align: center;
+`;
 
 export const FormGroup = styled.div`
   color: palevioletred;
@@ -39,85 +48,77 @@ export const Message = styled.label`
   display: block;
 `;
 
-class SignUp extends Component {
-  state = {
-    userInfo: {
-      username: "",
-      password: ""
-    }
+export const Button = styled.button`
+  background: #ac8daf;
+  border-radius: 3px;
+  border: none;
+  color: #f1d4d4;
+  padding: 0.5em 2em;
+  margin: 1em;
+`;
+
+function SignUp({loggingIn, registerUser,history}) {
+
+  
+  const [data, setData]=useState({
+    username: "",
+    password: "",
+    role:1
+  })
+
+  const handleChanges = e => {
+    setData({...data, [e.target.name]:e.target.value})
+
   };
 
-  changeHandler = e => {
-    e.preventDefault();
-    this.setState({
-      userInfo: {
-        ...this.state.userInfo,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
+  const handleSubmit = e => {
+    console.log(data)
+    if(data.username==="" && data.password==="")return alert("empty val")
+    else registerUser(data.username, data.password)
+    history.push("/Dashboard/StylistsPosts");
 
-  submitHandler = (e, userInfo) => {
-    e.preventDefault();
-    this.props.signUp(userInfo);
-    this.setState({
-      userInfo: {
-        username: "",
-        password: ""
-      }
-    });
-    this.props.history.push("/login");
-  };
+}
 
-  render() {
+
+
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <h1>Stylist Registration</h1>
-          <Form
-            onSubmit={e => this.submitHandler(e, this.state.userInfo)}
-            inline
-          >
-            <FormGroup>
-              <Label for="username">Username</Label>
-              <Input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Register A Username"
-                value={this.state.userInfo.username}
-                onChange={this.changeHandler}
-              />
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label for="password" className="mr-sm-2">
-                Password
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                value={this.state.userInfo.password}
-                onChange={this.changeHandler}
-                id="password"
-                placeholder="Register A Password"
-                required
-              />
-            </FormGroup>
-            <div className="createAccount">
-              <button type="submit">Register Account</button>
+      <div className="login-wrapper">
+        <FormGroup>
+          <H1>  Register </H1>
+          <div>
+            <Input
+              placeholder="username"
+              name="username"
+              defaultValue={data.username}
+              onChange={(e)=>handleChanges(e)}
+            />
+            <i className="fas fa-user" />
+          </div>
+          <div>
+            <Input
+              type="password"
+              placeholder="password"
+              name="password"
+              defaultValue={data.password}
+              onChange={(e)=>handleChanges(e)}
+            />
+            <i className="fas fa-key" />
+          </div>
+          <div>
+            <div className="btn-login shd" onClick={()=>handleSubmit()}>
+              <Button>Sign In</Button>
             </div>
-          </Form>
-        </div>
+            <i className="fas fa-sign-in-alt" />
+          </div>
+        </FormGroup>
+        <div className="login-splash" />
       </div>
     );
   }
-}
 
-const mapStateToProps = state => ({
-  signedUp: state.signedUp
+
+const mapStateToProps = (state) => ({
+  loggingIn: state.loggingIn,
 });
 
-export default connect(
-  mapStateToProps,
-  { signUp }
-)(SignUp);
+export default connect(mapStateToProps,{ LoadUser, registerUser } )(SignUp);

@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
-import { login } from "../actions/index";
+import { login } from "../actions/index2";
 import styled from "styled-components";
 
 export const H1 = styled.h1`

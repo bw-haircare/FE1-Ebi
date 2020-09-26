@@ -10,8 +10,10 @@ import "./index.css";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import {composeWithDevTools} from "redux-devtools-extension"
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const middleWare = [thunk]
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleWare, logger)));
 
 ReactDOM.render(
   <Provider store={store}>

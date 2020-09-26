@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./utilities/PrivateRoute";
 import NavBar from "./components/NavBar";
@@ -13,9 +13,17 @@ import Logout from "./components/Logout";
 //CSS
 import { LogoContainer, Logo } from "./components/styledComponents";
 import "./App.scss";
+import { setToken } from "./setToken";
 
+if(localStorage.getItem("token")){
+  setToken(localStorage.getItem("token"))
+}
 function App() {
   const [bringData, setBringData] = useState(profiles);
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <Router>
