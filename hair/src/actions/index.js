@@ -4,6 +4,8 @@ import {
     LOGIN_FAIL,
     REGISTER_FAIL,
     LOAD_USER,
+    LOAD_USER_SUCCESS,
+    LOAD_FAIL,
     AUTH_ERROR,
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
@@ -62,5 +64,26 @@ export const loginUser = (username, password)=> async dispatch =>{
 
     }
 }
+
+export const fetchUser = () => dispatch => {
+    // dispatch({ type: FETCHING_QUOTE_START });
+    axios
+      .get(`http://localhost:3200/api/users/user/1`)
+      .then(res => {
+        console.log("actions");
+        const users = res.data.map(item => item);
+  
+        dispatch({ type: LOAD_USER_SUCCESS, payload: users });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: LOAD_FAIL,
+          payload: `${err.response.message} with response code ${
+            err.response.code
+          }`
+        });
+      });
+  };
 
 

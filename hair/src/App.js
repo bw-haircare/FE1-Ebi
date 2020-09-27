@@ -9,6 +9,7 @@ import { profiles } from "./components/data";
 import SignUp from "./components/SignUp";
 import InsideStylistDetails from "./components/InsideStylistDetails";
 import Logout from "./components/Logout";
+import Profile from "./components/Profile"
 
 //CSS
 import { LogoContainer, Logo } from "./components/styledComponents";
@@ -34,6 +35,7 @@ function App() {
 
         <NavBar />
         <PrivateRoute path="/Dashboard/StylistsPosts" component={Dashboard} />
+        <PrivateRoute path="/profile" component={Profile} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />

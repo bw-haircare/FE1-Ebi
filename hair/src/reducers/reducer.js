@@ -5,6 +5,7 @@ import {
     REGISTER_FAIL,
     LOAD_USER,
     AUTH_ERROR,
+    LOAD_USER_SUCCESS,
   } from "../constants/constants";
 // import {
 //     LOGIN_STYLIST_START,
@@ -55,6 +56,12 @@ import {
           loggingIn: true,
           error: null
         };
+      case LOAD_USER_SUCCESS:
+          return {
+              ...state,
+              stylists: action.payload,
+              error: null
+            };
 
     //   case FETCH_STYLISTS_SUCCESS:
     //     return {

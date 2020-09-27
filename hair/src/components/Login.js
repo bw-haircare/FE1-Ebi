@@ -69,11 +69,14 @@ function SignUp({loggingIn, loginUser,history}) {
 
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     console.log(data)
     if(data.username==="" && data.password==="")return alert("empty val")
-    else loginUser(data.username, data.password)
+    else await loginUser(data.username, data.password)
     history.push("/Dashboard/StylistsPosts");
+    window.setTimeout(() => {
+      history.push("/Dashboard/StylistsPosts");
+    }, 1000)
 
 }
 
@@ -104,7 +107,16 @@ function SignUp({loggingIn, loginUser,history}) {
           </div>
           <div>
             <div className="btn-login shd" onClick={()=>handleSubmit()}>
-              <Button>Sign In</Button>
+            {loggingIn === true ? (
+                <Loader
+                  type="ThreeDots"
+                  color="##00bfff"
+                  height={80}
+                  width={80}
+                />
+              ) : (
+                <Button>Sign In</Button>
+              )}
             </div>
             <i className="fas fa-sign-in-alt" />
           </div>
