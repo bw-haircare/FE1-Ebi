@@ -10,6 +10,7 @@ import {
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
   import { setToken } from "../setToken";
+  import axios from 'axios'
 export const LoadUser = ()=> async dispatch=>{
     if (localStorage.getItem("token")){
         setToken(localStorage.getItem("token"))
@@ -50,8 +51,7 @@ export const loginUser = (username, password)=> async dispatch =>{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password})
         const response= await axiosWithAuth().post("http://localhost:3200/api/auth/login", body, config)
-        // localStorage.setItem("userID", response.data.token)
-        console.log("HOLD UP NOW LOGGED IN ", response.data)
+        localStorage.setItem('userID', response.data.id)
 
         dispatch({
             type: LOGIN_SUCCESS,
