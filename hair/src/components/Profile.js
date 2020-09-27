@@ -7,31 +7,23 @@ import {
   ProfileArticle,
   Container
 } from "./styledComponents";
-// {fetchUser,history,stylists}
-function Profile({fetchUser,stylists}) {
-    // console.log("PROPS", props)
-    // const {user: currentUser}=useSelector((state)=>state.user)
+function Profile({fetchUser,stylists,history}) {
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
-//   console.log("propos", props)
 
 
   useEffect(() => {
       setUser(fetchUser())
-//     // setUser(fetchUser)
   }, [fetchUser]);
 
-//   console.log("USER-->", user)
-//   console.log("stylists->", stylists)
+console.log(localStorage.getItem("userID"))
 
   return (
     <Container>
       <ProfileArticle>
         {/* <Button onClick={() => history.goBack()}>Go Back</Button> */}
         <h1>Welcome !</h1>
-        {console.log("INSIDE RETURN",)}
-        {stylists.map(item=>item.username)}
-      
+      {stylists.username}
       </ProfileArticle>
     </Container>
   );

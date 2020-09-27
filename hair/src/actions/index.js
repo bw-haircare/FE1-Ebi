@@ -9,10 +9,10 @@ import {
     AUTH_ERROR,
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
-
+  import { setToken } from "../setToken";
 export const LoadUser = ()=> async dispatch=>{
     if (localStorage.getItem("token")){
-        // setToken(localStorage.getItem("token"))
+        setToken(localStorage.getItem("token"))
     }
     try{ 
         const response= await axiosWithAuth().get("http://localhost:3200/api/users")
@@ -30,8 +30,8 @@ export const registerUser = (username, password)=> async dispatch =>{
         const body = JSON.stringify({username, password})
         const response= await axiosWithAuth().post("http://localhost:3200/api/auth/register", body, config)
     //   localStorage.setItem("token", response.data.token)
-    // localStorage.setItem('user_Id', response.data.data.id)
-    // console.log("HOLD UP NOW", response.data.data.id)
+    localStorage.setItem('userID', response.data.data.id)
+    console.log("HOLD UP NOW", response.data.data)
         dispatch({
             type: REGISTER_SUCCESS,
             payload: response.data
@@ -50,8 +50,8 @@ export const loginUser = (username, password)=> async dispatch =>{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password})
         const response= await axiosWithAuth().post("http://localhost:3200/api/auth/login", body, config)
-        // localStorage.setItem("token", response.data.token)
-        console.log("HOLD UP NOW LOGGED IN ")
+        // localStorage.setItem("userID", response.data.token)
+        console.log("HOLD UP NOW LOGGED IN ", response.data)
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -68,7 +68,7 @@ export const loginUser = (username, password)=> async dispatch =>{
 
 export const fetchAllUsers = () => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users`)
+      .get(`http://localhost:3200/api/users$`)
       .then(res => {
         const users = res.data.map(item => item);
   
@@ -86,11 +86,12 @@ export const fetchAllUsers = () => dispatch => {
 
   export const fetchUser = () => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users`)
+      .get(`http://localhost:3200/api/users/user/${localStorage.getItem("userID")}`)
+    //   ${localStorage.getItem('id')}`)
       .then(res => {
-        const users = res.data.map(item => item);
+        const users = res.data.map(item=>item)
   
-        dispatch({ type: LOAD_USER_SUCCESS, payload: users });
+        dispatch({ type: LOAD_USER_SUCCESS, payload: users[0] });
       })
       .catch(err => {
         console.log(err);
