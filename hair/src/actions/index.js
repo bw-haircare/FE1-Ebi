@@ -10,8 +10,6 @@ import {
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
 
-  import axios from "axios"
-
 export const LoadUser = ()=> async dispatch=>{
     if (localStorage.getItem("token")){
         // setToken(localStorage.getItem("token"))
@@ -30,8 +28,10 @@ export const registerUser = (username, password)=> async dispatch =>{
     try{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password})
-        const response= await axios.post("http://localhost:3200/api/auth/register", body, config)
+        const response= await axiosWithAuth().post("http://localhost:3200/api/auth/register", body, config)
     //   localStorage.setItem("token", response.data.token)
+    // localStorage.setItem('user_Id', response.data.data.id)
+    // console.log("HOLD UP NOW", response.data.data.id)
         dispatch({
             type: REGISTER_SUCCESS,
             payload: response.data
@@ -49,8 +49,9 @@ export const loginUser = (username, password)=> async dispatch =>{
     try{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password})
-        const response= await axios.post("http://localhost:3200/api/auth/login", body, config)
+        const response= await axiosWithAuth().post("http://localhost:3200/api/auth/login", body, config)
         // localStorage.setItem("token", response.data.token)
+        console.log("HOLD UP NOW LOGGED IN ")
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -65,12 +66,10 @@ export const loginUser = (username, password)=> async dispatch =>{
     }
 }
 
-export const fetchUser = () => dispatch => {
-    // dispatch({ type: FETCHING_QUOTE_START });
-    axios
-      .get(`http://localhost:3200/api/users/user/1`)
+export const fetchAllUsers = () => dispatch => {
+    axiosWithAuth()
+      .get(`http://localhost:3200/api/users`)
       .then(res => {
-        console.log("actions");
         const users = res.data.map(item => item);
   
         dispatch({ type: LOAD_USER_SUCCESS, payload: users });
@@ -79,9 +78,25 @@ export const fetchUser = () => dispatch => {
         console.log(err);
         dispatch({
           type: LOAD_FAIL,
-          payload: `${err.response.message} with response code ${
-            err.response.code
-          }`
+          payload: `${err} with response code ${err}`
+        });
+      });
+  };
+
+
+  export const fetchUser = () => dispatch => {
+    axiosWithAuth()
+      .get(`http://localhost:3200/api/users`)
+      .then(res => {
+        const users = res.data.map(item => item);
+  
+        dispatch({ type: LOAD_USER_SUCCESS, payload: users });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: LOAD_FAIL,
+          payload: `${err} with response code ${err}`
         });
       });
   };

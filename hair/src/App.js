@@ -16,6 +16,7 @@ import { LogoContainer, Logo } from "./components/styledComponents";
 import "./App.scss";
 import { setToken } from "./setToken";
 
+
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
