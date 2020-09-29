@@ -33,14 +33,14 @@ useEffect(()=>{
   }
 
   //Submit Event
-  function handleSubmit(event) {
+const handleSubmit = async event => {
     event.preventDefault();
-    newClient_(newPost);
+    await newClient_(newPost);
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
     console.log( newPost);
-    window.setTimeout(() => {
+    // window.setTimeout(() => {
         history.push("/profile");
-      }, 1000)
+    //   }, 1000)
   }
 
   return (

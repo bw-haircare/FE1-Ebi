@@ -62,7 +62,7 @@ import {
       case ADD_CLIENT:
       return {
         ...state,
-        clients: action.payload,
+        clients: [action.payload],
         isPosting: false,
         error: false,
       };

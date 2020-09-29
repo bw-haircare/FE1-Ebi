@@ -113,9 +113,9 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
             })} */}
           </section>
 
-          <section className="side">
+          <section className="side" style={{width: "630px"}}>
           <h3>My Clients {clients.length > 0 && <button onClick={()=>{history.push("/client");}}>Add Client</button>} </h3> 
-            <div style={{display:"inline-flex"}}>
+            <div style={{display:"inline-flex", flexWrap:"wrap"}}>
             {clients.length === 0 ? (
             <div style={{borderRadius: "10px", border:"4px dotted lightgrey", padding: "120px", background:"ghostwhite", textAlign: "center"}}>
               <h1>You don't have any clients yet</h1>
@@ -123,8 +123,8 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
               </div>): 
             ( 
                 clients.map(val =>  (
-                  <div style={{width: "200px", height: "300px", border:"1px solid black",  margin:"5px"}}>
-                    <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 150px", backgroundSize:"cover"}}></div>
+                  <div style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
+                    <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
                     <div>Service: {val.service}</div>
