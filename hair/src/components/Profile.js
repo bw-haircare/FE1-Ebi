@@ -128,6 +128,10 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
                     <div>Service: {val.service}</div>
+                    <div>
+                    <button style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
+                    <button style={{background:"crimson", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "right"}}>Delete</button>
+                    </div>
                     </div>
                   </div>
                   ))
