@@ -5,11 +5,16 @@ import {
     REGISTER_FAIL,
     LOAD_USER,
     AUTH_ERROR,
+    ADD_CLIENT,
     LOAD_USER_SUCCESS,
+    LOAD_CLIENTS,
+    LOAD_CLIENTS_SUCCESS, ADD_CLIENT_FAIL
   } from "../constants/constants";
   
   const initialState = {
     stylists: [],
+    clients:[],
+    isPosting: false,
     loggingIn: false,
     error: null,
     loading: true,
@@ -30,7 +35,6 @@ import {
       case LOGIN_FAIL:
       case REGISTER_FAIL:
       case AUTH_ERROR:
-        // localStorage.removeItem("token")
         return {
           ...state,
           loggingIn: false,
@@ -42,13 +46,32 @@ import {
           loggingIn: true,
           error: null
         };
+      case LOAD_CLIENTS:
       case LOAD_USER_SUCCESS:
           return {
               ...state,
               stylists: action.payload,
               error: null
             };
-
+      case LOAD_CLIENTS_SUCCESS:
+          return {
+              ...state,
+              clients: action.payload,
+              error: null
+            };
+      case ADD_CLIENT:
+      return {
+        ...state,
+        clients: action.payload,
+        isPosting: false,
+        error: false,
+      };
+      case ADD_CLIENT_FAIL:
+      return {
+        ...state,
+        ispPosting: false,
+        error: action.payload
+      };
   
       default:
         return state;

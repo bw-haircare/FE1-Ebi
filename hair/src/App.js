@@ -15,6 +15,7 @@ import Profile from "./components/Profile"
 import { LogoContainer, Logo } from "./components/styledComponents";
 import "./App.scss";
 import { setToken } from "./setToken";
+import AddEditClient from "./components/AddEditClient";
 
 
 if(localStorage.getItem("token")){
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/client" component={AddEditClient} />
         <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
           exact

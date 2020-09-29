@@ -152,6 +152,11 @@ body {
     margin: 0px auto;
     max-width: 1000px;
     width: 100%;
+    // -----
+      display: flex;
+      flex-flow: wrap-reverse;
+      justify-content: center;
+
   }
   .editPostButton {
     background: #ac8daf;
@@ -192,3 +197,28 @@ body {
     text-align: center;
   }
 }
+
+.sc-bZQynM.kJYNKs {
+  width: min-content;
+}
+
+.kJYNKs {
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+
+.kJYNKs .right {
+width: unset;
+text-align: unset;
+margin-left: unset;
+}
+
+.geNJXU .services {
+  text-align: left;
+  margin-right: unset;
+  width: 300px;
+}
+
+
+
+

@@ -1,11 +1,9 @@
   import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
-import { fetchUser, addUser } from "../actions/index";
-import { connect, useSelector } from "react-redux";
-import styled, { css } from "styled-components";
+import { fetchUser, addUser, fetchAllClients } from "../actions/index";
+import { connect } from "react-redux";
 import Modal from "react-bootstrap/Modal";
-import ReactDOM from "react-dom";
 import {
   Button,
   ProfileArticle,
@@ -14,15 +12,18 @@ import {
   Container
 } from "./styledComponents";
 
-function Profile({fetchUser,stylists,history}) {
+function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
-  const {imgUrl,username,first, last}=stylists
+  const [client, setClient]=useState()
+  const {imgUrl,username,first, last, bio, profession}=stylists
+  const { user_id, client_name, service, client_ImgUrl}=clients
 
 
   useEffect(() => {
       setUser(fetchUser())
-  }, [fetchUser]);
+      setClient(fetchAllClients())
+  }, [fetchUser, fetchAllClients]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -48,18 +49,17 @@ function Profile({fetchUser,stylists,history}) {
         <section className="top-section">
           <CropImg>
             <div className="left">
-              <img src={imgUrl} width="200px" />
+              <img alt={imgUrl} src={imgUrl} width="200px" />
             </div>
           </CropImg>
 
           <div className="right">
             <h2>
-               <h1>Welcome !</h1>
-      {stylists.username}
+      Welcome {first} {last} !
             </h2>
-            {/* <h3>{role}</h3> */}
+            <h3>{profession}</h3>
             <p className="description">
-                {/* {description} */}
+                {bio}
                 </p>
             <p className="stars">
               {" "}
@@ -114,17 +114,28 @@ function Profile({fetchUser,stylists,history}) {
           </section>
 
           <section className="side">
-            <h3>My Portfolio</h3>
-            <section className="portfolio">
-                work
-              {/* {work.map(val => {
-                return (
-                  <CropThumb>
-                    <img src={val} />
-                  </CropThumb>
-                );
-              })} */}
-            </section>
+          <h3>My Clients {clients.length > 0 && <button onClick={()=>{history.push("/client");}}>Add Client</button>} </h3> 
+            <div style={{display:"inline-flex"}}>
+            {clients.length === 0 ? (
+            <div style={{borderRadius: "10px", border:"4px dotted lightgrey", padding: "120px", background:"ghostwhite", textAlign: "center"}}>
+              <h1>You don't have any clients yet</h1>
+              <div style={{padding: "10px"}}><button>Add New Client</button></div>
+              </div>): 
+            ( 
+                clients.map(val =>  (
+                  <div style={{width: "200px", height: "300px", border:"1px solid black",  margin:"5px"}}>
+                    <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 150px", backgroundSize:"cover"}}></div>
+                    <div style={{padding: "10px"}}>
+                    <div>Name: {val.client_name}</div>
+                    <div>Service: {val.service}</div>
+                    </div>
+                  </div>
+                  ))
+
+            )}
+            </div>
+
+
             <section className="address">
                 address
               {/* {Object.values(place).map(value => {
@@ -141,11 +152,12 @@ function Profile({fetchUser,stylists,history}) {
 const mapStateToProps = state => {
     return {
         stylists: state.stylists,
+        clients:state.clients,
       error: state.error
     };
   };
   
   export default connect(
     mapStateToProps,
-    { fetchUser }
+    { fetchUser, fetchAllClients }
   )(Profile);

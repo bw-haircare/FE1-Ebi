@@ -5,6 +5,9 @@ import {
     REGISTER_FAIL,
     LOAD_USER,
     LOAD_USER_SUCCESS,
+    ADD_CLIENT,
+    ADD_CLIENT_FAIL,
+    LOAD_CLIENTS_SUCCESS,
     LOAD_FAIL,
     AUTH_ERROR,
   } from "../constants/constants";
@@ -68,7 +71,7 @@ export const loginUser = (username, password)=> async dispatch =>{
 
 export const fetchAllUsers = () => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users$`)
+      .get(`http://localhost:3200/api/users`)
       .then(res => {
         const users = res.data.map(item => item);
   
@@ -101,5 +104,36 @@ export const fetchAllUsers = () => dispatch => {
         });
       });
   };
+
+  export const fetchAllClients = () => dispatch => {
+    axiosWithAuth()
+      .get(`http://localhost:3200/api/users/${localStorage.getItem("userID")}/posts`)
+      .then(res => {
+        const users = res.data.map(item => item);
+        dispatch({ type: LOAD_CLIENTS_SUCCESS, payload: users });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: LOAD_FAIL,
+          payload: `${err} with response code ${err}`
+        });
+      });
+  };
+
+
+  export const newClient_ = (newpost)=> async dispatch =>{
+    try{
+        const response= await axiosWithAuth().post(`http://localhost:3200/api/users/${localStorage.getItem("userID")}/posts`, newpost)
+    console.log("HOLD UP NOW", response.data)
+        dispatch({
+            type: ADD_CLIENT,
+            payload: response.data
+        })
+    }catch(err){
+        dispatch({type: ADD_CLIENT_FAIL, payload: err})
+
+    }
+}
 
 
