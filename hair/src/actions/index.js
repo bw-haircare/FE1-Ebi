@@ -31,7 +31,7 @@ export const registerUser = (username, password)=> async dispatch =>{
         const body = JSON.stringify({username, password})
         const response= await axiosWithAuth().post("http://localhost:3200/api/auth/register", body, config)
     //   localStorage.setItem("token", response.data.token)
-    localStorage.setItem('userID', response.data.data.id)
+    localStorage.setItem('userID', response.data.id)
     console.log("HOLD UP NOW", response.data.data)
         dispatch({
             type: REGISTER_SUCCESS,
