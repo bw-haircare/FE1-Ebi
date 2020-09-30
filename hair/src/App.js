@@ -10,23 +10,30 @@ import SignUp from "./components/SignUp";
 import InsideStylistDetails from "./components/InsideStylistDetails";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile"
+import { fetchUser, addUser, fetchAllClients } from "./actions/index";
+import { connect } from "react-redux";
 
 //CSS
 import { LogoContainer, Logo } from "./components/styledComponents";
 import "./App.scss";
 import { setToken } from "./setToken";
 import AddEditClient from "./components/AddEditClient";
-
+import EditClientForm from "./components/AdEditClient"
 
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
 function App(props) {
+  const {fetchUser, fetchAllClients}=props
   const [bringData, setBringData] = useState(profiles);
+  const [user, setUser]= useState()
+  const [client, setClient]=useState()
 
-  useEffect(()=>{
+  useEffect(() => {
+    setUser(fetchUser())
+    setClient(fetchAllClients())
+}, [fetchUser, fetchAllClients]);
 
-  },[])
 
   return (
     <Router>
@@ -42,7 +49,8 @@ function App(props) {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
-        <Route exact path="/client/:id"><AddEditClient {...props}/> </Route>
+        <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} /> </Route>
+
         <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
           exact
@@ -57,5 +65,15 @@ function App(props) {
     </Router>
   );
 }
+const mapStateToProps = state => {
+  return {
+      stylists: state.stylists,
+      clients:state.clients,
+    error: state.error
+  };
+};
 
-export default App;
+export default connect(
+  mapStateToProps,
+  { fetchUser, fetchAllClients }
+)(App);

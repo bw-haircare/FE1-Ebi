@@ -1,5 +1,5 @@
   import React, { useState, useEffect } from "react";
-import { Link, Route, useParams } from "react-router-dom";
+import { Switch, Link, Route, useParams } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import { fetchUser, addUser, fetchAllClients } from "../actions/index";
 import { connect } from "react-redux";
@@ -11,6 +11,7 @@ import {
   CropThumb,
   Container
 } from "./styledComponents";
+import EditClientForm from "./AdEditClient";
 
 function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
   const params = useParams();
@@ -48,6 +49,7 @@ console.log("params this", params.id)
 //   const pricing = location.state.price;
 //   const work = location.state.portfolio;
   return (
+    <>
     <Container>
       <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
@@ -119,23 +121,24 @@ console.log("params this", params.id)
           </section>
 
           <section className="side" style={{width: "630px"}}>
-          <h3>My Clients {clients.length > 0 && <button onClick={()=>{history.push("/client");}}>Add Client</button>} </h3> 
+          <h3>My Clients {clients.length > 0 && <button onClick={()=>{history.push("/client")}}>Add Client</button>} </h3> 
             <div style={{display:"inline-flex", flexWrap:"wrap"}}>
             {clients.length === 0 ? (
             <div style={{borderRadius: "10px", border:"4px dotted lightgrey", padding: "120px", background:"ghostwhite", textAlign: "center"}}>
               <h1>You don't have any clients yet</h1>
-              <div style={{padding: "10px"}}><button>Add New Client</button></div>
+              <div style={{padding: "10px"}}><button onClick={()=>{history.push("/client")}}>Add New Client</button></div>
               </div>): 
             ( 
                 clients.map((val,key) =>  (
-                  <div key={key} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
+                  <div key={val.id} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
                     {console.log("KEY, VAL", key, val)}
+                    {console.log("hello id", val.id )}
                     <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
                     <div>Service: {val.service}</div>
                     <div>
-                    <button onClick={()=>{history.push(`/client/${key}`)}} style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
+                    <button onClick={()=>{history.push(`/client/${val.id}`)}} style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
                     <button style={{background:"crimson", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "right"}}>Delete</button>
                     </div>
                     </div>
@@ -156,6 +159,19 @@ console.log("params this", params.id)
         </section>
       </ProfileArticle>
     </Container>
+    <Switch>
+        {/* <Route
+          exact
+          path="/client/:id"
+          render={props => (
+            <AdEditClient {...props} />
+          )}
+        /> */}
+        something here
+        <Route exact path="/client/:id"><EditClientForm fetchclient={fetchAllClients}/> </Route>
+
+      </Switch>
+    </>
   );
 }
 
