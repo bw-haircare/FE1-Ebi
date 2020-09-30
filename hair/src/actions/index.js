@@ -9,11 +9,12 @@ import {
     ADD_CLIENT_FAIL,
     LOAD_CLIENTS_SUCCESS,
     LOAD_FAIL,
-    AUTH_ERROR,
+    AUTH_ERROR, 
+    UPDATE_CLIENT, 
+    UPDATE_CLIENT_FAIL
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
   import { setToken } from "../setToken";
-  import axios from 'axios'
 export const LoadUser = ()=> async dispatch=>{
     if (localStorage.getItem("token")){
         setToken(localStorage.getItem("token"))
@@ -135,5 +136,18 @@ export const fetchAllUsers = () => dispatch => {
 
     }
 }
+
+export const updateClient = (updatePost)=> async dispatch =>{
+  try{
+    const id = updatePost.id;
+      const response= await axiosWithAuth().put(`http://localhost:3200/api/users/${id}/posts`, updatePost)
+      dispatch({type: UPDATE_CLIENT,payload: response.data})
+  }catch(err){
+      dispatch({type: UPDATE_CLIENT_FAIL, payload: err})
+
+  }
+}
+
+
 
 

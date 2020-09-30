@@ -6,9 +6,12 @@ import {
     LOAD_USER,
     AUTH_ERROR,
     ADD_CLIENT,
+    ADD_CLIENT_FAIL,
     LOAD_USER_SUCCESS,
     LOAD_CLIENTS,
-    LOAD_CLIENTS_SUCCESS, ADD_CLIENT_FAIL
+    LOAD_CLIENTS_SUCCESS, 
+    UPDATE_CLIENT,
+    UPDATE_CLIENT_FAIL
   } from "../constants/constants";
   
   const initialState = {
@@ -59,6 +62,7 @@ import {
               clients: action.payload,
               error: null
             };
+      case UPDATE_CLIENT:
       case ADD_CLIENT:
       return {
         ...state,
@@ -66,6 +70,7 @@ import {
         isPosting: false,
         error: false,
       };
+      case UPDATE_CLIENT_FAIL:
       case ADD_CLIENT_FAIL:
       return {
         ...state,

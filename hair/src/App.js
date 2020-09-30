@@ -49,7 +49,7 @@ function App(props) {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
-        <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} /> </Route>
+        <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} {...props}/> </Route>
 
         <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
