@@ -1,8 +1,9 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import { LoadUser, registerUser, newClient_, fetchUser } from "../actions/index";
+import { LoadUser, registerUser, clients,newClient_, fetchUser } from "../actions/index";
 import { connect } from "react-redux";
+import {  useParams } from "react-router-dom";
 
 
 
@@ -16,11 +17,18 @@ import {
 } from "./styledComponents";
 
 
-function AddEditClient({fetchUser, newClient_, history}) {
+function AddEditClient(props) {
+    console.log("PROPS", props)
+    const{fetchUser, clients, newClient_, history}=props
   const [newPost, setNewPost] = useState( { client_name: "", service: "", client_ImgUrl: "" }
   );
 
   console.log("newClient", newClient_)
+  const params = useParams();
+  const info = clients.find(item => Number(item.id) === Number(params.id));
+
+  console.log("parammms", params)
+  console.log("INFO", clients.map(item=>item.id))
 
 useEffect(()=>{
     fetchUser()

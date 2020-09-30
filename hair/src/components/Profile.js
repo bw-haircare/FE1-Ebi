@@ -1,5 +1,5 @@
   import React, { useState, useEffect } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useParams } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import { fetchUser, addUser, fetchAllClients } from "../actions/index";
 import { connect } from "react-redux";
@@ -13,11 +13,16 @@ import {
 } from "./styledComponents";
 
 function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
+  const params = useParams();
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
   const {imgUrl,username,first, last, bio, profession}=stylists
   const { user_id, client_name, service, client_ImgUrl}=clients
+  const info = clients.find(item => Number(item.id) === Number(params.id));
+  console.log("Map this", clients.map(item=>item.id))
+console.log("THIS PARAM", info)
+console.log("params this", params.id)
 
 
   useEffect(() => {
@@ -122,14 +127,15 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
               <div style={{padding: "10px"}}><button>Add New Client</button></div>
               </div>): 
             ( 
-                clients.map(val =>  (
-                  <div style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
+                clients.map((val,key) =>  (
+                  <div key={key} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
+                    {console.log("KEY, VAL", key, val)}
                     <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
                     <div>Service: {val.service}</div>
                     <div>
-                    <button style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
+                    <button onClick={()=>{history.push(`/client/${key}`)}} style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
                     <button style={{background:"crimson", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "right"}}>Delete</button>
                     </div>
                     </div>

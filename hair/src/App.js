@@ -21,7 +21,7 @@ import AddEditClient from "./components/AddEditClient";
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
-function App() {
+function App(props) {
   const [bringData, setBringData] = useState(profiles);
 
   useEffect(()=>{
@@ -42,6 +42,7 @@ function App() {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
+        <Route exact path="/client/:id"><AddEditClient {...props}/> </Route>
         <Route path="/stylists/:id" component={InsideStylistDetails} />
         <Route
           exact
