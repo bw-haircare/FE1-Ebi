@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import InsideStylistDetails from "./components/InsideStylistDetails";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile"
-import { fetchUser, addUser, fetchAllClients } from "./actions/index";
+import { fetchUser, addUser, fetchAllClients, fetchAllUsers } from "./actions/index";
 import { connect } from "react-redux";
 
 //CSS
@@ -20,20 +20,21 @@ import { setToken } from "./setToken";
 import AddEditClient from "./components/AddEditClient";
 import EditClientForm from "./components/AdEditClient"
 import EditUser from "./components/EditUser";
+import Home from "./components/Home";
 
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
 function App(props) {
-  const {fetchUser, fetchAllClients}=props
+  const {fetchUser, fetchAllUsers,fetchAllClients}=props
   const [bringData, setBringData] = useState(profiles);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
 
   useEffect(() => {
-    setUser(fetchUser())
+    setUser(fetchAllUsers())
     setClient(fetchAllClients())
-}, [fetchUser, fetchAllClients]);
+}, [fetchAllUsers, fetchAllClients]);
 
 
   return (
@@ -63,6 +64,15 @@ function App(props) {
             );
           }}
         />
+         <Route
+          exact
+          path="/home"
+          render={props => {
+            return (
+              <Home bringData={bringData} usrsData={fetchAllUsers} setBringData={setBringData} />
+            );
+          }}
+        />
       </div>
     </Router>
   );
@@ -77,5 +87,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchUser, fetchAllClients }
+  { fetchAllUsers, fetchAllClients }
 )(App);
