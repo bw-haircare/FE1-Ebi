@@ -1,7 +1,7 @@
   import React, { useState, useEffect } from "react";
 import { Switch, Link, Route, useParams } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
-import { fetchUser, deleteClient, fetchAllClients } from "../actions/index";
+import { fetchUser, deleteClient, fetchAllClients, updateUser } from "../actions/index";
 import { connect } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import {
@@ -12,7 +12,7 @@ import {
 } from "./styledComponents";
 import EditClientForm from "./AdEditClient";
 
-function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteClient}) {
+function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteClient, updateUser}) {
   const params = useParams();
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
@@ -24,7 +24,8 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
   useEffect(() => {
       setUser(fetchUser())
       fetchAllClients()
-  }, [fetchUser, fetchAllClients]);
+      // updateUser()
+  }, [fetchUser, fetchAllClients, updateUser]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -69,8 +70,11 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
           <div className="right">
             <h2>
       Welcome {stylists.first} {stylists.last} !
-            </h2>
+            </h2> 
+            <button onClick={()=>history.push(`/user/${stylists.id}`)} style={{background:"deepskyblue", position:"relative", float:"right"}}>Edit</button>
+            {/* updateUser(stylists.id) */}
             <h3>{stylists.profession}</h3>
+            
             <p className="description">
                 {stylists.bio}
                 </p>
@@ -196,5 +200,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    { fetchUser, fetchAllClients, deleteClient }
+    { fetchUser, fetchAllClients, deleteClient, updateUser }
   )(Profile);

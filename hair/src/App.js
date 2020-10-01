@@ -19,6 +19,7 @@ import "./App.scss";
 import { setToken } from "./setToken";
 import AddEditClient from "./components/AddEditClient";
 import EditClientForm from "./components/AdEditClient"
+import EditUser from "./components/EditUser";
 
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
@@ -44,11 +45,12 @@ function App(props) {
 
         <NavBar />
         <PrivateRoute path="/Dashboard/StylistsPosts" component={Dashboard} />
-        <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />        
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
+        <Route exact path="/user/:id"><EditUser fetchC={fetchAllClients} {...props}/> </Route>
         <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} {...props}/> </Route>
 
         <Route path="/stylists/:id" component={InsideStylistDetails} />

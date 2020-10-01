@@ -13,7 +13,7 @@ import {
     UPDATE_CLIENT, 
     UPDATE_CLIENT_FAIL,
     DELETE_CLIENT_SUCCESS,
-    DELETE_CLIENT_FAIL
+    DELETE_CLIENT_FAIL, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
   import { setToken } from "../setToken";
@@ -107,6 +107,17 @@ export const fetchAllUsers = () => dispatch => {
         });
       });
   };
+
+  export const updateUser = (userId)=> async dispatch =>{
+    console.log("UPDATE USER", userId )
+    try{
+        const response= await axiosWithAuth().put(`http://localhost:3200/api/users/user/${userId.id}`, userId)
+        dispatch({type: EDIT_PROFILE_SUCCESS,payload: response.data})
+    }catch(err){
+        dispatch({type: EDIT_PROFILE_FAIL, payload: err})
+  
+    }
+  }
 
   export const fetchAllClients = () => dispatch => {
     axiosWithAuth()
