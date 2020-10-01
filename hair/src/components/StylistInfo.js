@@ -112,6 +112,7 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
             })} */}
 
             <h3>My Services</h3>
+            <strong>Coming Soon...</strong>
             {/* {Object.entries(price).map(([key, val]) => {
               return (
                 <p>

@@ -27,7 +27,7 @@ function Home({bringData,stylists, clients, fetchAllUsers}) {
 
   useEffect(() => {
     fetchAllUsers()
-    fetchAllClients()
+    // fetchAllClients()
 
   }, [fetchAllUsers])
 
@@ -94,12 +94,11 @@ function StylistDetails({user, clients}) {
 const mapStateToProps = state => {
   return {
       stylists: state.stylists,
-      clients:state.clients,
     error: state.error
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchAllUsers, fetchAllClients }
+  { fetchAllUsers }
 )(Home);

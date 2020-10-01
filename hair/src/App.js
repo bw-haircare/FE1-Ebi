@@ -52,7 +52,7 @@ function App(props) {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
-        <Route exact path="/user/:id"><EditUser fetchC={fetchAllClients} {...props}/> </Route>
+        <Route exact path="/user/:id"><EditUser {...props}/> </Route>
         <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} {...props}/> </Route>
 
         {/* <Route path="/stylists2/:id" component={InsideStylistDetails} /> */}
@@ -72,7 +72,7 @@ function App(props) {
           path="/home"
           render={props => {
             return (
-              <Home bringData={bringData} usrsData={fetchAllUsers} setBringData={setBringData} />
+              <Home setBringData={setBringData} />
             );
           }}
         />

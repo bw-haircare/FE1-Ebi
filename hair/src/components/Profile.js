@@ -24,39 +24,12 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
   useEffect(() => {
       setUser(fetchUser())
       fetchAllClients()
-      // updateUser()
   }, [fetchUser, fetchAllClients, updateUser]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   console.log("PROFILE CLIENT-->", clients)
-
-
-  // const removeList = itemTask =>{
-  //   console.log('it should be removed now')
-  //   setTodoItemList(toDoItemList.filter(item=>{
-  //     return !item.id
-  //   }))
-  // }
-
-  // console.log("USERRRRRR", clients )
-
-
-//   const {
-//     image,
-//     name,
-//     stylists.last,
-//     stars,
-//     role,
-//     description,
-//     portfolio,
-//     price,
-//     location
-//   } = location.state;
-//   const place = location.state.location;
-//   const pricing = location.state.price;
-//   const work = location.state.portfolio;
   return (
     <>
     <Container>
@@ -123,7 +96,7 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
             })} */}
 
             <h3>My Services</h3>
-            Check it out here
+            <strong>...Coming Soon</strong>
             {/* {Object.entries(pricing).map(([key, val]) => {
               return (
                 <p>
@@ -183,7 +156,6 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
             <AdEditClient {...props} />
           )}
         /> */}
-        something here
         <Route exact path="/client/:id"><EditClientForm fetchclient={fetchAllClients}/> </Route>
 
       </Switch>
