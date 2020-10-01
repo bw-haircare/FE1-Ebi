@@ -2,10 +2,9 @@ import React, { useState,useEffect } from "react";
 // import Images from "../img";
 import { Link } from "react-router-dom";
 import InsideStylistDetails from "../components/InsideStylistDetails";
-import { profiles } from "../components/data";
 import StarRatingComponent from "react-star-rating-component";
 
-import {fetchAllUsers} from "../actions/index";
+import {fetchAllClients, fetchAllUsers} from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams, useHistory } from "react-router-dom";
 
@@ -21,12 +20,14 @@ import {
   Wrap
 } from "./styledComponents";
 
-function Home({bringData,stylists, fetchAllUsers}) {
+function Home({bringData,stylists, clients, fetchAllUsers}) {
   console.log("props stylist");
   console.log("STYLISTS", stylists)
+  console.log("CLIENTS FROM STATE", clients)
 
   useEffect(() => {
     fetchAllUsers()
+    fetchAllClients()
 
   }, [fetchAllUsers])
 
@@ -39,7 +40,7 @@ function Home({bringData,stylists, fetchAllUsers}) {
       <div className="StyleContainer ">
 
       {stylists.sort((a, b) => a < b).map((user, i) => {
-          return <StylistDetails key={i} user={user} />;
+          return <StylistDetails clients={clients} key={i} user={user} />;
         })}
 
 
@@ -51,12 +52,13 @@ function Home({bringData,stylists, fetchAllUsers}) {
   );
 }
 
-function StylistDetails({user}) {
+function StylistDetails({user, clients}) {
 
   console.log("STYLISTS DETAILS", user)
   return (
     <Wrap>
       <Link
+      clients={clients}
         to={{
           pathname: `/stylists/${user.id}`,
           state: { ...user }
@@ -99,5 +101,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchAllUsers }
+  { fetchAllUsers, fetchAllClients }
 )(Home);

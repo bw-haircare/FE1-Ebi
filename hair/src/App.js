@@ -21,6 +21,7 @@ import AddEditClient from "./components/AddEditClient";
 import EditClientForm from "./components/AdEditClient"
 import EditUser from "./components/EditUser";
 import Home from "./components/Home";
+import StylistInfo from "./components/StylistInfo";
 
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
@@ -54,7 +55,9 @@ function App(props) {
         <Route exact path="/user/:id"><EditUser fetchC={fetchAllClients} {...props}/> </Route>
         <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} {...props}/> </Route>
 
-        <Route path="/stylists/:id" component={InsideStylistDetails} />
+        {/* <Route path="/stylists2/:id" component={InsideStylistDetails} /> */}
+        <Route path="/stylists/:id" component={StylistInfo} />
+
         <Route
           exact
           path="/"

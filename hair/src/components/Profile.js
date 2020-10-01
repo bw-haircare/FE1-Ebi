@@ -30,6 +30,8 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log("PROFILE CLIENT-->", clients)
+
 
   // const removeList = itemTask =>{
   //   console.log('it should be removed now')
@@ -72,7 +74,6 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
       Welcome {stylists.first} {stylists.last} !
             </h2> 
             <button onClick={()=>history.push(`/user/${stylists.id}`)} style={{background:"deepskyblue", position:"relative", float:"right"}}>Edit</button>
-            {/* updateUser(stylists.id) */}
             <h3>{stylists.profession}</h3>
             
             <p className="description">
