@@ -1,43 +1,49 @@
   import React, { useState, useEffect } from "react";
 import { Switch, Link, Route, useParams } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
-import { fetchUser, addUser, fetchAllClients } from "../actions/index";
+import { fetchUser, deleteClient, fetchAllClients } from "../actions/index";
 import { connect } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import {
   Button,
   ProfileArticle,
   CropImg,
-  CropThumb,
   Container
 } from "./styledComponents";
 import EditClientForm from "./AdEditClient";
 
-function Profile({fetchUser, fetchAllClients, stylists,clients,history}) {
+function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteClient}) {
   const params = useParams();
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
-  const {imgUrl,username,first, last, bio, profession}=stylists
+ 
   const { user_id, client_name, service, client_ImgUrl}=clients
   const info = clients.find(item => Number(item.id) === Number(params.id));
-  console.log("Map this", clients.map(item=>item.id))
-console.log("THIS PARAM", info)
-console.log("params this", params.id)
-
 
   useEffect(() => {
       setUser(fetchUser())
-      setClient(fetchAllClients())
+      fetchAllClients()
   }, [fetchUser, fetchAllClients]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  // const removeList = itemTask =>{
+  //   console.log('it should be removed now')
+  //   setTodoItemList(toDoItemList.filter(item=>{
+  //     return !item.id
+  //   }))
+  // }
+
+  // console.log("USERRRRRR", clients )
+
+
 //   const {
 //     image,
 //     name,
-//     last,
+//     stylists.last,
 //     stars,
 //     role,
 //     description,
@@ -53,20 +59,20 @@ console.log("params this", params.id)
     <Container>
       <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
-        <section className="top-section">
+{stylists && ( <section className="top-section">
           <CropImg>
             <div className="left">
-              <img alt={imgUrl} src={imgUrl} width="200px" />
+              <img alt={stylists.imgUrl} src={stylists.imgUrl} width="200px" />
             </div>
           </CropImg>
 
           <div className="right">
             <h2>
-      Welcome {first} {last} !
+      Welcome {stylists.first} {stylists.last} !
             </h2>
-            <h3>{profession}</h3>
+            <h3>{stylists.profession}</h3>
             <p className="description">
-                {bio}
+                {stylists.bio}
                 </p>
             <p className="stars">
               {" "}
@@ -98,8 +104,13 @@ console.log("params this", params.id)
               </Button>
             </Modal.Footer>
           </Modal>
-        </section>
+        </section>)}
 
+       
+       
+       
+       
+       
         <section className="bottom-row">
           <section className="services">
             {/* {Object.values(place).map(value => {
@@ -131,15 +142,13 @@ console.log("params this", params.id)
             ( 
                 clients.map((val,key) =>  (
                   <div key={val.id} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
-                    {console.log("KEY, VAL", key, val)}
-                    {console.log("hello id", val.id )}
                     <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
                     <div>Service: {val.service}</div>
                     <div>
                     <button onClick={()=>{history.push(`/client/${val.id}`)}} style={{background:"deepskyblue", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "left"}}>Edit</button>
-                    <button style={{background:"crimson", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "right"}}>Delete</button>
+                    <button onClick={()=>{deleteClient(val.id)}} style={{background:"crimson", border:"none", borderRadius:"5px", padding: "5px", margin: "5px", position: "relative", float: "right"}}>Delete</button>
                     </div>
                     </div>
                   </div>
@@ -147,6 +156,8 @@ console.log("params this", params.id)
 
             )}
             </div>
+
+
 
 
             <section className="address">
@@ -185,5 +196,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    { fetchUser, fetchAllClients }
+    { fetchUser, fetchAllClients, deleteClient }
   )(Profile);

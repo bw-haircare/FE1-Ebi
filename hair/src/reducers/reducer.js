@@ -11,7 +11,9 @@ import {
     LOAD_CLIENTS,
     LOAD_CLIENTS_SUCCESS, 
     UPDATE_CLIENT,
-    UPDATE_CLIENT_FAIL
+    UPDATE_CLIENT_FAIL,
+    DELETE_CLIENT_SUCCESS,
+    DELETE_CLIENT_FAIL
   } from "../constants/constants";
   
   const initialState = {
@@ -70,6 +72,7 @@ import {
         isPosting: false,
         error: false,
       };
+      case DELETE_CLIENT_FAIL:
       case UPDATE_CLIENT_FAIL:
       case ADD_CLIENT_FAIL:
       return {
@@ -77,6 +80,25 @@ import {
         ispPosting: false,
         error: action.payload
       };
+
+      // case DELETE_CLIENT_SUCCESS:
+      // console.log("action delete reducer", action.payload)
+      // return {
+      //   clients:[state.clients.filter(item=>item !== action.payload)]
+
+      // }
+
+
+      case DELETE_CLIENT_SUCCESS:
+        console.log("action delete reducer", action.payload)
+        return {clients: state.clients.filter(todo => todo.id !== action.payload)}
+
+
+      // case DELETE_CLIENT_SUCCESS:
+      //   return {
+      //       ...state,
+      //       items: state.clients.filter(item => item !== action.payload)
+      //   };
   
       default:
         return state;

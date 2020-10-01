@@ -11,7 +11,9 @@ import {
     LOAD_FAIL,
     AUTH_ERROR, 
     UPDATE_CLIENT, 
-    UPDATE_CLIENT_FAIL
+    UPDATE_CLIENT_FAIL,
+    DELETE_CLIENT_SUCCESS,
+    DELETE_CLIENT_FAIL
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
   import { setToken } from "../setToken";
@@ -147,6 +149,20 @@ export const updateClient = (updatePost)=> async dispatch =>{
 
   }
 }
+
+
+export const deleteClient = (clientId)=> async dispatch =>{
+  try{
+    await axiosWithAuth().delete(`http://localhost:3200/api/users/${clientId}/posts`)
+      dispatch({type: DELETE_CLIENT_SUCCESS,payload: clientId})
+      dispatch(fetchUser())
+
+  }catch(err){
+      dispatch({type: DELETE_CLIENT_FAIL, payload: err})
+
+  }
+}
+
 
 
 

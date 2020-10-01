@@ -17,9 +17,7 @@ import {
 } from "./styledComponents";
 
 
-function EditClientForm(props) {
-  console.log("PROPS IN EDT",props)
-    const{fetchUser, clients, updateClient}=props
+function EditClientForm({fetchUser, clients, updateClient}) {
     const history = useHistory();
   const [newPost, setNewPost] = useState( { client_name: "", service: "", client_ImgUrl: "" }
   );

@@ -1,9 +1,10 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import { LoadUser, registerUser, clients,newClient_, fetchUser } from "../actions/index";
+import { LoadUser, registerUser,newClient_, fetchUser } from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams } from "react-router-dom";
+// import profile from "../../public/img/profile.png"
 
 
 
@@ -43,7 +44,8 @@ useEffect(()=>{
   //Submit Event
 const handleSubmit = async event => {
     event.preventDefault();
-    await newClient_(newPost);
+
+    await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
     console.log( newPost);
     // window.setTimeout(() => {
@@ -54,6 +56,7 @@ const handleSubmit = async event => {
   return (
     <div>
       <h2 className="postFormTitle"> Some Button text</h2>
+      <img alt="something" src="" />
       <FormContainer>
         <PostForm onSubmit={handleSubmit}>
           {/* Placeholder for image url */}
