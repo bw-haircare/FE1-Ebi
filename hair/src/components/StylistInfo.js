@@ -3,7 +3,7 @@ import { Link, Route } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import styled, { css } from "styled-components";
 import Modal from "react-bootstrap/Modal";
-import {fetchAllClients, fetchAllUsers} from "../actions/index";
+import {fetchUserClientPortfolio} from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams, useHistory } from "react-router-dom";
 import {
@@ -14,13 +14,14 @@ import {
   Container
 } from "./styledComponents";
 
-function StylistInfo({clients, stylists, history, location}) {
+function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, location}) {
   const [show, setShow] = useState(false);
+  const [clientPortf, setClientPortf]=useState()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log("PROPS-->", clients)
+  console.log("PROPS-->", clients_id)
 
   console.log("PROPS STYLIST", stylists)
   console.log("LOCATION", location)
@@ -35,6 +36,12 @@ function StylistInfo({clients, stylists, history, location}) {
         username,
         price
   } = location.state;
+
+
+  useEffect(() => {
+
+    setClientPortf(fetchUserClientPortfolio(id))
+  }, [fetchUserClientPortfolio, id])
 
 //   const {
 //     image,
@@ -120,7 +127,8 @@ function StylistInfo({clients, stylists, history, location}) {
           <section className="side">
             <h3>My Portfolio</h3>
             <section className="portfolio">
-              {clients.map((item,val) => {
+                {console.log("Client_id", clients_id)}
+              {clients_id.map((item,val) => {
                 return (
                   <CropThumb>
                       <img alt={`${item.client_name}`} src={item.client_ImgUrl}/>
@@ -144,13 +152,13 @@ function StylistInfo({clients, stylists, history, location}) {
 const mapStateToProps = state => {
     return {
         stylists: state.stylists,
-        clients:state.clients,
+        clients_id:state.clients_id,
       error: state.error
     };
   };
   
   export default connect(
     mapStateToProps,
-    { fetchAllClients }
+    { fetchUserClientPortfolio }
   )(StylistInfo);
   

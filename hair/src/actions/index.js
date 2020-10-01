@@ -8,6 +8,7 @@ import {
     ADD_CLIENT,
     ADD_CLIENT_FAIL,
     LOAD_CLIENTS_SUCCESS,
+    LOAD_CLIENT_PORTFOLIO,
     LOAD_FAIL,
     AUTH_ERROR, 
     UPDATE_CLIENT, 
@@ -125,6 +126,24 @@ export const fetchAllUsers = () => dispatch => {
       .then(res => {
         const users = res.data.map(item => item);
         dispatch({ type: LOAD_CLIENTS_SUCCESS, payload: users });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: LOAD_FAIL,
+          payload: `${err} with response code ${err}`
+        });
+      });
+  };
+
+
+  export const fetchUserClientPortfolio = (id) => dispatch => {
+    console.log("FETCHING CLIENTS FROM USER ID")
+    axiosWithAuth()
+      .get(`http://localhost:3200/api/users/${id}/posts`)
+      .then(res => {
+        const users = res.data.map(item => item);
+        dispatch({ type: LOAD_CLIENT_PORTFOLIO, payload: users });
       })
       .catch(err => {
         console.log(err);

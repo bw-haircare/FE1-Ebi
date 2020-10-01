@@ -7,6 +7,7 @@ import {
     AUTH_ERROR,
     ADD_CLIENT,
     ADD_CLIENT_FAIL,
+    LOAD_CLIENT_PORTFOLIO,
     LOAD_USER_SUCCESS,
     LOAD_CLIENTS,
     LOAD_CLIENTS_SUCCESS, 
@@ -14,10 +15,12 @@ import {
     UPDATE_CLIENT_FAIL,
     DELETE_CLIENT_SUCCESS,
     DELETE_CLIENT_FAIL
+    
   } from "../constants/constants";
   
   const initialState = {
     stylists: [],
+    clients_id:[],
     clients:[],
     isPosting: false,
     loggingIn: false,
@@ -51,13 +54,21 @@ import {
           loggingIn: true,
           error: null
         };
-      case LOAD_CLIENTS:
+      
       case LOAD_USER_SUCCESS:
           return {
               ...state,
               stylists: action.payload,
               error: null
             };
+
+      case LOAD_CLIENT_PORTFOLIO:
+        return {
+          ...state,
+          clients_id: action.payload,
+          error: null
+        };
+      case LOAD_CLIENTS:      
       case LOAD_CLIENTS_SUCCESS:
           return {
               ...state,
