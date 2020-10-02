@@ -25,7 +25,7 @@ export const TOGGLE_STYLIST = "TOGGLE_STYLIST";
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_STYLIST_START });
   return axios
-    .post("http://localhost:3200/api/auth/login", creds, {
+    .post("/api/auth/login", creds, {
       headers: {
         Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
         "Content-Type": "application/x-www-form-urlencoded"

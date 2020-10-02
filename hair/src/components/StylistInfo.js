@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
-import styled, { css } from "styled-components";
 import Modal from "react-bootstrap/Modal";
 import {fetchUserClientPortfolio} from "../actions/index";
 import { connect } from "react-redux";
-import {  useParams, useHistory } from "react-router-dom";
 import {
   Button,
   ProfileArticle,
@@ -43,20 +41,6 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
     setClientPortf(fetchUserClientPortfolio(id))
   }, [fetchUserClientPortfolio, id])
 
-//   const {
-//     image,
-//     name,
-//     last,
-//     stars,
-//     role,
-//     description,
-//     portfolio,
-//     price,
-//     location
-//   } = props.location.state;
-//   const place = props.location.state.location;
-//   const pricing = props.location.state.price;
-//   const work = props.location.state.portfolio;
   return (
     <Container>
 

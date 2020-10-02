@@ -4,6 +4,7 @@ import {
     LOGIN_FAIL,
     REGISTER_FAIL,
     LOAD_USER,
+    LOAD_FAIL,
     AUTH_ERROR,
     ADD_CLIENT,
     ADD_CLIENT_FAIL,
@@ -40,9 +41,12 @@ import {
           error: false,
           token: action.payload.token
         };
+      case LOAD_FAIL:
       case LOGIN_FAIL:
       case REGISTER_FAIL:
       case AUTH_ERROR:
+        localStorage.removeItem("token")
+
         return {
           ...state,
           loggingIn: false,
