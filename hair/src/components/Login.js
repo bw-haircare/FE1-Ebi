@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
 import { LoadUser, loginUser } from "../actions/index";
@@ -74,9 +75,9 @@ function SignUp({loggingIn, loginUser,history}) {
     if(data.username==="" && data.password==="")return alert("empty val")
     else await loginUser(data.username, data.password)
     // history.push("/Dashboard/StylistsPosts");
-    window.setTimeout(() => {
+    // window.setTimeout(() => {
       history.push("/profile");
-    }, 1000)
+    // }, 1000)
 }
 
 
@@ -84,6 +85,7 @@ function SignUp({loggingIn, loginUser,history}) {
       <div className="login-wrapper">
         <FormGroup>
           <H1>  Login </H1>
+          
           <div>
             <Input
               placeholder="username"
@@ -104,7 +106,7 @@ function SignUp({loggingIn, loginUser,history}) {
             <i className="fas fa-key" />
           </div>
           <div>
-            <div className="btn-login shd" onClick={()=>handleSubmit()}>
+            <div className="btn-login shd">
             {loggingIn === true ? (
                 <Loader
                   type="ThreeDots"
@@ -113,8 +115,8 @@ function SignUp({loggingIn, loginUser,history}) {
                   width={80}
                 />
               ) : (
-                <Button>Sign In</Button>
-              )}
+                <Button onClick={()=>handleSubmit()}>Sign In</Button>
+              )} <><Link to="/signup"> Or register here</Link></>
             </div>
             <i className="fas fa-sign-in-alt" />
           </div>
