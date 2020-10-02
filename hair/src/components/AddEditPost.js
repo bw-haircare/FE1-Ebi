@@ -12,7 +12,7 @@ import {
   FormButton
 } from "./styledComponents";
 
-export default function AddEditForm(props) {
+export default function AddEditPost(props) {
   const { submitPost, initialPost, buttonText, history } = props;
   const [newPost, setNewPost] = useState(
     initialPost || { image: "", name: "", description: "" }
