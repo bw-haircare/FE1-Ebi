@@ -60,7 +60,7 @@ function App(props) {
 
         <Route
           exact
-          path="/"
+          path="/home"
           render={props => {
             return (
               <Homepage bringData={bringData} setBringData={setBringData} />
@@ -69,7 +69,7 @@ function App(props) {
         />
          <Route
           exact
-          path="/home"
+          path="/"
           render={props => {
             return (
               <Home setBringData={setBringData} />

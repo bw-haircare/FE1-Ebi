@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { LoadUser, registerUser } from "../actions/index";
 import styled from "styled-components";
@@ -74,10 +75,9 @@ function SignUp({loggingIn, registerUser,history}) {
     console.log(data)
     if(data.username==="" && data.password==="")return alert("empty val")
     else await registerUser(data.username, data.password)
-    // history.push("/Dashboard/StylistsPosts");
-    window.setTimeout(() => {
+    // window.setTimeout(() => {
       history.push("/profile");
-    }, 1000)
+    // }, 1000)
 
 }
 
@@ -107,7 +107,7 @@ function SignUp({loggingIn, registerUser,history}) {
             <i className="fas fa-key" />
           </div>
           <div>
-            <div className="btn-login shd" onClick={()=>handleSubmit()}>
+            <div className="btn-login shd" >
             {loggingIn === true ? (
                 <Loader
                   type="ThreeDots"
@@ -116,8 +116,8 @@ function SignUp({loggingIn, registerUser,history}) {
                   width={80}
                 />
               ) : (
-                <Button>Sign In</Button>
-              )}
+                <Button onClick={()=>handleSubmit()}>Sign In</Button>
+              )}<Link to="/login"> Or login here</Link>
             </div>
             <i className="fas fa-sign-in-alt" />
           </div>
