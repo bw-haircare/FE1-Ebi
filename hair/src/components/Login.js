@@ -75,9 +75,9 @@ function SignUp({loggingIn, loginUser,history}) {
     if(data.username==="" && data.password==="")return alert("empty val")
     else await loginUser(data.username, data.password)
     // history.push("/Dashboard/StylistsPosts");
-    // window.setTimeout(() => {
+    window.setTimeout(() => {
       history.push("/profile");
-    // }, 1000)
+    }, 1000)
 }
 
 
