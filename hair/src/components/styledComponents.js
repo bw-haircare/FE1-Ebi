@@ -93,9 +93,9 @@ export const Wrap = styled.div`
   }
 
   .right {
-    width: 50%;
+    width: unset;
     text-align: left;
-    margin-left: -280px;
+    margin-left: unset;
 
     .stars {
       margin-top: 10px;
