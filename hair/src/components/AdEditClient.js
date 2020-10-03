@@ -32,7 +32,6 @@ function EditClientForm({fetchUser, clients, updateClient}) {
 useEffect(()=>{
     setUsr(info)
     setUpdateMe(false)
-    fetchUser()
 },[fetchUser, info, updateClient])
 
   //Change Event

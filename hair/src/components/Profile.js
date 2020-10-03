@@ -171,6 +171,7 @@ const mapStateToProps = state => {
     return {
         user_info: state.user_info,
         clients:state.clients,
+        new_deleted_client:state.new_deleted_client,
       error: state.error
     };
   };

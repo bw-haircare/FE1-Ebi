@@ -25,6 +25,7 @@ import {
     stylists: [],
     clients_id:[],
     new_client:[],
+    new_deleted_client:[],
     clients:[],
     isPosting: false,
     loggingIn: false,
@@ -123,7 +124,8 @@ import {
 
       case DELETE_CLIENT_SUCCESS:
         console.log("action delete reducer", action.payload)
-        return {clients: state.clients.filter(todo => todo.id !== action.payload)}
+        console.log("DELETE STATE", state)
+        return {...state, new_deleted_client: state.new_deleted_client.filter(todo => todo.id !== action.payload)}
 
 
       // case DELETE_CLIENT_SUCCESS:
