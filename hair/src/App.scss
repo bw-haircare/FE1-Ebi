@@ -150,11 +150,11 @@ body {
   }
   .StyleContainer {
     margin: 0px auto;
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     // -----
       display: flex;
-      flex-flow: wrap-reverse;
+      flex-flow: wrap;
       justify-content: center;
 
   }
@@ -207,11 +207,17 @@ body {
   column-count: 2;
 }
 
-.kJYNKs .right {
-width: unset;
-text-align: unset;
-margin-left: unset;
-}
+// .kJYNKs .right {
+// width: unset;
+// text-align: unset;
+// margin-left: unset;
+// }
+
+// .right {
+//   width: 50%;
+//   text-align: left;
+//   margin-left: -280px;
+
 
 .geNJXU .services {
   text-align: left;
