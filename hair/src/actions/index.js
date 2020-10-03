@@ -24,7 +24,7 @@ export const LoadUser = ()=> async dispatch=>{
         setToken(localStorage.getItem("token"))
     }
     try{ 
-        const response= await axiosWithAuth().get("http://localhost:3200/api/users")
+        const response= await axiosWithAuth().get("/api/users")
         dispatch({type: LOAD_USER, payload: response.data})
         dispatch(fetchAllClients())
 
@@ -38,7 +38,7 @@ export const registerUser = (username, password, imgUrl)=> async dispatch =>{
     try{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password, imgUrl})
-        const response= await axiosWithAuth().post("http://localhost:3200/api/auth/register", body, config)
+        const response= await axiosWithAuth().post("/api/auth/register", body, config)
     //   localStorage.setItem("token", response.data.token)
     localStorage.setItem('userID', response.data.id)
     console.log("HOLD UP NOW", response.data.data)
@@ -59,7 +59,7 @@ export const loginUser = (username, password)=> async dispatch =>{
     try{
         const config={headers:{"Content-Type":"application/json"}}
         const body = JSON.stringify({username, password})
-        const response= await axiosWithAuth().post("http://localhost:3200/api/auth/login", body, config)
+        const response= await axiosWithAuth().post("/api/auth/login", body, config)
         localStorage.setItem('userID', response.data.id)
 
         dispatch({
@@ -77,7 +77,7 @@ export const loginUser = (username, password)=> async dispatch =>{
 
 export const fetchAllUsers = () => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users`)
+      .get(`/api/users`)
       .then(res => {
         const users = res.data.map(item => item);
         dispatch({ type: LOAD_USERS_INFO_SUCCESS, payload: users });
@@ -94,7 +94,7 @@ export const fetchAllUsers = () => dispatch => {
 
   export const fetchUser = (userID) => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users/user/${userID}`)
+      .get(`/api/users/user/${userID}`)
       .then(res => {
         const users = res.data.map(item=>item)  
         dispatch({ type: LOAD_USER_SUCCESS, payload: users[0] });
@@ -111,7 +111,7 @@ export const fetchAllUsers = () => dispatch => {
 
   export const updateUser = (userId)=> async dispatch =>{
     try{
-        const response= await axiosWithAuth().put(`http://localhost:3200/api/users/user/${userId.id}`, userId)
+        const response= await axiosWithAuth().put(`/api/users/user/${userId.id}`, userId)
         dispatch({type: EDIT_PROFILE_SUCCESS,payload: response.data})
     }catch(err){
         dispatch({type: EDIT_PROFILE_FAIL, payload: err})
@@ -121,7 +121,7 @@ export const fetchAllUsers = () => dispatch => {
 
   export const fetchAllClients = () => dispatch => {
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users/${localStorage.getItem("userID")}/posts`)
+      .get(`/api/users/${localStorage.getItem("userID")}/posts`)
       .then(res => {
         const users = res.data.map(item => item);
         dispatch({ type: LOAD_CLIENTS_SUCCESS, payload: users });
@@ -139,7 +139,7 @@ export const fetchAllUsers = () => dispatch => {
   export const fetchUserClientPortfolio = (id) => dispatch => {
     console.log("FETCHING CLIENTS FROM USER ID")
     axiosWithAuth()
-      .get(`http://localhost:3200/api/users/${id}/posts`)
+      .get(`/api/users/${id}/posts`)
       .then(res => {
         const users = res.data.map(item => item);
         dispatch({ type: LOAD_CLIENT_PORTFOLIO, payload: users });
@@ -156,7 +156,7 @@ export const fetchAllUsers = () => dispatch => {
 
   export const newClient_ = (newpost)=> async dispatch =>{
     try{
-        const response= await axiosWithAuth().post(`http://localhost:3200/api/users/${localStorage.getItem("userID")}/posts`, newpost)
+        const response= await axiosWithAuth().post(`/api/users/${localStorage.getItem("userID")}/posts`, newpost)
         dispatch({
             type: ADD_CLIENT,
             payload: response.data
@@ -170,7 +170,7 @@ export const fetchAllUsers = () => dispatch => {
 export const updateClient = (updatePost)=> async dispatch =>{
   try{
     const id = updatePost.id;
-      const response= await axiosWithAuth().put(`http://localhost:3200/api/users/${id}/posts`, updatePost)
+      const response= await axiosWithAuth().put(`/api/users/${id}/posts`, updatePost)
       dispatch({type: UPDATE_CLIENT,payload: response.data})
   }catch(err){
       dispatch({type: UPDATE_CLIENT_FAIL, payload: err})
@@ -182,7 +182,7 @@ export const updateClient = (updatePost)=> async dispatch =>{
 export const deleteClient = (clientId)=> async dispatch =>{
   try{
 
-    await axiosWithAuth().delete(`http://localhost:3200/api/users/${clientId}/posts`)
+    await axiosWithAuth().delete(`/api/users/${clientId}/posts`)
       dispatch({type: DELETE_CLIENT_SUCCESS,payload: clientId})
       dispatch(fetchUser(localStorage.getItem("userID")))
 
