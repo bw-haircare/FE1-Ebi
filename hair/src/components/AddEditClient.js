@@ -1,7 +1,7 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import { LoadUser, registerUser,newClient_, fetchUser, fetchAllUsers } from "../actions/index";
+import { LoadUser, registerUser,newClient_, fetchUser, fetchAllUsers, fetchAllClients } from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams } from "react-router-dom";
 // import profile from "../../public/img/profile.png"
@@ -106,9 +106,11 @@ const handleSubmit = async event => {
 }
 
 const mapStateToProps = (state) => ({
+  user_info: state.user_info,
     loggingIn: state.loggingIn,
-    clients:state.clients,
+    clients_id:state.clients_id,
+    new_client:state.new_client
 
   });
   
-  export default connect(mapStateToProps,{ LoadUser, registerUser, fetchUser, newClient_, fetchAllUsers } )(AddEditClient);
+  export default connect(mapStateToProps,{ LoadUser, registerUser, fetchUser, newClient_, fetchAllUsers, fetchAllClients } )(AddEditClient);

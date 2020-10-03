@@ -24,6 +24,7 @@ import {
     user_info:[],
     stylists: [],
     clients_id:[],
+    new_client:[],
     clients:[],
     isPosting: false,
     loggingIn: false,
@@ -98,7 +99,8 @@ import {
       case ADD_CLIENT:
       return {
         ...state,
-        clients: [action.payload],
+        new_client:[action.payload],
+        // clients: [action.payload],
         isPosting: false,
         error: false,
       };

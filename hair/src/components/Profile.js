@@ -18,7 +18,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
   const [user, setUser]= useState()
   const [client, setClient]=useState()
  
-  const info = clients.find(item => Number(item.id) === Number(params.id));
+  // const info = clients.find(item => Number(item.id) === Number(params.id));
   const userID=localStorage.getItem("userID")
   useEffect(() => {
       setUser(fetchUser(userID))
@@ -27,8 +27,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-console.log(userID)
-console.log("USER INFO", user_info)
+
   return (
     <>
     <Container>
@@ -118,7 +117,13 @@ console.log("USER INFO", user_info)
               </div>): 
             ( 
                 clients.map((val,key) =>  (
+                  // <div>
+                  //   {key}
+   
+                    
+                  // </div>
                   <div key={val.id} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
+                    {console.log("VAL", val)}
                     <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
