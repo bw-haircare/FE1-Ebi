@@ -63,7 +63,7 @@ function SignUp({loggingIn, registerUser,history}) {
   const [data, setData]=useState({
     username: "",
     password: "",
-    imgUrl:"https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png",
+    imgUrl:"https://api.adorable.io/avatars/285/abott@adorable.png",
     role:1
   })
 

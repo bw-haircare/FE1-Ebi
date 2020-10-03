@@ -21,9 +21,7 @@ import {
 } from "./styledComponents";
 
 function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
-  console.log("props stylist");
-  console.log("STYLISTS", stylists)
-  // console.log("CLIENTS FROM STATE", clients)
+
 
   useEffect(() => {
     fetchAllUsers()
@@ -38,6 +36,7 @@ function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
 
       <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS NEARBY</H1>
       <div className="StyleContainer ">
+        <div style={{display:"flex", flexWrap:"wrap"}}>
 
 
 
@@ -49,6 +48,7 @@ function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
         {/* {bringData.map((user, i) => {
           return <StylistDetails key={i} user={user} />;
         })} */}
+        </div>
       </div>
     </div>
   );
@@ -77,15 +77,15 @@ function StylistDetails({user, clients}) {
           </h2>
           <h3>{user.profession}</h3>
           <p className="city">{user.location}</p>
-          <p className="stars">
+          <div className="stars">
             <StarRatingComponent
               name="rate1"
               starCount={5}
               starColor="pink"
               renderStarIcon={() => <span>♥</span>}
-              value="2"
+              value={2}
             />
-          </p>
+          </div>
         </div>
       </Link>
     </Wrap>

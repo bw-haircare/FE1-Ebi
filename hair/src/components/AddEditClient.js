@@ -45,10 +45,8 @@ useEffect(()=>{
 const handleSubmit = async event => {
     event.preventDefault();
 
-    await newClient_(newPost);
-
+    await newClient_({...newPost, client_ImgUrl: "https://api.adorable.io/avatars/285/abott@adorable.png"});
     // await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
-    // setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
 
     console.log( newPost);

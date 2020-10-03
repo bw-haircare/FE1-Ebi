@@ -19,11 +19,6 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log("PROPS-->", clients_id)
-
-  console.log("PROPS STYLIST", stylists)
-  console.log("LOCATION", location)
-
     const {
         bio,
         first,
@@ -59,7 +54,7 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
             </h2>
              <h3>{profession}</h3>
             <p className="description">{bio}</p>
-            <p className="stars">
+            <div className="stars">
               {" "}
               My Rating:{" "}
               <StarRatingComponent
@@ -70,7 +65,7 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
                 value="3"
               />{" "}
               3
-            </p>
+            </div>
           </div>
 
           <Modal show={show} onHide={handleClose}>
@@ -112,14 +107,13 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
           <section className="side">
             <h3>My Portfolio</h3>
             <section className="portfolio">
-                {console.log("Client_id", clients_id)}
-              {clients_id.map((item,val) => {
+              {clients_id ? (clients_id.map((item,val) => {
                 return (
-                  <CropThumb>
+                  <CropThumb key={val}>
                       <img alt={`${item.client_name}`} src={item.client_ImgUrl}/>
                   </CropThumb>
                 );
-              })}
+              })): <p>Stylist has no clients yet</p>}
             </section>
             <section className="address">
               {/* {Object.values(place).map(value => {
