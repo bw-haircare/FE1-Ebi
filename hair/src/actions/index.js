@@ -94,7 +94,7 @@ export const fetchAllUsers = () => dispatch => {
 
   export const fetchUser = (userID) => dispatch => {
     axiosWithAuth()
-      .get(`/api/users/user/${userID}`)
+      .get(`/api/users/user/${userID || localStorage.getItem("userID") }`)
       .then(res => {
         const users = res.data.map(item=>item)  
         dispatch({ type: LOAD_USER_SUCCESS, payload: users[0] });
