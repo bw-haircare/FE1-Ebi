@@ -191,7 +191,7 @@ export const deleteClient = (clientId)=> async dispatch =>{
 
     await axiosWithAuth().delete(`http://localhost:3200/api/users/${clientId}/posts`)
       dispatch({type: DELETE_CLIENT_SUCCESS,payload: clientId})
-      dispatch(fetchUser(clientId))
+      dispatch(fetchUser(localStorage.getItem("userID")))
 
   }catch(err){
       dispatch({type: DELETE_CLIENT_FAIL, payload: err})

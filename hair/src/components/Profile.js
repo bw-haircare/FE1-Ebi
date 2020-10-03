@@ -123,7 +123,6 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
                     
                   // </div>
                   <div key={val.id} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
-                    {console.log("VAL", val)}
                     <div style={{backgroundImage: `url(${val.client_ImgUrl})`, height:" 140px", backgroundSize:"cover"}}></div>
                     <div style={{padding: "10px"}}>
                     <div>Name: {val.client_name}</div>
