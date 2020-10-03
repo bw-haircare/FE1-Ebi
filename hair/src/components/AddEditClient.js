@@ -1,7 +1,7 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import { LoadUser, registerUser,newClient_, fetchUser } from "../actions/index";
+import { LoadUser, registerUser,newClient_, fetchUser, fetchAllUsers } from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams } from "react-router-dom";
 // import profile from "../../public/img/profile.png"
@@ -19,17 +19,17 @@ import {
 
 
 function AddEditClient(props) {
-    console.log("PROPS", props)
+    // console.log("PROPS", props)
     const{fetchUser, clients, newClient_, history}=props
   const [newPost, setNewPost] = useState( { client_name: "", service: "", client_ImgUrl: "" }
   );
 
-  console.log("newClient", newClient_)
+  // console.log("newClient", newClient_)
   const params = useParams();
-  const info = clients.find(item => Number(item.id) === Number(params.id));
+  // const info = clients.find(item => Number(item.id) === Number(params.id));
 
-  console.log("parammms", params)
-  console.log("INFO", clients.map(item=>item.id))
+  // console.log("parammms", params)
+  // console.log("INFO", clients.map(item=>item.id))
 
 useEffect(()=>{
     fetchUser()
@@ -45,9 +45,14 @@ useEffect(()=>{
 const handleSubmit = async event => {
     event.preventDefault();
 
-    await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
+    await newClient_(newPost);
+
+    // await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
+    // setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
+
     console.log( newPost);
+    console.log("Testter")
     // window.setTimeout(() => {
         history.push("/profile");
     //   }, 1000)
@@ -55,8 +60,7 @@ const handleSubmit = async event => {
 
   return (
     <div>
-      <h2 className="postFormTitle"> Some Button text</h2>
-      <img alt="something" src="" />
+      <h2 className="postFormTitle"> Add Client </h2>
       <FormContainer>
         <PostForm onSubmit={handleSubmit}>
           {/* Placeholder for image url */}
@@ -107,4 +111,4 @@ const mapStateToProps = (state) => ({
 
   });
   
-  export default connect(mapStateToProps,{ LoadUser, registerUser, fetchUser, newClient_ } )(AddEditClient);
+  export default connect(mapStateToProps,{ LoadUser, registerUser, fetchUser, newClient_, fetchAllUsers } )(AddEditClient);

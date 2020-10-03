@@ -8,6 +8,7 @@ import {
     AUTH_ERROR,
     ADD_CLIENT,
     ADD_CLIENT_FAIL,
+    LOAD_USERS_INFO_SUCCESS,
     LOAD_CLIENT_PORTFOLIO,
     LOAD_USER_SUCCESS,
     LOAD_CLIENTS,
@@ -20,6 +21,7 @@ import {
   } from "../constants/constants";
   
   const initialState = {
+    user_info:[],
     stylists: [],
     clients_id:[],
     clients:[],
@@ -42,6 +44,11 @@ import {
           token: action.payload.token
         };
       case LOAD_FAIL:
+        return {
+          ...state,
+          loggingIn: false,
+          error: action.payload
+        };
       case LOGIN_FAIL:
       case REGISTER_FAIL:
       case AUTH_ERROR:
@@ -62,9 +69,17 @@ import {
       case LOAD_USER_SUCCESS:
           return {
               ...state,
-              stylists: action.payload,
+              // loggingIn:true,
+              user_info: action.payload,
               error: null
             };
+
+        case LOAD_USERS_INFO_SUCCESS:
+      return {
+          ...state,
+          stylists: action.payload,
+          error: null
+        };
 
       case LOAD_CLIENT_PORTFOLIO:
         return {

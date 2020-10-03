@@ -12,45 +12,44 @@ import {
 } from "./styledComponents";
 import EditClientForm from "./AdEditClient";
 
-function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteClient, updateUser}) {
+function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history, deleteClient, updateUser}) {
   const params = useParams();
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
  
-  const { user_id, client_name, service, client_ImgUrl}=clients
   const info = clients.find(item => Number(item.id) === Number(params.id));
-
+  const userID=localStorage.getItem("userID")
   useEffect(() => {
-      setUser(fetchUser())
-      fetchAllClients()
-  }, [fetchUser, fetchAllClients, updateUser]);
+      setUser(fetchUser(userID))
+      // fetchAllClients()
+  }, [fetchUser, fetchAllClients, updateUser, userID]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  console.log("PROFILE CLIENT-->", clients)
+console.log(userID)
+console.log("USER INFO", user_info)
   return (
     <>
     <Container>
       <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
-{stylists && ( <section className="top-section">
+{user_info && ( <section className="top-section">
           <CropImg>
             <div className="left">
-              <img alt={stylists.imgUrl} src={stylists.imgUrl} width="200px" />
+              <img alt={user_info.imgUrl} src={user_info.imgUrl} width="200px" />
             </div>
           </CropImg>
 
           <div className="right">
             <h2>
-      Welcome {stylists.first} {stylists.last} !
+      Welcome {user_info.first} {user_info.last} !
             </h2> 
-            <button onClick={()=>history.push(`/user/${stylists.id}`)} style={{background:"deepskyblue", position:"relative", float:"right"}}>Edit</button>
-            <h3>{stylists.profession}</h3>
+            <button onClick={()=>history.push(`/user/${user_info.id}`)} style={{background:"deepskyblue", position:"relative", float:"right"}}>Edit</button>
+            <h3>{user_info.profession}</h3>
             
             <p className="description">
-                {stylists.bio}
+                {user_info.bio}
                 </p>
             <p className="stars">
               {" "}
@@ -165,7 +164,7 @@ function Profile({fetchUser, fetchAllClients, stylists,clients,history, deleteCl
 
 const mapStateToProps = state => {
     return {
-        stylists: state.stylists,
+        user_info: state.user_info,
         clients:state.clients,
       error: state.error
     };

@@ -63,6 +63,7 @@ function SignUp({loggingIn, registerUser,history}) {
   const [data, setData]=useState({
     username: "",
     password: "",
+    imgUrl:"https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png",
     role:1
   })
 
@@ -74,7 +75,7 @@ function SignUp({loggingIn, registerUser,history}) {
   const handleSubmit = async e => {
     console.log(data)
     if(data.username==="" && data.password==="")return alert("empty val")
-    else await registerUser(data.username, data.password)
+    else await registerUser(data.username, data.password, data.imgUrl)
     // window.setTimeout(() => {
       history.push("/profile");
     // }, 1000)

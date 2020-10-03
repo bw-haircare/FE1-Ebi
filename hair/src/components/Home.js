@@ -20,10 +20,10 @@ import {
   Wrap
 } from "./styledComponents";
 
-function Home({bringData,stylists, clients, fetchAllUsers}) {
+function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
   console.log("props stylist");
   console.log("STYLISTS", stylists)
-  console.log("CLIENTS FROM STATE", clients)
+  // console.log("CLIENTS FROM STATE", clients)
 
   useEffect(() => {
     fetchAllUsers()
@@ -39,9 +39,11 @@ function Home({bringData,stylists, clients, fetchAllUsers}) {
       <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS NEARBY</H1>
       <div className="StyleContainer ">
 
-      {stylists.sort((a, b) => a < b).map((user, i) => {
+
+
+      {stylists ? (stylists.map((user, i) => {
           return <StylistDetails clients={clients} key={i} user={user} />;
-        })}
+        })): <p>...Loading</p>}
 
 
         {/* {bringData.map((user, i) => {
@@ -54,7 +56,6 @@ function Home({bringData,stylists, clients, fetchAllUsers}) {
 
 function StylistDetails({user, clients}) {
 
-  console.log("STYLISTS DETAILS", user)
   return (
     <Wrap>
       <Link
@@ -94,6 +95,7 @@ function StylistDetails({user, clients}) {
 const mapStateToProps = state => {
   return {
       stylists: state.stylists,
+      loggingIn: state.loggingIn,
     error: state.error
   };
 };

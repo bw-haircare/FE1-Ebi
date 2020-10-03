@@ -27,15 +27,15 @@ if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
 function App(props) {
-  const {fetchUser, fetchAllUsers,fetchAllClients}=props
+  const {fetchUser, stylists,fetchAllUsers,fetchAllClients}=props
   const [bringData, setBringData] = useState(profiles);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
 
-  useEffect(() => {
-    setUser(fetchAllUsers())
-    setClient(fetchAllClients())
-}, [fetchAllUsers, fetchAllClients]);
+//   useEffect(() => {
+//     setUser(fetchAllUsers())
+//     setClient(fetchAllClients())
+// }, [fetchAllUsers, fetchAllClients]);
 
 
   return (
@@ -90,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchAllUsers, fetchAllClients }
+  { fetchUser, fetchAllUsers, fetchAllClients }
 )(App);

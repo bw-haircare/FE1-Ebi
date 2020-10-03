@@ -25,8 +25,6 @@ function EditClientForm({fetchUser, clients, updateClient}) {
   const params = useParams();
   const info = clients.find(item => Number(item.id) === Number(params.id));
 
-  console.log("INNFOO EDIT CLIENT", info)
-
   const [usr, setUsr] = useState(info);
   const [task2, setTask2] = useState([]);
   const [updateMe, setUpdateMe] = useState(false);
@@ -101,7 +99,7 @@ const submitHandler = async (e, id)=>{
 }
 
 const mapStateToProps = (state) => ({
-    loggingIn: state.loggingIn,
+    // loggingIn: state.loggingIn,
     clients:state.clients,
 
   });

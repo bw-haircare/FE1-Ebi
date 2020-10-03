@@ -17,14 +17,16 @@ import {
 } from "./styledComponents";
 
 
-function EditClientForm({fetchUser, clients,stylists, updateUser}) {
+function EditClientForm({fetchUser, clients,user_info, updateUser}) {
     const history = useHistory();
   const [newPost, setNewPost] = useState( { client_name: "", service: "", client_ImgUrl: "" }
   );
 
   const params = useParams();
 //   const info = clients.find(item => Number(item.id) === Number(params.id));
-const info = stylists
+const info = user_info
+console.log("INFO", info)
+console.log("PARAMS", params.id)
 
 
   const [usr, setUsr] = useState(info);
@@ -32,24 +34,26 @@ const info = stylists
   const [updateMe, setUpdateMe] = useState(false);
 
 useEffect(()=>{
-    setUsr(info)
+    setUsr({id: params.id})
     setUpdateMe(false)
     // fetchUser()
-},[fetchUser, info, updateUser])
+},[fetchUser, info, params.id, updateUser])
 
   //Change Event
   function handleChange(event) {
     const updatedPost = { ...usr, [event.target.name]: event.target.value };
     setTask2({ ...newPost, [event.target.name]: event.target.value });
 setUsr(updatedPost)
-console.log("usr =", usr)
+// console.log("usr =", usr)
     setNewPost(updatedPost);
   }
 
 const submitHandler = async (e, id)=>{
   e.preventDefault()
-  await updateUser(usr, id)
+  console.log("ID")
+  await updateUser(usr)
   setUpdateMe(true)
+  console.log("it worked in submit")
     history.push("/profile");
 }
 
@@ -141,7 +145,8 @@ const submitHandler = async (e, id)=>{
 }
 
 const mapStateToProps = (state) => ({
-    loggingIn: state.loggingIn,
+  user_info:state.user_info
+,    loggingIn: state.loggingIn,
     clients:state.clients,
 
   });
