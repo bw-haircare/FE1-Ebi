@@ -93,7 +93,8 @@ export const Wrap = styled.div`
   }
 
   .right {
-    width: unset;
+    max-width: 135px;
+    width: 100%;
     text-align: left;
     margin-left: unset;
 
