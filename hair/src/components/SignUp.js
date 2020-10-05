@@ -63,7 +63,8 @@ function SignUp({loggingIn, registerUser,history}) {
   const [data, setData]=useState({
     username: "",
     password: "",
-    imgUrl:"https://api.adorable.io/avatars/285/abott@adorable.png",
+    imgUrl:"",
+    // imgUrl:"https://api.adorable.io/avatars/285/abott@adorable.png",
     role:1
   })
 

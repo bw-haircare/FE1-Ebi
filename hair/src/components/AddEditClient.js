@@ -20,16 +20,13 @@ import {
 
 function AddEditClient(props) {
     // console.log("PROPS", props)
-    const{fetchUser, clients, newClient_, history}=props
+    const{fetchUser, clients, user_info, new_client, newClient_, clients_id, history}=props
   const [newPost, setNewPost] = useState( { client_name: "", service: "", client_ImgUrl: "" }
   );
 
-  // console.log("newClient", newClient_)
-  const params = useParams();
   // const info = clients.find(item => Number(item.id) === Number(params.id));
+// console.log("NEW CLIENT", newClient_)
 
-  // console.log("parammms", params)
-  // console.log("INFO", clients.map(item=>item.id))
 
 useEffect(()=>{
     fetchUser()
@@ -41,11 +38,15 @@ useEffect(()=>{
     setNewPost(updatedPost);
   }
 
+
   //Submit Event
 const handleSubmit = async event => {
     event.preventDefault();
+    console.log("NEW_client99", new_client)
 
-    await newClient_({...newPost, client_ImgUrl: "https://api.adorable.io/avatars/285/abott@adorable.png"});
+    // await newClient_({...newPost, client_ImgUrl: `https://api.adorable.io/avatars/avatar/${new_client.id}`});
+    await newClient_(newPost);
+
     // await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
 
