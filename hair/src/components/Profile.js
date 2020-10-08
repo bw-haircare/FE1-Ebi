@@ -4,6 +4,7 @@ import StarRatingComponent from "react-star-rating-component";
 import { fetchUser, deleteClient, fetchAllClients, updateUser } from "../actions/index";
 import { connect } from "react-redux";
 import Modal from "react-bootstrap/Modal";
+import Logout from "./Logout"
 import {
   Button,
   ProfileArticle,
@@ -30,16 +31,20 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
 
   return (
     <>
-    <Container>
-      <ProfileArticle>
+    {/* {console.log("user_info-->", user_info == undefined)} */}
+    
+{/* {user_info ?(     */}
+<Container>
+  {user_info ?(
+        <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
-{user_info && ( <section className="top-section">
+  {user_info && ( <section className="top-section">
           <CropImg>
             <div className="left">
               <img alt={user_info.imgUrl} src={user_info.imgUrl} width="200px" />
             </div>
           </CropImg>
-
+  
           <div className="right">
             <h2>
       Welcome {user_info.first} {user_info.last} !
@@ -63,7 +68,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
               {/* {stars} */}
             </p>
           </div>
-
+  
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Congratulations!</Modal.Title>
@@ -71,7 +76,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
             <Modal.Body>
               You're all set! 
               {/* {name} */}
-               will contact you shortly to work out the
+                will contact you shortly to work out the
               details{" "}
             </Modal.Body>
             <Modal.Footer>
@@ -81,18 +86,18 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
             </Modal.Footer>
           </Modal>
         </section>)}
-
-       
-       
-       
-       
-       
+  
+        
+        
+        
+        
+        
         <section className="bottom-row">
           <section className="services">
             {/* {Object.values(place).map(value => {
               return <p>{value}</p>;
             })} */}
-
+  
             <h3>My Services</h3>
             <strong>...Coming Soon</strong>
             {/* {Object.entries(pricing).map(([key, val]) => {
@@ -106,7 +111,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
               );
             })} */}
           </section>
-
+  
           <section className="side" style={{width: "630px"}}>
           <h3>My Clients {clients.length > 0 && <button onClick={()=>{history.push("/client")}}>Add Client</button>} </h3> 
             <div style={{display:"inline-flex", flexWrap:"wrap"}}>
@@ -119,7 +124,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
                 clients.map((val,key) =>  (
                   // <div>
                   //   {key}
-   
+    
                     
                   // </div>
                   <div key={val.id} style={{width: "180px", height: "250px", border:"1px solid black",  margin:"10px"}}>
@@ -134,13 +139,13 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
                     </div>
                   </div>
                   ))
-
+  
             )}
             </div>
-
-
-
-
+  
+  
+  
+  
             <section className="address">
                 address
               {/* {Object.values(place).map(value => {
@@ -150,16 +155,13 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
           </section>
         </section>
       </ProfileArticle>
-    </Container>
-    <Switch>
-        {/* <Route
-          exact
-          path="/client/:id"
-          render={props => (
-            <AdEditClient {...props} />
-          )}
-        /> */}
-        <Route exact path="/client/:id"><EditClientForm fetchclient={fetchAllClients}/> </Route>
+  
+  ): (Logout())}
+  </Container>
+  {/* ):"this is loading"} */}
+  
+  <Switch>
+      <Route exact path="/client/:id"><EditClientForm fetchclient={fetchAllClients}/> </Route>
 
       </Switch>
     </>
