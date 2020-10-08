@@ -39,11 +39,19 @@ function App(props) {
 
 
   return (
+
+
+
+
     <Router>
-      <div className="App">
+{/* {stylists > 0 ? "Loaded in": "Coming through"} */}
+
+     <div className="App">
+
         <LogoContainer>
           <Logo src="https://i.imgur.com/jaZMHk5.png" alt="Hair Care Logo" />
         </LogoContainer>
+
 
         <NavBar />
         <PrivateRoute path="/Dashboard/StylistsPosts" component={Dashboard} />
@@ -67,7 +75,7 @@ function App(props) {
             );
           }}
         />
-         <Route
+        {stylists>0 ? "..Loading" : (         <Route
           exact
           path="/"
           render={props => {
@@ -75,8 +83,21 @@ function App(props) {
               <Home setBringData={setBringData} />
             );
           }}
-        />
+        />)}
+
+         {/* <Route
+          exact
+          path="/"
+          render={props => {
+            return (
+              <Home setBringData={setBringData} />
+            );
+          }}
+        /> */}
+
       </div>
+
+
     </Router>
   );
 }
