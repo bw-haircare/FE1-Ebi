@@ -2,22 +2,26 @@
 
 Hair Care is the online destination for beauty & wellness professionals and clients. Professionals can showcase their work, connect with new and existing clients, and build their business. Clients can discover new services and providers, book appointments online, and get inspired.
 
-API Documentation <--link coming soon
+[API Documentation](https://docs-haircare-now.vercel.app)
 
 
 ## Technologies used:
 
-General:
+### General:
 
 NodeJS backend.
+
 ExpressJS framework for the API.
+
 express-session session middleware for managing user state across requests.
-Security
+
+### Security
 
 CORS for Cross-Origin configuration.
 helmet for basic security adjustments to the server.
 bcrypt for encrypting/hashing sensitive user data.
-Testing:
+
+### Testing:
 
 jest
 supertest
@@ -25,9 +29,11 @@ Database:
 
 knex as the query builder and interface to postgres
 pg PostgreSQL
-Installation
 
-$ npm install
+## Installation
+
+`$ npm install`
+
 Required environment variables
 
 These are required to get the server working after install:
