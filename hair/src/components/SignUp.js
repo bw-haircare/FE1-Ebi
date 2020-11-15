@@ -57,10 +57,11 @@ export const Button = styled.button`
   margin: 1em;
 `;
 
-function SignUp({loggingIn, registerUser,history}) {
+function SignUp({loggingIn, registerUser, stylists, history}) {
 
   
   const [data, setData]=useState({
+    id:null,
     username: "",
     password: "",
     imgUrl:"",
@@ -73,10 +74,13 @@ function SignUp({loggingIn, registerUser,history}) {
 
   };
 
+  const newuser= stylists.length+1
+  console.log("stylists---", stylists)
+
   const handleSubmit = async e => {
     console.log(data)
     if(data.username==="" && data.password==="")return alert("empty val")
-    else await registerUser(data.username, data.password, data.imgUrl)
+    else await registerUser(data.username, data.password, data.id)
     // window.setTimeout(() => {
       history.push("/profile");
     // }, 1000)
@@ -132,6 +136,7 @@ function SignUp({loggingIn, registerUser,history}) {
 
 const mapStateToProps = (state) => ({
   loggingIn: state.loggingIn,
+  stylists: state.stylists
 });
 
-export default connect(mapStateToProps,{ LoadUser, registerUser } )(SignUp);
+export default connect(mapStateToProps,{ LoadUser, registerUser, } )(SignUp);

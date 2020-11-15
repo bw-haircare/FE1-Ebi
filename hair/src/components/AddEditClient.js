@@ -26,6 +26,7 @@ function AddEditClient(props) {
 
   // const info = clients.find(item => Number(item.id) === Number(params.id));
 // console.log("NEW CLIENT", newClient_)
+console.log("CLIENT length", clients.length+1)
 
 
 useEffect(()=>{
@@ -44,8 +45,8 @@ const handleSubmit = async event => {
     event.preventDefault();
     console.log("NEW_client99", new_client)
 
-    // await newClient_({...newPost, client_ImgUrl: `https://api.adorable.io/avatars/avatar/${new_client.id}`});
-    await newClient_(newPost);
+    await newClient_({...newPost, client_ImgUrl: `https://avatars.dicebear.com/api/avataaars/${clients.length+1}.svg`});
+    // await newClient_(newPost);
 
     // await newClient_({...newPost, client_ImgUrl: "https://workhound.com/wp-content/uploads/2017/05/placeholder-profile-pic.png"});
     setNewPost({ client_name: "", service: "", client_ImgUrl: "" });
@@ -105,6 +106,7 @@ const handleSubmit = async event => {
 }
 
 const mapStateToProps = (state) => ({
+  clients:state.clients,
   user_info: state.user_info,
     loggingIn: state.loggingIn,
     clients_id:state.clients_id,

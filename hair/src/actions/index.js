@@ -3,6 +3,7 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     REGISTER_FAIL,
+    LOAD_DATA,
     LOAD_USER,
     LOAD_USER_SUCCESS,
     ADD_CLIENT,
@@ -34,11 +35,12 @@ export const LoadUser = ()=> async dispatch=>{
     }
 }
 
-export const registerUser = (username, password, imgUrl)=> async dispatch =>{
+export const registerUser = (username, password,_id)=> async dispatch =>{
     try{
       let newId;
+      // console.log("BROUGHT IN USR", usr)
         const config={headers:{"Content-Type":"application/json"}}
-        const body = JSON.stringify({username, password, imgUrl:`https://api.adorable.io/avatars/avatar/${newId}`})
+        const body = JSON.stringify({username, password, imgUrl:`https://picsum.photos/id/${_id}/300/300`})
         const response= await axiosWithAuth().post("/api/auth/register", body, config)
     //   localStorage.setItem("token", response.data.token)
     localStorage.setItem('userID', response.data.id)
@@ -78,6 +80,8 @@ export const loginUser = (username, password)=> async dispatch =>{
 }
 
 export const fetchAllUsers = () => dispatch => {
+  dispatch({ type: LOAD_DATA });
+
     axiosWithAuth()
       .get(`/api/users`)
       .then(res => {
@@ -163,8 +167,8 @@ export const fetchAllUsers = () => dispatch => {
       let cat =5;
       console.log("CAT IDDDD", cat)
 
-      const body={...newpost, client_ImgUrl: `https://api.adorable.io/avatars/avatar/${cat}`}
-        const response= await axiosWithAuth().post(`/api/users/${localStorage.getItem("userID")}/posts`, body)
+      // const body={...newpost, client_ImgUrl: `https://api.adorable.io/avatars/avatar/${cat}`}
+        const response= await axiosWithAuth().post(`/api/users/${localStorage.getItem("userID")}/posts`, newpost)
         // let cat;
         console.log("PAYLOAD NEW", response.data.id)
         cat += 10

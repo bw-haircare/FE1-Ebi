@@ -20,7 +20,7 @@ import {
   Wrap
 } from "./styledComponents";
 
-function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
+function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}) {
 
 
   useEffect(() => {
@@ -28,6 +28,8 @@ function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
     // fetchAllClients()
 
   }, [fetchAllUsers])
+
+  console.log("LOADDIN", isLoading)
 
 
   return (
@@ -38,11 +40,14 @@ function Home({bringData,stylists, loggingIn, clients, fetchAllUsers}) {
       <div className="StyleContainer ">
         <div style={{display:"flex", flexWrap:"wrap"}}>
 
-
-
-      {stylists ? (stylists.map((user, i) => {
+{isLoading===true ? (<div className="loadercontainer" style={{marginTop:"100%"}}>
+  <div class="lds-ripple"><div></div><div></div></div>
+  </div>) : (stylists.map((user, i) => {
           return <StylistDetails clients={clients} key={i} user={user} />;
-        })): <p>...Loading</p>}
+        }))}
+
+
+
 
 
         {/* {bringData.map((user, i) => {
@@ -95,6 +100,7 @@ function StylistDetails({user, clients}) {
 const mapStateToProps = state => {
   return {
       stylists: state.stylists,
+      isLoading:state.isLoading,
       loggingIn: state.loggingIn,
     error: state.error
   };

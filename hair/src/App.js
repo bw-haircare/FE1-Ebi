@@ -27,15 +27,11 @@ if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
 function App(props) {
-  const {fetchUser, stylists,fetchAllUsers,fetchAllClients}=props
+  const {stylists,fetchAllClients}=props
   const [bringData, setBringData] = useState(profiles);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
 
-//   useEffect(() => {
-//     setUser(fetchAllUsers())
-//     setClient(fetchAllClients())
-// }, [fetchAllUsers, fetchAllClients]);
 
 
   return (
@@ -44,7 +40,6 @@ function App(props) {
 
 
     <Router>
-{/* {stylists > 0 ? "Loaded in": "Coming through"} */}
 
      <div className="App">
 
@@ -75,25 +70,15 @@ function App(props) {
             );
           }}
         />
-        {stylists>0 ? "..Loading" : (         <Route
+        {/* {!stylists ? "..Loading" : (          */}
+        <Route
           exact
           path="/"
           render={props => {
-            return (
-              <Home setBringData={setBringData} />
-            );
+            return (!stylists ? "..Loading" : (<Home setBringData={setBringData} />));
           }}
-        />)}
-
-         {/* <Route
-          exact
-          path="/"
-          render={props => {
-            return (
-              <Home setBringData={setBringData} />
-            );
-          }}
-        /> */}
+        />
+        
 
       </div>
 

@@ -16,7 +16,8 @@ import {
     UPDATE_CLIENT,
     UPDATE_CLIENT_FAIL,
     DELETE_CLIENT_SUCCESS,
-    DELETE_CLIENT_FAIL
+    DELETE_CLIENT_FAIL,
+    LOAD_DATA
     
   } from "../constants/constants";
   
@@ -27,6 +28,7 @@ import {
     new_client:[],
     new_deleted_client:[],
     clients:[],
+    isLoading: false,
     isPosting: false,
     loggingIn: false,
     error: null,
@@ -61,6 +63,12 @@ import {
           loggingIn: false,
           error: action.payload
         };
+        case LOAD_DATA:
+          return {
+            ...state,
+            isLoading: true,
+            error: null
+          };
       case LOAD_USER:
         return {
           ...state,
@@ -73,6 +81,7 @@ import {
               ...state,
               // loggingIn:true,
               user_info: action.payload,
+              isLoading:false,
               error: null
             };
 
@@ -80,6 +89,7 @@ import {
       return {
           ...state,
           stylists: action.payload,
+          isLoading:false,
           error: null
         };
 
