@@ -22,6 +22,8 @@ import {
 
 function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}) {
   const[results, setResult]=useState([])
+  const [getLocation, setGetLocation]=useState()
+  const [searchTerm, setSearchTerm]=useState()
   const [dropDownTerm, setDropDownTerm]=useState("")
 
 
@@ -35,25 +37,39 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 
   const searchResults=(e)=>{
     e.preventDefault()
-
-    // setResult([...new Set(stylists.map(job=>job.profession))])
-    console.log("SEARCHINGGGGGG 💃🏻 💃🏻 💃🏻 💃🏻")
-    console.log("drop down term", dropDownTerm)
-    // setResult(stylists.map(job=>job.profession))
-    // const results = stylists.filter(person => person.toLowerCase().includes(searchTerm.toLowerCase()));
     const profession_name=stylists.map(job=>job)
-    const result = profession_name.filter(person=>person.profession===dropDownTerm);
+    const result = profession_name.filter((person)=>(
+      dropDownTerm && getLocation ? person.profession===dropDownTerm && person.location === getLocation:"null" ||
+      dropDownTerm? person.profession===dropDownTerm:"null" ||
+      getLocation ? [person.location].includes(getLocation):"null"
+ )
+
+ 
+      );
+      // if (getLocation && dropDownTerm){
+      //   const result = profession_name.filter((person)=>person.profession===dropDownTerm && person.location === getLocation)
+      //   setResult(result)
+      // } else if (dropDownTerm){
+      //   const result = profession_name.filter((person)=>person.profession === dropDownTerm)
+      //   setResult(result)
+      // }
+      // else if (getLocation){
+      //   const result = profession_name.filter((person)=>[person.location].includes(getLocation))
+      //   setResult(result)
+      // }else{
+      //   return "nothing"
+      // }
+
     setResult(result)
-
-    console.log("results--->", result)
-
   }
 
   const changeHandler=(e)=>{
-  console.log("changing", e.target.name)
-  console.log("change 2", { [e.target.name]: e.target.value })
   setDropDownTerm(e.target.value)
   }
+
+  const handleChange=(e)=>{
+    setGetLocation(e.target.value)
+    }
 
 
   return (
@@ -67,6 +83,9 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
           style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px"}}
           >
         <input 
+        name="location"
+        value={getLocation}
+        onChange={handleChange}
         style={{width:"100%", height:"50px", margin:"10px", maxWidth:"900px"}}
         />
         <select name="job"  
