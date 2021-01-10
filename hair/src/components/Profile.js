@@ -34,7 +34,7 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
     {/* {console.log("user_info-->", user_info == undefined)} */}
     
 {/* {user_info ?(     */}
-<Container>
+<Container className="profile-container">
   {user_info ?(
         <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
