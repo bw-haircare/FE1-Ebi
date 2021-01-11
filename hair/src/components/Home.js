@@ -93,7 +93,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
                 style={{width:"50%", height:"50px", margin:"10px", padding:"10px", maxWidth:"900px"}}
                 onChange={changeHandler}
         >
-          {[...new Set(stylists.map(job=>job.profession))].map(item=><option value={`${item}`}>{item}</option>)}
+          {[null,...new Set(stylists.map(job=>job.profession).sort())].slice(0, -1).map(item=><option value={`${item}`}>{item}</option>)}
 </select>
 
 
