@@ -40,8 +40,9 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
     const profession_name=stylists.map(job=>job)
     const result = profession_name.filter((person)=>(
       dropDownTerm && getLocation ? person.profession===dropDownTerm && person.location === getLocation:"null" ||
-      dropDownTerm? person.profession===dropDownTerm:"null" ||
-      getLocation ? [person.location].includes(getLocation):"null"
+      getLocation ? [person.location].includes(getLocation):"null" ||
+      dropDownTerm? person.profession===dropDownTerm:"null"
+
  )
 
  
@@ -84,7 +85,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
           >
         <input 
         name="location"
-        value={getLocation}
+        value={getLocation|| ""}
         onChange={handleChange}
         style={{width:"100%", height:"50px", margin:"10px", maxWidth:"900px"}}
         />
@@ -93,7 +94,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
                 style={{width:"50%", height:"50px", margin:"10px", padding:"10px", maxWidth:"900px"}}
                 onChange={changeHandler}
         >
-          {[null,...new Set(stylists.map(job=>job.profession).sort())].slice(0, -1).map(item=><option value={`${item}`}>{item}</option>)}
+          {[null,...new Set(stylists.map(job=>job.profession).sort())].slice(0, -1).map(item=><option key={item} value={`${item}`}>{item}</option>)}
 </select>
 
 
@@ -114,7 +115,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
         <div style={{display:"flex", flexWrap:"wrap"}}>   
 
 {isLoading===true ? (<div className="loadercontainer" style={{marginTop:"100%"}}>
-  <div class="lds-ripple"><div></div><div></div></div>
+  <div className="lds-ripple"><div></div><div></div></div>
   </div>) : (results.length==0?
    (stylists.map((user, i) => {
           return <StylistDetails clients={clients} key={i} user={user} />;

@@ -1,7 +1,7 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import {registerUser, clients,newClient_, fetchUser, updateUser } from "../actions/index";
+import {registerUser, clients,newClient_, newService_, fetchUser, updateUser } from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams, useHistory } from "react-router-dom";
 
@@ -151,4 +151,4 @@ const mapStateToProps = (state) => ({
 
   });
   
-  export default connect(mapStateToProps,{ registerUser, fetchUser, newClient_, updateUser } )(EditClientForm);
+  export default connect(mapStateToProps,{ registerUser, fetchUser, newClient_, newService_, updateUser } )(EditClientForm);
