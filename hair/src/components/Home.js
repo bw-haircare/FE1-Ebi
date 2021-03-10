@@ -23,8 +23,15 @@ import {
 function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}) {
   const[results, setResult]=useState([])
   const [getLocation, setGetLocation]=useState()
-  const [searchTerm, setSearchTerm]=useState()
+  // const [searchTerm, setSearchTerm]=useState()
   const [dropDownTerm, setDropDownTerm]=useState("")
+  const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState({
+    location: "",
+    user: ""
+  });
+  const [newResult, setNewResult] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
 
   useEffect(() => {
@@ -72,6 +79,67 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
     setGetLocation(e.target.value)
     }
 
+  const changeHandling = (e) => {
+    const value = e.target.value;
+    setSearchTerm({
+      ...searchTerm,
+      [e.target.name]: value
+    });
+  };
+
+    const submitHandler = (e) => {
+      e.preventDefault();
+      let searched = stylists.filter((item) => {
+        if (
+          (item.location ? item.location : "")
+            .toLowerCase()
+            .includes(searchTerm.location.toLowerCase()) &&
+          (item.username ? item.username : "")
+            .toLowerCase()
+            .includes(searchTerm.user.toLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      setNewResult(searched);
+      setIsSubmitted(true);
+    };
+
+    const renderContent = () => {
+      if(isSubmitted){
+        if (newResult.length > 0) {
+              return (newResult.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
+            } else {
+              return <h2>No matches</h2>;
+            }
+      }else{
+        if(stylists){
+          return (stylists.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
+        }else{
+          return "loading..."
+        }
+      }
+
+
+      
+      // if (isSubmitted) {
+      //   if (newResult.length > 0) {
+      //     return newResult.map((item) => <p key={item.id}>{item.username}</p>);
+      //   } else {
+      //     return <h2>No matches</h2>;
+      //   }
+      // } else {
+      //   if (users) {
+      //     return users.map((item) => <p key={item.id}>{item.username}</p>);
+      //   } else {
+      //     return "loading";
+      //   }
+      // }
+      // return "hello"
+    };
+
 
   return (
     <div>
@@ -80,22 +148,34 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
       <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS NEARBY</H1>
       <div className="StyleContainer ">
           <form
-          onSubmit={searchResults}
+           onSubmit={submitHandler}
+          // onSubmit={searchResults}
           style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px"}}
           >
         <input 
         name="location"
-        value={getLocation|| ""}
-        onChange={handleChange}
-        style={{width:"100%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        placeholder="write a location"
+        value={searchTerm.location}
+        // value={getLocation|| ""}
+        onChange={changeHandling}
+        // onChange={handleChange}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
         />
-        <select name="job"  
+        <div style={{ lineHeight: 3.2, display: "inline-block", verticalAlign: "middle", fontWeight:900}}> and/or </div>
+        <input 
+        placeholder="stylist"
+        name="user"
+        value={searchTerm.user}
+        onChange={changeHandling}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        />
+        {/* <select name="job"  
         id="jobs"
                 style={{width:"50%", height:"50px", margin:"10px", padding:"10px", maxWidth:"900px"}}
                 onChange={changeHandler}
         >
           {[null,...new Set(stylists.map(job=>job.profession).sort())].slice(0, -1).map(item=><option key={item} value={`${item}`}>{item}</option>)}
-</select>
+</select> */}
 
 
         <button
@@ -113,18 +193,8 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
         </form>
         
         <div style={{display:"flex", flexWrap:"wrap"}}>   
+    {renderContent()}
 
-{isLoading===true ? (<div className="loadercontainer" style={{marginTop:"100%"}}>
-  <div className="lds-ripple"><div></div><div></div></div>
-  </div>) : (results.length==0?
-   (stylists.map((user, i) => {
-          return <StylistDetails clients={clients} key={i} user={user} />;
-        }))
-  :
-  (results.map((user, i) => {
-    return <StylistSearchResult clients={clients} key={i} user={user} />;
-  }))
-  )}
 
 
 
@@ -140,44 +210,6 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 }
 
 function StylistDetails({user, clients}) {
-
-  return (
-    <Wrap>
-      <Link
-      clients={clients}
-        to={{
-          pathname: `/stylists/${user.id}`,
-          state: { ...user }
-        }}
-      >
-        <div className="left">
-          <CropImg>
-            <img alt={`${user.first}-${user.last}`}src={user.imgUrl} height="200px" />
-          </CropImg>{" "}
-        </div>
-        <div className="right">
-          <h2>
-            {" "}
-            {user.first} {user.last}{" "}
-          </h2>
-          <h3>{user.profession}</h3>
-          <p className="city">{user.location}</p>
-          <div className="stars">
-            <StarRatingComponent
-              name="rate1"
-              starCount={5}
-              starColor="pink"
-              renderStarIcon={() => <span>♥</span>}
-              value={2}
-            />
-          </div>
-        </div>
-      </Link>
-    </Wrap>
-  );
-}
-
-function StylistSearchResult({user, clients}) {
 
   return (
     <Wrap>
