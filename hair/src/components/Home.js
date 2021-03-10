@@ -108,36 +108,22 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
     };
 
     const renderContent = () => {
+      console.log("stylist???", stylists)
       if(isSubmitted){
         if (newResult.length > 0) {
               return (newResult.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
             } else {
-              return <h2>No matches</h2>;
+              return <h1 style={{color:"orangered", fontWeight:800}}>No matches</h1>;
             }
       }else{
-        if(stylists){
+        if(stylists.length){
           return (stylists.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
         }else{
-          return "loading..."
+          return "LOADING ...."
         }
+
+        
       }
-
-
-      
-      // if (isSubmitted) {
-      //   if (newResult.length > 0) {
-      //     return newResult.map((item) => <p key={item.id}>{item.username}</p>);
-      //   } else {
-      //     return <h2>No matches</h2>;
-      //   }
-      // } else {
-      //   if (users) {
-      //     return users.map((item) => <p key={item.id}>{item.username}</p>);
-      //   } else {
-      //     return "loading";
-      //   }
-      // }
-      // return "hello"
     };
 
 
@@ -150,7 +136,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
           <form
            onSubmit={submitHandler}
           // onSubmit={searchResults}
-          style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px"}}
+          style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px", height:"70px"}}
           >
         <input 
         name="location"
@@ -159,7 +145,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
         // value={getLocation|| ""}
         onChange={changeHandling}
         // onChange={handleChange}
-        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px", border: "1px solid black", padding: "14px"}}
         />
         <div style={{ lineHeight: 3.2, display: "inline-block", verticalAlign: "middle", fontWeight:900}}> and/or </div>
         <input 
@@ -167,7 +153,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
         name="user"
         value={searchTerm.user}
         onChange={changeHandling}
-        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px", border: "1px solid black", padding: "14px"}}
         />
         {/* <select name="job"  
         id="jobs"
@@ -179,12 +165,12 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 
 
         <button
+        className="search-button"
          style={{height:"50px", margin: "10px", width:"200px",
         marginTop: "12px",
         marginLeft: "12px",
-        boxShadow: "3px 8px",
         border: "1px solid black",
-        boxShadow: "5px 10px",
+        boxShadow: "5px 10px #daccdb",
         padding: "5px",
         verticalAlign: "super",
         color:"black",
@@ -193,7 +179,7 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
         </form>
         
         <div style={{display:"flex", flexWrap:"wrap"}}>   
-    {renderContent()}
+    {renderContent() || "LOADING..."}
 
 
 
