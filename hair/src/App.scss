@@ -268,5 +268,21 @@ body {
 }
 
 
+// button.search-button {
+//   position: absolute;
+//   margin:10px;
+// }
+
+button.search-button:active {
+  margin-top: 13px !important;
+  margin-left: 12px !important;
+  box-shadow: 3px 7px #c0a8c1 !important;
+}
+
+button.search-button:focus {
+  outline: none!important;
+}
+
+
 
 
