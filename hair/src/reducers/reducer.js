@@ -17,7 +17,17 @@ import {
     UPDATE_CLIENT_FAIL,
     DELETE_CLIENT_SUCCESS,
     DELETE_CLIENT_FAIL,
-    LOAD_DATA
+    LOAD_DATA,
+    LOAD_SERVICES_LIST,
+    LOAD_SERVICES_SUCCESS, 
+    LOAD_SERVICES,
+    LOAD_SERVICES_FAIL, 
+    UPDATE_SERVICES,
+    ADD_SERVICES,
+    ADD_SERVICES_FAIL,
+    DELETE_SERVICES_FAIL,
+    DELETE_SERVICES_SUCCESS,
+    UPDATE_SERVICES_FAIL
     
   } from "../constants/constants";
   
@@ -28,6 +38,11 @@ import {
     new_client:[],
     new_deleted_client:[],
     clients:[],
+    services_id:[],
+    new_services:[],
+    new_deleted_client:[],
+    services:[],
+    isServicing:false,
     isLoading: false,
     isPosting: false,
     loggingIn: false,
@@ -123,6 +138,43 @@ import {
         ispPosting: false,
         error: action.payload
       };
+      case DELETE_CLIENT_SUCCESS:
+        console.log("action delete reducer", action.payload)
+        console.log("DELETE STATE", state)
+        return {...state, new_deleted_client: state.new_deleted_client.filter(todo => todo.id !== action.payload)}
+
+
+      //services
+      case LOAD_SERVICES_LIST:
+        return {
+          ...state,
+          services_id: action.payload,
+          error: null
+        };
+
+      case LOAD_SERVICES:      
+      case LOAD_SERVICES_SUCCESS:
+          return {
+              ...state,
+              services: action.payload,
+              error: null
+            };
+      case UPDATE_SERVICES:
+      case ADD_SERVICES:
+      return {
+        ...state,
+        new_services:[action.payload],
+        isServicing: false,
+        error: false,
+      };
+      case DELETE_SERVICES_FAIL:
+      case UPDATE_SERVICES_FAIL:
+      case ADD_SERVICES_FAIL:
+      return {
+        ...state,
+        isServicing: false,
+        error: action.payload
+      };
 
       // case DELETE_CLIENT_SUCCESS:
       // console.log("action delete reducer", action.payload)
@@ -132,10 +184,6 @@ import {
       // }
 
 
-      case DELETE_CLIENT_SUCCESS:
-        console.log("action delete reducer", action.payload)
-        console.log("DELETE STATE", state)
-        return {...state, new_deleted_client: state.new_deleted_client.filter(todo => todo.id !== action.payload)}
 
 
       // case DELETE_CLIENT_SUCCESS:

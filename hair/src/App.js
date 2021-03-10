@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import InsideStylistDetails from "./components/InsideStylistDetails";
 import Logout from "./components/Logout";
 import Profile from "./components/Profile"
-import { fetchUser, addUser, fetchAllClients, fetchAllUsers } from "./actions/index";
+import { fetchUser, addUser, fetchAllClients, fetchAllUsers, fetchAllServices } from "./actions/index";
 import { connect } from "react-redux";
 
 //CSS
@@ -22,12 +22,14 @@ import EditClientForm from "./components/AdEditClient"
 import EditUser from "./components/EditUser";
 import Home from "./components/Home";
 import StylistInfo from "./components/StylistInfo";
+import AddEditService from "./components/AddEditServices";
+import EditServiceForm from "./components/AddEditServices";
 
 if(localStorage.getItem("token")){
   setToken(localStorage.getItem("token"))
 }
 function App(props) {
-  const {stylists,fetchAllClients}=props
+  const {stylists,fetchAllClients, fetchAllServices}=props
   const [bringData, setBringData] = useState(profiles);
   const [user, setUser]= useState()
   const [client, setClient]=useState()
@@ -55,8 +57,11 @@ function App(props) {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/client" component={AddEditClient} />
+        <Route exact path="/service" component={AddEditService} />
         <Route exact path="/user/:id"><EditUser {...props}/> </Route>
-        <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} {...props}/> </Route>
+        <Route exact path="/client/:id"><EditClientForm fetchC={fetchAllClients} fetchS={fetchAllServices} {...props}/> </Route>
+        <Route exact path="/service/:id"><EditServiceForm fetchC={fetchAllClients} fetchS={fetchAllServices} {...props}/> </Route>
+
 
         {/* <Route path="/stylists2/:id" component={InsideStylistDetails} /> */}
         <Route path="/stylists/:id" component={StylistInfo} />
@@ -90,11 +95,12 @@ const mapStateToProps = state => {
   return {
       stylists: state.stylists,
       clients:state.clients,
+      services:state.services,
     error: state.error
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUser, fetchAllUsers, fetchAllClients }
+  { fetchUser, fetchAllUsers, fetchAllClients, fetchAllServices }
 )(App);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import Modal from "react-bootstrap/Modal";
-import {fetchUserClientPortfolio} from "../actions/index";
+import {fetchUserClientPortfolio, fetchStylistServiceList} from "../actions/index";
 import { connect } from "react-redux";
 import {
   Button,
@@ -12,9 +12,10 @@ import {
   Container
 } from "./styledComponents";
 
-function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, location}) {
+function StylistInfo({fetchUserClientPortfolio, fetchStylistServiceList, clients_id, stylists, services_id, history, location}) {
   const [show, setShow] = useState(false);
   const [clientPortf, setClientPortf]=useState()
+  const [stylistService, setStylistService]=useState()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -34,6 +35,7 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
   useEffect(() => {
 
     setClientPortf(fetchUserClientPortfolio(id))
+    setStylistService(fetchStylistServiceList(id))
   }, [fetchUserClientPortfolio, id])
 
   return (
@@ -86,22 +88,16 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
 
         <section className="bottom-row">
           <section className="services">
-            {/* {Object.values(place).map(value => {
-              return <p>{value}</p>;
-            })} */}
-
             <h3>My Services</h3>
-            <strong>Coming Soon...</strong>
-            {/* {Object.entries(price).map(([key, val]) => {
-              return (
-                <p>
-                  <strong>{key}</strong> <br />${val}
-                  <Button variant="primary" onClick={handleShow}>
-                    Book
-                  </Button>
-                </p>
-              );
-            })} */}
+            
+            {services_id.length>0 ? (services_id.map(item=>(
+              <p>
+              <strong>{item.service_name}</strong> <br />${item.price}
+              <Button variant="primary" onClick={handleShow}>
+                Book
+              </Button>
+            </p>
+            ))):<strong>Coming Soon...</strong>}
           </section>
 
           <section className="side">
@@ -116,9 +112,6 @@ function StylistInfo({fetchUserClientPortfolio, clients_id, stylists, history, l
               })): <p>Stylist has no clients yet</p>}
             </section>
             <section className="address">
-              {/* {Object.values(place).map(value => {
-                return <p>{value}</p>;
-              })} */}
             </section>
           </section>
         </section>
@@ -132,12 +125,13 @@ const mapStateToProps = state => {
     return {
         stylists: state.stylists,
         clients_id:state.clients_id,
+        services_id:state.services_id,
       error: state.error
     };
   };
   
   export default connect(
     mapStateToProps,
-    { fetchUserClientPortfolio }
+    { fetchUserClientPortfolio, fetchStylistServiceList }
   )(StylistInfo);
   

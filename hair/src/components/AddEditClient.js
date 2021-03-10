@@ -1,7 +1,7 @@
 //Code and styling done by Jade Lopez
 
 import React, { useEffect, useState } from "react";
-import { LoadUser, registerUser,newClient_, fetchUser, fetchAllUsers, fetchAllClients } from "../actions/index";
+import { LoadUser, registerUser,newClient_, fetchUser, fetchAllUsers, fetchAllClients, fetchAllServices } from "../actions/index";
 import { connect } from "react-redux";
 import {  useParams } from "react-router-dom";
 // import profile from "../../public/img/profile.png"

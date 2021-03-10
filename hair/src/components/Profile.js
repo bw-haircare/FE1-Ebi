@@ -1,7 +1,7 @@
-  import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Link, Route, useParams } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
-import { fetchUser, deleteClient, fetchAllClients, updateUser } from "../actions/index";
+import { fetchUser, deleteClient, fetchAllClients, fetchAllServices, updateUser } from "../actions/index";
 import { connect } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import Logout from "./Logout"
@@ -12,8 +12,9 @@ import {
   Container
 } from "./styledComponents";
 import EditClientForm from "./AdEditClient";
+import EditServiceForm from './AddEditServices'
 
-function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history, deleteClient, updateUser}) {
+function Profile({fetchUser, fetchAllClients, fetchAllServices, stylists,services, user_info,clients,history, deleteClient, updateUser}) {
   const params = useParams();
   const [show, setShow] = useState(false);
   const [user, setUser]= useState()
@@ -24,17 +25,19 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
   useEffect(() => {
       setUser(fetchUser(userID))
       // fetchAllClients()
-  }, [fetchUser, fetchAllClients, updateUser, userID]);
+  }, [fetchUser, fetchAllClients, fetchAllServices, updateUser, userID]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  console.log("SERVICES IN PROFILE", services)
 
   return (
     <>
     {/* {console.log("user_info-->", user_info == undefined)} */}
     
 {/* {user_info ?(     */}
-<Container>
+<Container className="profile-container">
   {user_info ?(
         <ProfileArticle>
         <Button onClick={() => history.goBack()}>Go Back</Button>
@@ -99,7 +102,18 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
             })} */}
   
             <h3>My Services</h3>
-            <strong>...Coming Soon</strong>
+            {console.log("current service", services)}
+            {services.map(item=>(
+              <p key={item.id}>
+              <strong>{item.service_name}</strong> <br />${item.price}
+              <Button variant="primary" onClick={handleShow}>
+                Book
+              </Button>
+            </p>
+            ))}
+            <div 
+            onClick={()=>{history.push("/service")}}
+            style={{width:"110px", height:"30px", border:"2px dashed grey", textAlign:"center", padding:"1px", cursor:"pointer"}}>Add Service</div>
             {/* {Object.entries(pricing).map(([key, val]) => {
               return (
                 <p>
@@ -162,6 +176,8 @@ function Profile({fetchUser, fetchAllClients, stylists,user_info,clients,history
   
   <Switch>
       <Route exact path="/client/:id"><EditClientForm fetchclient={fetchAllClients}/> </Route>
+      <Route exact path="/service/:id"><EditServiceForm fetchclient={fetchAllServices}/> </Route>
+
 
       </Switch>
     </>
@@ -172,6 +188,7 @@ const mapStateToProps = state => {
     return {
         user_info: state.user_info,
         clients:state.clients,
+        services:state.services,
         new_deleted_client:state.new_deleted_client,
       error: state.error
     };
@@ -179,5 +196,5 @@ const mapStateToProps = state => {
   
   export default connect(
     mapStateToProps,
-    { fetchUser, fetchAllClients, deleteClient, updateUser }
+    { fetchUser, fetchAllClients, fetchAllServices, deleteClient, updateUser }
   )(Profile);

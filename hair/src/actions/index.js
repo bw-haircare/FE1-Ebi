@@ -16,7 +16,13 @@ import {
     UPDATE_CLIENT_FAIL,
     DELETE_CLIENT_SUCCESS,
     DELETE_CLIENT_FAIL, EDIT_PROFILE_SUCCESS, EDIT_PROFILE_FAIL,
-    LOAD_USERS_INFO_SUCCESS
+    LOAD_USERS_INFO_SUCCESS,
+    LOAD_SERVICES_LIST,
+    LOAD_SERVICES_SUCCESS,
+    ADD_SERVICES,
+    ADD_SERVICES_FAIL,
+    UPDATE_SERVICES,
+    UPDATE_SERVICES_FAIL
   } from "../constants/constants";
   import {axiosWithAuth} from '../utilities/axiosWithAuth'
   import { setToken } from "../setToken";
@@ -28,6 +34,7 @@ export const LoadUser = ()=> async dispatch=>{
         const response= await axiosWithAuth().get("/api/users")
         dispatch({type: LOAD_USER, payload: response.data})
         dispatch(fetchAllClients())
+        // dispatch(fetchAllServices())
 
     }catch(err){
         dispatch({type: AUTH_ERROR, payload: ErrorEvent})
@@ -105,6 +112,7 @@ export const fetchAllUsers = () => dispatch => {
         const users = res.data.map(item=>item)  
         dispatch({ type: LOAD_USER_SUCCESS, payload: users[0] });
       dispatch(fetchAllClients())
+      dispatch(fetchAllServices())
       })
       .catch(err => {
         console.log(err);
@@ -142,6 +150,19 @@ export const fetchAllUsers = () => dispatch => {
   };
 
 
+
+export const fetchAllServices = () => dispatch => {
+  console.log("FETCHING services FROM USER ID")
+  axiosWithAuth()
+  .get(`/api/users/${localStorage.getItem("userID")}/services-post`)
+  .then(res => {
+    console.log("LOADING SERVICES", res)
+    const users = res.data.map(item => item);
+    dispatch({ type: LOAD_SERVICES_SUCCESS, payload: users });
+  })
+};
+
+
   export const fetchUserClientPortfolio = (id) => dispatch => {
     console.log("FETCHING CLIENTS FROM USER ID")
     axiosWithAuth()
@@ -159,11 +180,28 @@ export const fetchAllUsers = () => dispatch => {
       });
   };
 
+  export const fetchStylistServiceList = (id) => dispatch => {
+    console.log("OKAY THIS IS THE STYLIST SERVICE LIST")
+    axiosWithAuth()
+    .get(`/api/users/${id}/services-post`)
+    // .then(res=>console.log("FETCHING THIS", res))
+    .then(res => {
+      const users = res.data.map(item => item);
+      dispatch({ type: LOAD_SERVICES_LIST, payload: users });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: LOAD_FAIL,
+        payload: `${err} with response code ${err}`
+      });
+    });
+
+  };
 
   export const newClient_ = (newpost)=> async dispatch =>{
 
     try{
-      let newID;
       let cat =5;
       console.log("CAT IDDDD", cat)
 
@@ -183,6 +221,30 @@ export const fetchAllUsers = () => dispatch => {
     }
 }
 
+export const newService_ = (newpost)=> async dispatch =>{
+  console.log("yummy service new")
+
+  try{
+    let newID;
+    let cat =5;
+    console.log("CAT IDDDD", cat)
+
+    // const body={...newpost, client_ImgUrl: `https://api.adorable.io/avatars/avatar/${cat}`}
+      const response= await axiosWithAuth().post(`/api/users/${localStorage.getItem("userID")}/services-post`, newpost)
+      // let cat;
+      console.log("PAYLOAD NEW", response.data.id)
+      cat += 10
+      console.log("CAT IDDDDRRR", cat)
+      dispatch({
+          type: ADD_SERVICES,
+          payload: response.data
+      })
+  }catch(err){
+      dispatch({type: ADD_SERVICES_FAIL, payload: err.message})
+
+  }
+}
+
 export const updateClient = (updatePost)=> async dispatch =>{
   try{
     const id = updatePost.id;
@@ -194,6 +256,16 @@ export const updateClient = (updatePost)=> async dispatch =>{
   }
 }
 
+export const updateServices = (updatePost)=> async dispatch =>{
+  try{
+    const id = updatePost.id;
+      const response= await axiosWithAuth().put(`/api/users/${id}/services-post`, updatePost)
+      dispatch({type: UPDATE_SERVICES,payload: response.data})
+  }catch(err){
+      dispatch({type: UPDATE_SERVICES_FAIL, payload: err})
+
+  }
+}
 
 export const deleteClient = (clientId)=> async dispatch =>{
   try{
@@ -207,6 +279,7 @@ export const deleteClient = (clientId)=> async dispatch =>{
 
   }
 }
+
 
 
 

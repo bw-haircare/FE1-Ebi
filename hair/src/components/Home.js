@@ -21,6 +21,17 @@ import {
 } from "./styledComponents";
 
 function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}) {
+  const[results, setResult]=useState([])
+  const [getLocation, setGetLocation]=useState()
+  // const [searchTerm, setSearchTerm]=useState()
+  const [dropDownTerm, setDropDownTerm]=useState("")
+  const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState({
+    location: "",
+    user: ""
+  });
+  const [newResult, setNewResult] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
 
   useEffect(() => {
@@ -31,6 +42,104 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 
   console.log("LOADDIN", isLoading)
 
+  const searchResults=(e)=>{
+    e.preventDefault()
+    const profession_name=stylists.map(job=>job)
+    const result = profession_name.filter((person)=>(
+      dropDownTerm && getLocation ? person.profession===dropDownTerm && person.location === getLocation:"null" ||
+      getLocation ? [person.location].includes(getLocation):"null" ||
+      dropDownTerm? person.profession===dropDownTerm:"null"
+
+ )
+
+ 
+      );
+      // if (getLocation && dropDownTerm){
+      //   const result = profession_name.filter((person)=>person.profession===dropDownTerm && person.location === getLocation)
+      //   setResult(result)
+      // } else if (dropDownTerm){
+      //   const result = profession_name.filter((person)=>person.profession === dropDownTerm)
+      //   setResult(result)
+      // }
+      // else if (getLocation){
+      //   const result = profession_name.filter((person)=>[person.location].includes(getLocation))
+      //   setResult(result)
+      // }else{
+      //   return "nothing"
+      // }
+
+    setResult(result)
+  }
+
+  const changeHandler=(e)=>{
+  setDropDownTerm(e.target.value)
+  }
+
+  const handleChange=(e)=>{
+    setGetLocation(e.target.value)
+    }
+
+  const changeHandling = (e) => {
+    const value = e.target.value;
+    setSearchTerm({
+      ...searchTerm,
+      [e.target.name]: value
+    });
+  };
+
+    const submitHandler = (e) => {
+      e.preventDefault();
+      let searched = stylists.filter((item) => {
+        if (
+          (item.location ? item.location : "")
+            .toLowerCase()
+            .includes(searchTerm.location.toLowerCase()) &&
+          (item.username ? item.username : "")
+            .toLowerCase()
+            .includes(searchTerm.user.toLowerCase())
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      setNewResult(searched);
+      setIsSubmitted(true);
+    };
+
+    const renderContent = () => {
+      if(isSubmitted){
+        if (newResult.length > 0) {
+              return (newResult.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
+            } else {
+              return <h2>No matches</h2>;
+            }
+      }else{
+        if(stylists){
+          return (stylists.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
+        }else{
+          return "loading..."
+        }
+      }
+
+
+      
+      // if (isSubmitted) {
+      //   if (newResult.length > 0) {
+      //     return newResult.map((item) => <p key={item.id}>{item.username}</p>);
+      //   } else {
+      //     return <h2>No matches</h2>;
+      //   }
+      // } else {
+      //   if (users) {
+      //     return users.map((item) => <p key={item.id}>{item.username}</p>);
+      //   } else {
+      //     return "loading";
+      //   }
+      // }
+      // return "hello"
+    };
+
 
   return (
     <div>
@@ -38,13 +147,54 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 
       <H1>BROWSE AND DISCOVER BEAUTY PROFESSIONALS NEARBY</H1>
       <div className="StyleContainer ">
-        <div style={{display:"flex", flexWrap:"wrap"}}>
+          <form
+           onSubmit={submitHandler}
+          // onSubmit={searchResults}
+          style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px"}}
+          >
+        <input 
+        name="location"
+        placeholder="write a location"
+        value={searchTerm.location}
+        // value={getLocation|| ""}
+        onChange={changeHandling}
+        // onChange={handleChange}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        />
+        <div style={{ lineHeight: 3.2, display: "inline-block", verticalAlign: "middle", fontWeight:900}}> and/or </div>
+        <input 
+        placeholder="stylist"
+        name="user"
+        value={searchTerm.user}
+        onChange={changeHandling}
+        style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px"}}
+        />
+        {/* <select name="job"  
+        id="jobs"
+                style={{width:"50%", height:"50px", margin:"10px", padding:"10px", maxWidth:"900px"}}
+                onChange={changeHandler}
+        >
+          {[null,...new Set(stylists.map(job=>job.profession).sort())].slice(0, -1).map(item=><option key={item} value={`${item}`}>{item}</option>)}
+</select> */}
 
-{isLoading===true ? (<div className="loadercontainer" style={{marginTop:"100%"}}>
-  <div class="lds-ripple"><div></div><div></div></div>
-  </div>) : (stylists.map((user, i) => {
-          return <StylistDetails clients={clients} key={i} user={user} />;
-        }))}
+
+        <button
+         style={{height:"50px", margin: "10px", width:"200px",
+        marginTop: "12px",
+        marginLeft: "12px",
+        boxShadow: "3px 8px",
+        border: "1px solid black",
+        boxShadow: "5px 10px",
+        padding: "5px",
+        verticalAlign: "super",
+        color:"black",
+        background:"white"
+        }}>Search</button>
+        </form>
+        
+        <div style={{display:"flex", flexWrap:"wrap"}}>   
+    {renderContent()}
+
 
 
 
