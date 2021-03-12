@@ -86,23 +86,21 @@ export const loginUser = (username, password)=> async dispatch =>{
     }
 }
 
-export const fetchAllUsers = () => dispatch => {
-  dispatch({ type: LOAD_DATA });
-
-    axiosWithAuth()
-      .get(`/api/users`)
-      .then(res => {
-        const users = res.data.map(item => item);
-        dispatch({ type: LOAD_USERS_INFO_SUCCESS, payload: users });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch({
-          type: LOAD_FAIL,
-          payload: `${err} with response code ${err}`
-        });
-      });
-  };
+export const fetchAllUsers = ()=> async dispatch =>{
+  try{
+    dispatch({ type: LOAD_DATA });
+    const {data}= await axiosWithAuth().get(`/api/users`)
+    const users = data.map(item=>item)
+    return dispatch({type:LOAD_USERS_INFO_SUCCESS, payload: users })
+  }
+  catch(err){
+    console.log(err)
+    dispatch({
+            type: LOAD_FAIL,
+            payload: `${err} with response code ${err}`
+          });
+  }
+}
 
 
   export const fetchUser = (userID) => dispatch => {

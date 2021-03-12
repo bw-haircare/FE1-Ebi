@@ -40,8 +40,6 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
 
   }, [fetchAllUsers])
 
-  console.log("LOADDIN", isLoading)
-
   const searchResults=(e)=>{
     e.preventDefault()
     const profession_name=stylists.map(job=>job)
@@ -94,21 +92,43 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
           (item.location ? item.location : "")
             .toLowerCase()
             .includes(searchTerm.location.toLowerCase()) &&
-          (item.username ? item.username : "")
+          (item.profession ? item.profession : "")
             .toLowerCase()
             .includes(searchTerm.user.toLowerCase())
-        ) {
-          return true;
-        } else {
-          return false;
-        }
+        ) return true;
+        
+        if (
+          (item.username ? item.username : "")
+            .toLowerCase()
+            .includes(searchTerm.location.toLowerCase()) &&
+          (item.profession ? item.profession : "")
+            .toLowerCase()
+            .includes(searchTerm.user.toLowerCase())
+        ) return true; 
+
+        if (
+          (item.first ? item.first : "")
+            .toLowerCase()
+            .includes(searchTerm.location.toLowerCase()) &&
+          (item.profession ? item.profession : "")
+            .toLowerCase()
+            .includes(searchTerm.user.toLowerCase())
+        ) return true; 
+
+        if (
+          (item.last ? item.last : "")
+            .toLowerCase()
+            .includes(searchTerm.location.toLowerCase()) &&
+          (item.profession ? item.profession : "")
+            .toLowerCase()
+            .includes(searchTerm.user.toLowerCase())
+        ) return true; 
       });
       setNewResult(searched);
       setIsSubmitted(true);
     };
 
     const renderContent = () => {
-      console.log("stylist???", stylists)
       if(isSubmitted){
         if (newResult.length > 0) {
               return (newResult.map((user, i) => <StylistDetails clients={clients} key={i} user={user} />))
@@ -135,22 +155,21 @@ function Home({bringData,stylists, isLoading, loggingIn, clients, fetchAllUsers}
       <div className="StyleContainer ">
           <form
            onSubmit={submitHandler}
-          // onSubmit={searchResults}
           style={{width:"100%", justifyContent:"center", display:"inline-flex", margin:"20px", height:"70px"}}
           >
         <input 
         name="location"
-        placeholder="write a location"
+        type="search"
+        placeholder="Search location or stylists"
         value={searchTerm.location}
-        // value={getLocation|| ""}
         onChange={changeHandling}
-        // onChange={handleChange}
         style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px", border: "1px solid black", padding: "14px"}}
         />
         <div style={{ lineHeight: 3.2, display: "inline-block", verticalAlign: "middle", fontWeight:900}}> and/or </div>
         <input 
-        placeholder="stylist"
+        placeholder="Search profession"
         name="user"
+        type="search"
         value={searchTerm.user}
         onChange={changeHandling}
         style={{width:"50%", height:"50px", margin:"10px", maxWidth:"900px", border: "1px solid black", padding: "14px"}}
